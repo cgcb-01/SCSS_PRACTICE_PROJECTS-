@@ -1,0 +1,31 @@
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: sans-serif;
+  padding: 10px 1%;
+  height: 60px;
+  background: rgb(240, 239, 239);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+nav .logo-container {
+  margin-left: 40px;
+  color: black;
+}
+nav ul {
+  margin-right: 40px;
+}
+nav ul li {
+  display: inline;
+  list-style: none;
+  margin-left: 30px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-family: "Franklin Gothic Medium";
+}/*# sourceMappingURL=naviagation.css.map */

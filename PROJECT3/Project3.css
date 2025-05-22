@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(222, 222, 222);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: sans-serif;
+  padding: 10px 1%;
+  height: 60px;
+  background: rgb(240, 239, 239);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+nav .logo-container {
+  margin-left: 40px;
+  color: black;
+}
+nav ul {
+  margin-right: 40px;
+}
+nav ul li {
+  display: inline;
+  list-style: none;
+  margin-left: 30px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-family: "Franklin Gothic Medium";
+}
+
+main {
+  background: url("https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  filter: contrast(110%);
+}
+main h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+main p {
+  max-width: 700px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+}
+main button {
+  background: transparent;
+  border: none;
+  background: rgba(223, 219, 219, 0.8);
+  padding: 10px 20px;
+  border-radius: 2px;
+}
+main button:hover {
+  background: rgba(223, 219, 219, 0.9);
+  font-weight: 500;
+}
+
+.card {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .card-container {
+  width: 400px;
+  height: 300px;
+  padding: 30px;
+  margin: 0.6rem;
+  font-family: sans-serif;
+}
+.card .card-container h1 {
+  font-size: 3rem;
+  font-family: serif;
+}
+.card .card-container p {
+  margin: 20px 0;
+  margin-bottom: 40px;
+  line-height: 1.5rem;
+}
+.card .card-container a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  background-color: black;
+}
+.card .card-img {
+  width: 400px;
+  margin: 30px;
+  border-radius: 4px;
+  filter: contrast(115%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.gallery {
+  margin-top: 3rem;
+}
+.gallery h1 {
+  text-align: center;
+  font-family: serif;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+}
+.gallery .images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.gallery .gallery-img {
+  width: 300px;
+  margin: 10px;
+  border-radius: 4px;
+  height: 40vh;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  filter: contrast(120%);
+}/*# sourceMappingURL=Project3.css.map */

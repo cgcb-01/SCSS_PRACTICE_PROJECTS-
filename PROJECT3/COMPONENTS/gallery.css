@@ -1,0 +1,23 @@
+.gallery {
+  margin-top: 3rem;
+}
+.gallery h1 {
+  text-align: center;
+  font-family: serif;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+}
+.gallery .images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.gallery .gallery-img {
+  width: 300px;
+  margin: 10px;
+  border-radius: 4px;
+  height: 40vh;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  filter: contrast(120%);
+}/*# sourceMappingURL=gallery.css.map */

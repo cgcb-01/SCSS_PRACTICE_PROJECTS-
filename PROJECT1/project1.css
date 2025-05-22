@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  background: linear-gradient(rgba(165, 170, 233, 0.8), #7d8df5);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: #b8d3fb;
+  max-width: 280px;
+  padding: 20px;
+  line-height: 24px;
+  margin: 4rem;
+  position: relative;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: 5px solid white;
+  position: absolute;
+  right: -30px;
+  bottom: 110px;
+}
+
+.img-one {
+  background: url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/one.jpg") no-repeat center/cover;
+}
+
+.img-two {
+  background: url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/four.jpg") no-repeat center/cover;
+}
+
+.img-three {
+  background: url("https://avatars.githubusercontent.com/u/85052811?v=4") no-repeat center/cover;
+}
+
+.img-four {
+  background: url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/one.jpg") no-repeat center/cover;
+}/*# sourceMappingURL=project1.css.map */

@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+//Variables declaration
+$maincolor:#b8d3fb;
+$bg-image:no-repeat center/cover; // here the background properties can be mentioned separated by spaces. center/cover is a specific format for position/size
+$main-font:"Roboto", sans-serif;
+body{
+    background:linear-gradient(#a5aae9cc,#7d8df5);
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     background-size: cover;
+     font-weight:500;
+     font-family:$main-font;
+}
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items: center;
+}
+.card{
+    background:$maincolor;
+    max-width:280px;
+    padding:20px;
+    line-height:24px;
+    margin:4rem;
+    position:relative;
+}
+
+.img
+{
+    width:70px;
+    height:70px;
+    border-radius:100%;
+    border:5px solid white;
+    position:absolute;
+    right:-30px;
+    bottom:110px;
+}
+.img-one
+{
+    background:url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/one.jpg")$bg-image;
+}
+.img-two
+{
+    background:url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/four.jpg")$bg-image;
+}
+.img-three
+{
+    background:url("https://avatars.githubusercontent.com/u/85052811?v=4")$bg-image;
+}
+.img-four
+{
+    background:url("https://raw.githubusercontent.com/HuXn-WebDev/Sass-Masterclass/refs/heads/main/Finished/1.%20Variables/Images/one.jpg")$bg-image;
+}
