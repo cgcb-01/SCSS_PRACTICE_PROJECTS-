@@ -132,11 +132,55 @@ h2 {
     padding: 30px;
     margin: 0.6rem;
     font-family: sans-serif;
-    h1 {
+    .restaurant {
       font-size: 3rem;
       font-family: serif;
       text-align: left;
       padding-left: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid rgb(0, 0, 0);
+      animation: typingres 2.5s steps(20, end) forwards,
+        blink2 0.3s step-end infinite;
+      animation-delay: 4s;
+    }
+    .founder {
+      font-size: 3rem;
+      font-family: serif;
+      text-align: left;
+      padding-left: 0px;
+      width: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid rgb(0, 0, 0);
+      animation: typingf 2.5s steps(10, end) forwards,
+        blink2 0.3s step-end infinite;
+      animation-delay: 4s;
+    }
+    @keyframes typingres {
+      from {
+        width: 0ch;
+      }
+      to {
+        width: 14ch;
+      }
+    }
+    @keyframes typingf {
+      from {
+        width: 0;
+      }
+      to {
+        width: 75%;
+      }
+    }
+    @keyframes blink2 {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: rgb(0, 0, 0);
+      }
     }
     p {
       margin: 20px 0px;
@@ -153,10 +197,10 @@ h2 {
     }
 
     a:hover {
-      background-color: #111; /* slightly lighter black */
+      background-color: #111;
       box-shadow: 0 0 10px 3px rgba(0, 162, 255, 0.333),
         0 0 10px 5px rgba(0, 162, 255, 0.333);
-      color: #baffba; /* soft glowing green text */
+      color: #baffba;
     }
   }
   .pic {
@@ -165,6 +209,10 @@ h2 {
     border-radius: 4px;
     filter: contrast(115%);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .pic:hover {
+    box-shadow: 0 0 10px 3px rgba(255, 174, 0, 0.333),
+      0 0 10px 5px rgba(255, 174, 0, 0.333);
   }
 }
 
