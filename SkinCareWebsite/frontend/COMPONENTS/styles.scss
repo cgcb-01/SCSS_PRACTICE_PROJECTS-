@@ -1,0 +1,1320 @@
+// ============================================================
+// NATURELLE BLOOM — SCSS DESIGN SYSTEM
+// Template tokens reused throughout the stylesheet
+// ============================================================
+
+// ── 1. DESIGN TOKENS ──────────────────────────────────────
+$color-cream:        #fdf6ee;
+$color-blush:        #f4d6c8;
+$color-rose:         #d4756b;
+$color-rose-dark:    #b85c52;
+$color-sage:         #7a9e7e;
+$color-sage-light:   #a8c5ab;
+$color-bark:         #5c3d2e;
+$color-bark-light:   #8b6355;
+$color-gold:         #c9a96e;
+$color-gold-light:   #e8d5b0;
+$color-text:         #3a2a22;
+$color-text-muted:   #8a6f63;
+$color-white:        #ffffff;
+$color-border:       #e8d5c8;
+
+// ── 2. TYPOGRAPHY ─────────────────────────────────────────
+$font-display:   'Playfair Display', Georgia, serif;
+$font-script:    'Dancing Script', cursive;
+$font-body:      'Lato', 'Trebuchet MS', sans-serif;
+
+// ── 3. SPACING SCALE ──────────────────────────────────────
+$space-xs:   0.4rem;
+$space-sm:   0.8rem;
+$space-md:   1.6rem;
+$space-lg:   3.2rem;
+$space-xl:   6rem;
+$space-xxl:  10rem;
+
+// ── 4. RADIUS ─────────────────────────────────────────────
+$radius-sm:   6px;
+$radius-md:   14px;
+$radius-lg:   28px;
+$radius-pill: 999px;
+
+// ── 5. SHADOWS ────────────────────────────────────────────
+$shadow-sm:  0 2px 12px rgba(92,61,46,0.08);
+$shadow-md:  0 6px 28px rgba(92,61,46,0.14);
+$shadow-lg:  0 16px 56px rgba(92,61,46,0.18);
+
+// ── 6. TRANSITIONS ────────────────────────────────────────
+$trans-fast:   all 0.18s ease;
+$trans-mid:    all 0.32s cubic-bezier(0.4,0,0.2,1);
+$trans-slow:   all 0.56s cubic-bezier(0.4,0,0.2,1);
+
+// ── 7. BREAKPOINTS ────────────────────────────────────────
+$bp-sm:  600px;
+$bp-md:  900px;
+$bp-lg:  1200px;
+
+// ============================================================
+// MIXINS
+// ============================================================
+
+// Flex helpers
+@mixin flex($dir: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 { gap: $gap; }
+}
+
+// Grid
+@mixin grid($cols: 1, $gap: $space-md) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
+// Button base
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: 0.7rem 1.8rem;
+  border-radius: $radius-pill;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: $trans-mid;
+  text-decoration: none;
+}
+
+// Card base
+@mixin card-base {
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: $trans-mid;
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-4px);
+  }
+}
+
+// Section header
+@mixin section-header {
+  text-align: center;
+  margin-bottom: $space-lg;
+  .eyebrow {
+    display: block;
+    font-family: $font-body;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-rose;
+    margin-bottom: $space-sm;
+  }
+  h2 {
+    font-family: $font-script;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: $color-bark;
+    line-height: 1.1;
+    margin-bottom: $space-sm;
+  }
+  p {
+    font-family: $font-body;
+    color: $color-text-muted;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+}
+
+// Decorative dot pattern
+@mixin dot-pattern($color: $color-blush, $size: 4px, $spacing: 18px) {
+  background-image: radial-gradient($color $size/2, transparent $size/2);
+  background-size: $spacing $spacing;
+}
+
+// Scrollbar styling
+@mixin custom-scrollbar($track: $color-blush, $thumb: $color-rose) {
+  &::-webkit-scrollbar { width: 5px; }
+  &::-webkit-scrollbar-track { background: $track; border-radius: $radius-pill; }
+  &::-webkit-scrollbar-thumb { background: $thumb; border-radius: $radius-pill; }
+}
+
+// Hover link
+@mixin link-hover($color: $color-rose) {
+  color: $color-text-muted;
+  text-decoration: none;
+  transition: $trans-fast;
+  &:hover { color: $color; }
+}
+
+// ============================================================
+// RESET & BASE
+// ============================================================
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body;
+  background: $color-cream;
+  color: $color-text;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+// ============================================================
+// TYPOGRAPHY UTILITIES
+// ============================================================
+.display { font-family: $font-display; }
+.script  { font-family: $font-script; }
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $color-rose;
+}
+
+// ============================================================
+// BUTTONS
+// ============================================================
+.btn-primary {
+  @include btn-base;
+  background: $color-rose;
+  color: $color-white;
+  border-color: $color-rose;
+  &:hover {
+    background: $color-rose-dark;
+    border-color: $color-rose-dark;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-outline {
+  @include btn-base;
+  background: transparent;
+  color: $color-bark;
+  border-color: $color-bark;
+  &:hover {
+    background: $color-bark;
+    color: $color-white;
+  }
+}
+
+.btn-sage {
+  @include btn-base;
+  background: $color-sage;
+  color: $color-white;
+  border-color: $color-sage;
+  &:hover {
+    background: darken($color-sage, 8%);
+    border-color: darken($color-sage, 8%);
+  }
+}
+
+// ============================================================
+// NAVBAR
+// ============================================================
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba($color-cream, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $color-border;
+  padding: 0 $space-lg;
+  height: 68px;
+  @include flex(row, center, space-between, 0);
+
+  &__logo {
+    @include flex(row, center, flex-start, $space-sm);
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, $color-rose, $color-gold);
+      border-radius: 50%;
+      @include flex(row, center, center);
+      font-size: 1.2rem;
+    }
+    .logo-text {
+      font-family: $font-display;
+      font-size: 1.35rem;
+      color: $color-bark;
+      font-weight: 700;
+      span {
+        color: $color-rose;
+        font-family: $font-script;
+        font-size: 1.6rem;
+      }
+    }
+    .logo-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $color-text-muted;
+      margin-top: -4px;
+    }
+  }
+
+  &__nav {
+    @include flex(row, center, flex-start, 0);
+    .nav-item {
+      position: relative;
+      &:hover > .dropdown { display: block; }
+    }
+    .nav-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: $color-text;
+      transition: $trans-fast;
+      @include flex(row, center, flex-start, 4px);
+      &:hover, &.active { color: $color-rose; }
+      .arrow {
+        font-size: 0.6rem;
+        transition: $trans-fast;
+      }
+    }
+    .nav-item:hover .arrow { transform: rotate(180deg); }
+  }
+
+  &__actions {
+    @include flex(row, center, flex-end, $space-md);
+    .search-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: $color-text-muted;
+      transition: $trans-fast;
+      padding: 0.3rem;
+      &:hover { color: $color-rose; }
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: $color-bark;
+      border-radius: 2px;
+      transition: $trans-mid;
+    }
+    @media (max-width: $bp-md) { display: flex; }
+  }
+
+  @media (max-width: $bp-md) {
+    &__nav, &__actions .btn-primary { display: none; }
+  }
+}
+
+// Dropdown
+.dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  min-width: 220px;
+  padding: $space-sm 0;
+  border: 1px solid $color-border;
+  z-index: 999;
+  animation: fadeDown 0.18s ease;
+  .dropdown-link {
+    display: block;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.82rem;
+    color: $color-text-muted;
+    transition: $trans-fast;
+    &:hover {
+      background: $color-cream;
+      color: $color-rose;
+      padding-left: 1.6rem;
+    }
+  }
+  .dropdown-section {
+    padding: 0.3rem 1.2rem 0.1rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-rose;
+    margin-top: $space-xs;
+  }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+// ============================================================
+// HERO
+// ============================================================
+.hero {
+  position: relative;
+  min-height: 88vh;
+  overflow: hidden;
+  @include flex(row, center, center);
+  background: linear-gradient(
+    135deg,
+    $color-cream 0%,
+    lighten($color-blush, 6%) 40%,
+    $color-blush 100%
+  );
+
+  &__bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+    }
+    .s1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, $color-rose, transparent 70%);
+      top: -100px; right: -80px;
+    }
+    .s2 {
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, $color-sage, transparent 70%);
+      bottom: -60px; left: 5%;
+    }
+    .s3 {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, $color-gold, transparent 70%);
+      top: 30%; left: 28%;
+    }
+  }
+
+  &__dot-grid {
+    position: absolute;
+    right: 2%;
+    top: 10%;
+    width: 180px; height: 180px;
+    @include dot-pattern($color-rose, 3px, 14px);
+    opacity: 0.35;
+    border-radius: $radius-md;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+    padding: $space-xl $space-lg;
+    @include flex(row, center, space-between, $space-xl);
+
+    @media (max-width: $bp-md) {
+      flex-direction: column;
+      padding: $space-lg $space-md;
+      text-align: center;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    max-width: 560px;
+    animation: heroFadeIn 0.9s cubic-bezier(0.4,0,0.2,1) both;
+
+    .hero-eyebrow {
+      @include flex(row, center, flex-start, $space-sm);
+      margin-bottom: $space-md;
+      @media (max-width: $bp-md) { justify-content: center; }
+      .leaf { font-size: 1.1rem; }
+      span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: $color-rose;
+      }
+    }
+
+    h1 {
+      font-family: $font-display;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.1;
+      color: $color-bark;
+      margin-bottom: $space-sm;
+      em {
+        font-family: $font-script;
+        color: $color-rose;
+        font-style: normal;
+        font-size: 1.15em;
+      }
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: $color-text-muted;
+      line-height: 1.75;
+      margin-bottom: $space-lg;
+      max-width: 440px;
+    }
+
+    .hero-ctas {
+      @include flex(row, center, flex-start, $space-md);
+      flex-wrap: wrap;
+      @media (max-width: $bp-md) { justify-content: center; }
+    }
+
+    .hero-stats {
+      @include flex(row, center, flex-start, $space-lg);
+      margin-top: $space-xl * 0.6;
+      padding-top: $space-md;
+      border-top: 1px solid $color-border;
+      @media (max-width: $bp-md) { justify-content: center; }
+      .stat {
+        text-align: center;
+        .stat-num {
+          font-family: $font-display;
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: $color-bark;
+        }
+        .stat-label {
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: $color-text-muted;
+        }
+      }
+    }
+  }
+
+  &__visual {
+    flex: 0 0 420px;
+    position: relative;
+    animation: heroFadeIn 0.9s 0.2s cubic-bezier(0.4,0,0.2,1) both;
+    @media (max-width: $bp-md) { flex: none; width: 100%; max-width: 340px; }
+
+    .hero-img-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%;
+      overflow: hidden;
+      box-shadow: $shadow-lg;
+      background: linear-gradient(135deg, $color-blush, $color-sage-light);
+      animation: morphBlob 8s ease-in-out infinite;
+
+      img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        filter: saturate(1.05);
+      }
+    }
+
+    .hero-badge {
+      position: absolute;
+      background: $color-white;
+      border-radius: $radius-md;
+      box-shadow: $shadow-md;
+      padding: 0.8rem 1.1rem;
+      @include flex(row, center, flex-start, $space-sm);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: $color-bark;
+
+      &-1 {
+        bottom: 12%;
+        left: -16%;
+        .badge-icon { font-size: 1.4rem; }
+      }
+      &-2 {
+        top: 10%;
+        right: -12%;
+        flex-direction: column;
+        align-items: flex-start;
+        .badge-num {
+          font-family: $font-display;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: $color-rose;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes morphBlob {
+  0%,100% { border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%; }
+  25%      { border-radius: 40% 60% 46% 54% / 56% 44% 56% 44%; }
+  50%      { border-radius: 54% 46% 60% 40% / 44% 56% 44% 56%; }
+  75%      { border-radius: 46% 54% 40% 60% / 56% 44% 56% 44%; }
+}
+
+// ============================================================
+// CATEGORY PILLS (below hero)
+// ============================================================
+.category-strip {
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  padding: $space-md $space-lg;
+  @include flex(row, center, center, $space-md);
+  flex-wrap: wrap;
+
+  .cat-pill {
+    @include flex(row, center, flex-start, $space-xs);
+    padding: 0.45rem 1.1rem;
+    border-radius: $radius-pill;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $trans-fast;
+    border: 2px solid transparent;
+
+    &.face    { background: lighten($color-blush, 4%); color: $color-rose-dark; border-color: $color-blush; }
+    &.treat   { background: lighten($color-gold-light, 2%); color: darken($color-gold, 20%); border-color: $color-gold-light; }
+    &.exercise{ background: lighten($color-sage-light, 4%); color: darken($color-sage, 20%); border-color: $color-sage-light; }
+    &.drinks  { background: #e8f4f0; color: #2d7a5e; border-color: #b8dfd4; }
+    &.body    { background: #f3eee8; color: $color-bark; border-color: $color-gold-light; }
+
+    &:hover, &.active { filter: brightness(0.92); transform: translateY(-2px); box-shadow: $shadow-sm; }
+  }
+}
+
+// ============================================================
+// MAIN LAYOUT — Sidebar + Content
+// ============================================================
+.main-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $space-xl $space-lg;
+  @include flex(row, flex-start, flex-start, $space-xl);
+
+  @media (max-width: $bp-lg) {
+    gap: $space-lg;
+  }
+  @media (max-width: $bp-md) {
+    flex-direction: column;
+    padding: $space-lg $space-md;
+  }
+}
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+.sidebar {
+  flex: 0 0 280px;
+  position: sticky;
+  top: 84px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  @include custom-scrollbar($color-blush, $color-rose);
+  @media (max-width: $bp-md) {
+    position: static;
+    max-height: none;
+    width: 100%;
+    overflow-y: visible;
+  }
+
+  &__section {
+    margin-bottom: $space-lg;
+    .sidebar__title {
+      @include flex(row, center, flex-start, $space-xs);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: $space-sm 0;
+      margin-bottom: $space-xs;
+      border-bottom: 2px solid $color-border;
+
+      &.face   { color: $color-rose; }
+      &.treats { color: darken($color-gold, 15%); }
+      &.exercise { color: darken($color-sage, 12%); }
+      &.drinks { color: #2d7a5e; }
+    }
+  }
+
+  &__list {
+    .sb-item {
+      display: block;
+      padding: 0.38rem 0.6rem;
+      font-size: 0.8rem;
+      color: $color-text-muted;
+      border-radius: $radius-sm;
+      transition: $trans-fast;
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      &:hover, &.active {
+        background: $color-cream;
+        border-left-color: $color-rose;
+        color: $color-rose;
+        padding-left: 1rem;
+      }
+    }
+  }
+}
+
+// ============================================================
+// CONTENT AREA
+// ============================================================
+.content-area {
+  flex: 1;
+  min-width: 0;
+}
+
+// ============================================================
+// SECTION WRAPPER (reusable)
+// ============================================================
+.blog-section {
+  margin-bottom: $space-xxl * 0.7;
+
+  &__header {
+    @include flex(row, center, space-between, $space-md);
+    margin-bottom: $space-lg;
+    flex-wrap: wrap;
+    gap: $space-sm;
+
+    .section-left {
+      .eyebrow { margin-bottom: $space-xs; }
+      h2 {
+        font-family: $font-script;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        color: $color-bark;
+        line-height: 1.15;
+      }
+    }
+    .view-all {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: $color-rose;
+      letter-spacing: 0.06em;
+      @include flex(row, center, flex-start, 4px);
+      transition: $trans-fast;
+      &:hover { gap: 8px; }
+    }
+  }
+}
+
+// ============================================================
+// BLOG CARDS
+// ============================================================
+
+// Featured card (wide)
+.card-featured {
+  @include card-base;
+  @include flex(row, stretch, flex-start, 0);
+  margin-bottom: $space-lg;
+
+  @media (max-width: $bp-sm) { flex-direction: column; }
+
+  &__img {
+    flex: 0 0 45%;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    background: $color-blush;
+    img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: $trans-slow;
+    }
+    &:hover img { transform: scale(1.05); }
+    .cat-tag {
+      position: absolute;
+      top: $space-md;
+      left: $space-md;
+      background: $color-rose;
+      color: $color-white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: $radius-pill;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    padding: $space-lg $space-lg;
+    @include flex(column, flex-start, center, $space-sm);
+
+    .meta {
+      @include flex(row, center, flex-start, $space-md);
+      font-size: 0.75rem;
+      color: $color-text-muted;
+    }
+    h3 {
+      font-family: $font-display;
+      font-size: 1.5rem;
+      color: $color-bark;
+      line-height: 1.25;
+    }
+    p {
+      font-size: 0.9rem;
+      color: $color-text-muted;
+      line-height: 1.7;
+    }
+    .read-more {
+      @include btn-base;
+      background: transparent;
+      color: $color-rose;
+      border-color: $color-rose;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.78rem;
+      margin-top: $space-sm;
+      &:hover { background: $color-rose; color: $color-white; }
+    }
+  }
+}
+
+// Grid card (small)
+.card-grid {
+  @include card-base;
+  cursor: pointer;
+
+  &__img {
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, $color-blush, $color-sage-light);
+    img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: $trans-slow;
+    }
+    &:hover img { transform: scale(1.07); }
+    .cat-dot {
+      position: absolute;
+      bottom: $space-sm;
+      left: $space-sm;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      &.face    { background: $color-rose; }
+      &.treats  { background: $color-gold; }
+      &.exercise{ background: $color-sage; }
+      &.drinks  { background: #2d9e72; }
+    }
+    .num-badge {
+      position: absolute;
+      top: $space-sm;
+      right: $space-sm;
+      background: rgba($color-white, 0.9);
+      color: $color-bark;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: $radius-pill;
+    }
+  }
+
+  &__body {
+    padding: $space-md;
+    h4 {
+      font-family: $font-display;
+      font-size: 0.95rem;
+      color: $color-bark;
+      margin-bottom: $space-xs;
+      line-height: 1.35;
+    }
+    .meta-sm {
+      @include flex(row, center, space-between, 0);
+      font-size: 0.7rem;
+      color: $color-text-muted;
+      .tag {
+        color: $color-rose;
+        font-weight: 600;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+    }
+  }
+}
+
+// List card (horizontal small)
+.card-list {
+  @include flex(row, center, flex-start, $space-md);
+  padding: $space-sm 0;
+  border-bottom: 1px solid $color-border;
+  cursor: pointer;
+  transition: $trans-fast;
+  &:hover { transform: translateX(4px); }
+  &:last-child { border-bottom: none; }
+
+  .card-list__num {
+    font-family: $font-display;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $color-border;
+    flex: 0 0 36px;
+    line-height: 1;
+  }
+
+  .card-list__body {
+    flex: 1;
+    h5 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: $color-bark;
+      margin-bottom: 2px;
+      line-height: 1.4;
+    }
+    span {
+      font-size: 0.72rem;
+      color: $color-text-muted;
+    }
+  }
+
+  &:hover .card-list__num { color: $color-rose; }
+}
+
+// ============================================================
+// GRIDS
+// ============================================================
+.grid-3 { @include grid(3, $space-md); @media (max-width: $bp-md) { grid-template-columns: repeat(2, 1fr); } @media (max-width: $bp-sm) { grid-template-columns: 1fr; } }
+.grid-2 { @include grid(2, $space-md); @media (max-width: $bp-sm) { grid-template-columns: 1fr; } }
+.grid-4 { @include grid(4, $space-md); @media (max-width: $bp-md) { grid-template-columns: repeat(2, 1fr); } @media (max-width: $bp-sm) { grid-template-columns: 1fr; } }
+
+// ============================================================
+// INGREDIENT SPOTLIGHT
+// ============================================================
+.ingredient-card {
+  @include flex(column, center, flex-start, $space-sm);
+  text-align: center;
+  padding: $space-lg $space-md;
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1.5px solid $color-border;
+  transition: $trans-mid;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-rose;
+    box-shadow: $shadow-md;
+    transform: translateY(-6px);
+  }
+
+  .ing-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, $color-blush, $color-gold-light);
+    border-radius: 50%;
+    @include flex(row, center, center);
+    font-size: 2rem;
+    margin-bottom: $space-sm;
+  }
+
+  h4 {
+    font-family: $font-display;
+    font-size: 0.95rem;
+    color: $color-bark;
+    margin-bottom: 2px;
+  }
+
+  p {
+    font-size: 0.75rem;
+    color: $color-text-muted;
+    line-height: 1.5;
+  }
+
+  .ing-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-rose;
+    margin-top: $space-xs;
+  }
+}
+
+// ============================================================
+// EXERCISE SECTION
+// ============================================================
+.exercise-card {
+  @include card-base;
+  @include flex(row, center, flex-start, $space-md);
+  padding: $space-md;
+  cursor: pointer;
+
+  .ex-icon {
+    flex: 0 0 50px;
+    width: 50px; height: 50px;
+    background: linear-gradient(135deg, $color-sage-light, $color-sage);
+    border-radius: $radius-md;
+    @include flex(row, center, center);
+    font-size: 1.4rem;
+    color: $color-white;
+  }
+
+  .ex-body {
+    flex: 1;
+    h4 { font-size: 0.88rem; font-weight: 700; color: $color-bark; margin-bottom: 2px; }
+    p  { font-size: 0.74rem; color: $color-text-muted; }
+  }
+
+  .ex-arrow {
+    color: $color-sage;
+    font-size: 1rem;
+    transition: $trans-fast;
+  }
+
+  &:hover .ex-arrow { transform: translateX(4px); }
+}
+
+// ============================================================
+// DRINKS SECTION
+// ============================================================
+.drink-card {
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: $trans-mid;
+  cursor: pointer;
+
+  &:hover { transform: translateY(-4px); box-shadow: $shadow-md; }
+
+  &__top {
+    padding: $space-lg $space-md $space-sm;
+    @include flex(column, center, center, $space-xs);
+    text-align: center;
+    .drink-emoji { font-size: 2.4rem; }
+    h4 { font-family: $font-display; font-size: 0.9rem; color: $color-bark; }
+  }
+
+  &__bar {
+    height: 4px;
+    background: linear-gradient(90deg, $color-sage, #2d9e72);
+  }
+
+  &__body {
+    padding: $space-sm $space-md $space-md;
+    font-size: 0.75rem;
+    color: $color-text-muted;
+    text-align: center;
+    line-height: 1.5;
+  }
+}
+
+// ============================================================
+// NEWSLETTER / CTA BANNER
+// ============================================================
+.cta-banner {
+  background: linear-gradient(135deg, $color-bark 0%, $color-rose-dark 60%, $color-rose 100%);
+  border-radius: $radius-lg;
+  padding: $space-xl $space-lg;
+  @include flex(row, center, space-between, $space-lg);
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 350px; height: 350px;
+    background: rgba($color-white, 0.05);
+    border-radius: 50%;
+    top: -100px; right: -80px;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 240px;
+    .eyebrow { color: $color-gold-light; }
+    h2 {
+      font-family: $font-script;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: $color-white;
+      margin: $space-xs 0;
+    }
+    p { color: rgba($color-white, 0.75); font-size: 0.9rem; }
+  }
+
+  &__form {
+    @include flex(row, center, flex-start, $space-sm);
+    flex-wrap: wrap;
+    input {
+      padding: 0.75rem 1.2rem;
+      border-radius: $radius-pill;
+      border: none;
+      font-family: $font-body;
+      font-size: 0.88rem;
+      outline: none;
+      width: 240px;
+      background: rgba($color-white, 0.15);
+      color: $color-white;
+      &::placeholder { color: rgba($color-white, 0.55); }
+      &:focus { background: rgba($color-white, 0.25); }
+    }
+  }
+}
+
+// ============================================================
+// TESTIMONIAL
+// ============================================================
+.testimonial-card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  box-shadow: $shadow-sm;
+  border-left: 4px solid $color-rose;
+  position: relative;
+
+  &::before {
+    content: '"';
+    font-family: $font-display;
+    font-size: 6rem;
+    color: $color-blush;
+    position: absolute;
+    top: -10px;
+    left: $space-md;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $color-text-muted;
+    line-height: 1.8;
+    margin-bottom: $space-md;
+    padding-top: $space-lg;
+  }
+
+  .test-author {
+    @include flex(row, center, flex-start, $space-sm);
+    .avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: $color-blush;
+      @include flex(row, center, center);
+      font-size: 1.2rem;
+    }
+    .name { font-weight: 700; font-size: 0.88rem; color: $color-bark; }
+    .role { font-size: 0.72rem; color: $color-text-muted; }
+  }
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+.footer {
+  background: $color-bark;
+  color: rgba($color-white, 0.8);
+  padding: $space-xl $space-lg $space-lg;
+
+  &__top {
+    max-width: 1400px;
+    margin: 0 auto;
+    @include grid(4, $space-xl);
+    margin-bottom: $space-xl;
+    @media (max-width: $bp-md) { grid-template-columns: repeat(2, 1fr); gap: $space-lg; }
+    @media (max-width: $bp-sm) { grid-template-columns: 1fr; }
+  }
+
+  &__brand {
+    .brand-name {
+      font-family: $font-display;
+      font-size: 1.4rem;
+      color: $color-white;
+      margin-bottom: $space-sm;
+      span { font-family: $font-script; color: $color-rose; font-size: 1.8rem; }
+    }
+    p { font-size: 0.82rem; line-height: 1.7; margin-bottom: $space-md; }
+    .socials {
+      @include flex(row, center, flex-start, $space-sm);
+      a {
+        width: 36px; height: 36px;
+        background: rgba($color-white, 0.1);
+        border-radius: 50%;
+        @include flex(row, center, center);
+        font-size: 0.9rem;
+        transition: $trans-fast;
+        &:hover { background: $color-rose; color: $color-white; }
+      }
+    }
+  }
+
+  &__col {
+    h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: $color-white;
+      margin-bottom: $space-md;
+      padding-bottom: $space-sm;
+      border-bottom: 1px solid rgba($color-white, 0.1);
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+      a {
+        font-size: 0.82rem;
+        color: rgba($color-white, 0.65);
+        transition: $trans-fast;
+        &:hover { color: $color-gold-light; padding-left: 4px; }
+      }
+    }
+    .contact-row {
+      @include flex(row, flex-start, flex-start, $space-sm);
+      font-size: 0.8rem;
+      color: rgba($color-white, 0.65);
+      margin-bottom: $space-sm;
+      .icon { color: $color-rose; flex-shrink: 0; margin-top: 2px; }
+    }
+  }
+
+  &__bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: $space-md;
+    border-top: 1px solid rgba($color-white, 0.1);
+    @include flex(row, center, space-between, 0);
+    flex-wrap: wrap;
+    gap: $space-sm;
+    font-size: 0.75rem;
+    color: rgba($color-white, 0.45);
+    a { color: $color-gold-light; }
+    .back-top {
+      width: 36px; height: 36px;
+      background: rgba($color-white, 0.1);
+      border-radius: 50%;
+      @include flex(row, center, center);
+      cursor: pointer;
+      transition: $trans-fast;
+      font-size: 0.85rem;
+      &:hover { background: $color-rose; }
+    }
+  }
+}
+
+// ============================================================
+// ANIMATIONS & UTILITIES
+// ============================================================
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  &.visible { opacity: 1; transform: translateY(0); }
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid $color-border;
+  margin: $space-xl 0;
+}
+
+// Stagger animation for children
+@for $i from 1 through 12 {
+  .stagger-#{$i} { animation-delay: #{$i * 0.08}s; }
+}
+
+// ============================================================
+// SEARCH OVERLAY
+// ============================================================
+.search-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba($color-cream, 0.96);
+  z-index: 2000;
+  @include flex(column, center, center, $space-md);
+  backdrop-filter: blur(10px);
+
+  &.active { display: flex; }
+
+  input {
+    width: min(600px, 90vw);
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+    font-family: $font-display;
+    border: 2px solid $color-rose;
+    border-radius: $radius-pill;
+    background: $color-white;
+    outline: none;
+    color: $color-bark;
+    &::placeholder { color: $color-border; }
+  }
+
+  .close-search {
+    position: absolute;
+    top: $space-lg;
+    right: $space-lg;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $color-text-muted;
+    transition: $trans-fast;
+    &:hover { color: $color-rose; }
+  }
+}
+
+// ============================================================
+// MOBILE MENU OVERLAY
+// ============================================================
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: $color-cream;
+  z-index: 1500;
+  padding: $space-xl $space-lg;
+  overflow-y: auto;
+  @include custom-scrollbar($color-blush, $color-rose);
+  @include flex(column, flex-start, flex-start, $space-md);
+
+  &.active { display: flex; }
+
+  .mobile-close {
+    position: absolute;
+    top: $space-lg;
+    right: $space-lg;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $color-bark;
+  }
+
+  .mobile-nav-link {
+    font-family: $font-display;
+    font-size: 1.8rem;
+    color: $color-bark;
+    font-weight: 700;
+    transition: $trans-fast;
+    &:hover { color: $color-rose; }
+  }
+}

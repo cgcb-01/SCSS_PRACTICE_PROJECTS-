@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naturelle Bloom — Natural Body Care Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@600;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --cream:        #fdf6ee;
+      --blush:        #f4d6c8;
+      --rose:         #d46baa;
+      --rose-dark:    #b8526a;
+      --sage:         #7a9e7e;
+      --sage-light:   #a8c5ab;
+      --bark:         #5c2e32;
+      --bark-light:   #8b6355;
+      --gold:         #c9a96e;
+      --gold-light:   #e8d5b0;
+      --text:         #250714;
+      --text-muted:   #8a6376;
+      --white:        #ffffff;
+      --border:       #e8d5c8;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-script:  'Dancing Script', cursive;
+      --font-body:    'Lato', 'Trebuchet MS', sans-serif;
+
+      --shadow-sm:  0 2px 12px rgba(92,61,46,0.08);
+      --shadow-md:  0 6px 28px rgba(92,61,46,0.14);
+      --shadow-lg:  0 16px 56px rgba(92,61,46,0.18);
+
+      --radius-sm:   6px;
+      --radius-md:   14px;
+      --radius-lg:   28px;
+      --radius-pill: 999px;
+
+      --trans-fast: all 0.18s ease;
+      --trans-mid:  all 0.32s cubic-bezier(0.4,0,0.2,1);
+      --trans-slow: all 0.56s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── BUTTON MIXIN ── */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.7rem 1.8rem; border-radius: var(--radius-pill); font-family: var(--font-body); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: 2px solid transparent; transition: var(--trans-mid); text-decoration: none; }
+    .btn-primary { background: var(--rose); color: var(--white); border-color: var(--rose); }
+    .btn-primary:hover { background: var(--rose-dark); border-color: var(--rose-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline { background: transparent; color: var(--bark); border-color: var(--bark); }
+    .btn-outline:hover { background: var(--bark); color: var(--white); }
+    .btn-sage { background: var(--sage); color: var(--white); border-color: var(--sage); }
+    .btn-sage:hover { background: #5e8262; border-color: #5e8262; }
+    .btn-ghost { background: transparent; color: var(--rose); border-color: var(--rose); font-size: 0.78rem; padding: 0.5rem 1.2rem; }
+    .btn-ghost:hover { background: var(--rose); color: var(--white); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(253,246,238,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar__logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.3rem; color: var(--bark); font-weight: 700; }
+    .logo-text span { font-family: var(--font-script); color: var(--rose); font-size: 1.55rem; }
+    .logo-sub { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+    .navbar__nav { display: flex; align-items: center; }
+    .nav-item { position: relative; }
+    .nav-item:hover > .dropdown { display: block; }
+    .nav-link {
+      display: flex; align-items: center; gap: 4px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.83rem; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--text); transition: var(--trans-fast);
+    }
+    .nav-link:hover, .nav-link.active { color: var(--rose); }
+    .nav-link .arr { font-size: 0.55rem; transition: var(--trans-fast); display: inline-block; }
+    .nav-item:hover .arr { transform: rotate(180deg); }
+
+    .navbar__actions { display: flex; align-items: center; gap: 1.2rem; }
+    .search-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); transition: var(--trans-fast); padding: 4px; }
+    .search-btn:hover { color: var(--rose); }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); border-radius: 2px; transition: var(--trans-mid); }
+
+    /* ── DROPDOWN ── */
+    .dropdown {
+      display:none;
+      position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 230px;
+      padding: 8px 0;
+      border: 1px solid var(--border);
+      z-index: 999;
+      animation: fadeDown 0.18s ease;
+    }
+    .dropdown-link { display: block; padding: 0.45rem 1.2rem; font-size: 0.8rem; color: var(--text-muted); transition: var(--trans-fast); }
+    .dropdown-link:hover { background: var(--cream); color: var(--rose); padding-left: 1.6rem; }
+    .dropdown-section { padding: 0.4rem 1.2rem 0.1rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); margin-top: 4px; }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 88vh; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--cream) 0%, #f9e8de 40%, var(--blush) 100%);
+    }
+    .hero__shapes { position: absolute; inset: 0; pointer-events: none; }
+    .shape { position: absolute; border-radius: 50%; opacity: 0.18; }
+    .s1 { width: 520px; height: 520px; background: radial-gradient(circle, var(--rose), transparent 70%); top: -100px; right: -80px; }
+    .s2 { width: 340px; height: 340px; background: radial-gradient(circle, var(--sage), transparent 70%); bottom: -60px; left: 5%; }
+    .s3 { width: 220px; height: 220px; background: radial-gradient(circle, var(--gold), transparent 70%); top: 30%; left: 28%; }
+    .dot-grid { position: absolute; right: 10%; top: 10%; width: 180px; height: 180px; background-image: radial-gradient(var(--rose) 1.5px, transparent 1.5px); background-size: 14px 14px; opacity: 0.3; border-radius: var(--radius-md); }
+
+    .hero__content {
+      position: relative; z-index: 2;
+      max-width: 1200px; width: 100%;
+      padding: 5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 4rem;
+    }
+    .hero__text { flex: 1; max-width: 560px; animation: heroIn 0.9s cubic-bezier(0.4,0,0.2,1) both; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; }
+    .hero-eyebrow .leaf { font-size: 1.1rem; }
+    .hero-eyebrow span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); }
+    .hero__text h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.1; color: var(--bark); margin-bottom: 1rem; }
+    .hero__text h1 em { font-family: var(--font-script); color: var(--rose); font-style: normal; font-size: 1.15em; }
+    .hero-sub { font-size: 1.02rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; max-width: 440px; }
+    .hero-ctas { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .hero-stats { display: flex; align-items: center; gap: 2.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .stat .stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--bark); }
+    .stat .stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+    .hero__visual { flex: 0 0 420px; position: relative; animation: heroIn 0.9s 0.2s cubic-bezier(0.4,0,0.2,1) both; }
+    .hero-img-frame {
+      width: 100%; aspect-ratio: 4/5;
+      border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%;
+      overflow: hidden; box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, var(--blush), var(--sage-light));
+      animation: morphBlob 8s ease-in-out infinite;
+    }
+    .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+    /* Hero placeholder visual */
+    .hero-placeholder {
+      width: 100%; height: 100%; min-height: 380px;
+      background: linear-gradient(135deg, #f0c8bc 0%, #c5d9c7 50%, #e8d5b0 100%);
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px;
+    }
+    .hero-placeholder .plant-emoji { font-size: 5rem; }
+    .hero-placeholder p { font-family: var(--font-script); font-size: 1.4rem; color: var(--bark); opacity: 0.7; }
+
+    .hero-badge {
+      position: absolute; background: var(--white); border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md); padding: 0.8rem 1rem;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.76rem; font-weight: 600; color: var(--bark);
+    }
+    .hero-badge-1 { bottom: 12%; left: -14%; }
+    .hero-badge-2 { top: 10%; right: -10%; flex-direction: column; align-items: flex-start; }
+    .hero-badge-2 .badge-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--rose); line-height: 1; }
+    .badge-icon { font-size: 1.4rem; }
+
+    @keyframes heroIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes morphBlob {
+      0%,100% { border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%; }
+      25%      { border-radius: 40% 60% 46% 54% / 56% 44% 56% 44%; }
+      50%      { border-radius: 54% 46% 60% 40% / 44% 56% 44% 56%; }
+      75%      { border-radius: 46% 54% 40% 60% / 56% 44% 56% 44%; }
+    }
+
+    /* ── CATEGORY STRIP ── */
+    .category-strip {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .cat-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 0.42rem 1rem; border-radius: var(--radius-pill);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      transition: var(--trans-fast); border: 2px solid transparent;
+    }
+    .cat-pill.face    { background: #fdeee9; color: var(--rose-dark); border-color: var(--blush); }
+    .cat-pill.treats  { background: #faf3e6; color: #8b6a20; border-color: var(--gold-light); }
+    .cat-pill.exercise{ background: #eaf2eb; color: #3d6b41; border-color: var(--sage-light); }
+    .cat-pill.drinks  { background: #e8f4f0; color: #2d7a5e; border-color: #b8dfd4; }
+    .cat-pill.body    { background: #f3eee8; color: var(--bark); border-color: var(--gold-light); }
+    .cat-pill:hover, .cat-pill.active { filter: brightness(0.92); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-layout {
+      max-width: 1400px; margin: 0 auto; padding: 4rem 3rem;
+      display: flex; align-items: flex-start; gap: 4rem;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      flex: 0 0 270px; position: sticky; top: 84px;
+      max-height: calc(100vh - 100px); overflow-y: auto;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: var(--blush); border-radius: 99px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 99px; }
+
+    .sidebar__section { margin-bottom: 2rem; }
+    .sidebar__title {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.6rem 0; margin-bottom: 4px;
+      border-bottom: 2px solid var(--border);
+    }
+    .sidebar__title.face      { color: var(--rose); }
+    .sidebar__title.treats    { color: #8b6a20; }
+    .sidebar__title.exercise  { color: #3d6b41; }
+    .sidebar__title.drinks    { color: #2d7a5e; }
+    .sidebar__title.body      { color: var(--bark-light); }
+
+    .sb-subsection { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding: 0.5rem 0.5rem 0.2rem; margin-top: 0.5rem; }
+    .sb-item {
+      display: block; padding: 0.32rem 0.5rem;
+      font-size: 0.78rem; color: var(--text-muted); border-radius: var(--radius-sm);
+      transition: var(--trans-fast); border-left: 2px solid transparent; cursor: pointer;
+    }
+    .sb-item:hover, .sb-item.active {
+      background: var(--cream); border-left-color: var(--rose);
+      color: var(--rose); padding-left: 0.9rem;
+    }
+
+    /* ── CONTENT AREA ── */
+    .content-area { flex: 1; min-width: 0; }
+
+    /* ── BLOG SECTION ── */
+    .blog-section { margin-bottom: 4.5rem; }
+    .blog-section__header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.8rem; flex-wrap: wrap; gap: 0.8rem;
+    }
+    .section-left .eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); margin-bottom: 4px; }
+    .section-left h2 { font-family: var(--font-script); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--bark); line-height: 1.15; }
+    .view-all { font-size: 0.78rem; font-weight: 600; color: var(--rose); display: flex; align-items: center; gap: 4px; transition: var(--trans-fast); }
+    .view-all:hover { gap: 8px; }
+
+    /* ── FEATURED CARD ── */
+    .card-featured {
+      display: flex; background: var(--white);
+      border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      overflow: hidden; transition: var(--trans-mid); margin-bottom: 1.8rem;
+    }
+    .card-featured:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .card-featured__img { flex: 0 0 44%; min-height: 280px; position: relative; overflow: hidden; }
+    .card-featured__img .img-placeholder {
+      width: 100%; height: 100%; min-height: 280px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      font-size: 4rem; gap: 8px;
+    }
+    .card-featured__img .img-placeholder p { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+    .cat-tag { position: absolute; top: 1rem; left: 1rem; background: var(--rose); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: var(--radius-pill); }
+    .card-featured__body { flex: 1; padding: 2rem; display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; }
+    .meta { display: flex; align-items: center; gap: 1rem; font-size: 0.72rem; color: var(--text-muted); }
+    .meta .dot { width: 3px; height: 3px; background: var(--text-muted); border-radius: 50%; }
+    .card-featured__body h3 { font-family: var(--font-display); font-size: 1.45rem; color: var(--bark); line-height: 1.25; }
+    .card-featured__body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── GRID CARD ── */
+    .card-grid {
+      background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      overflow: hidden; transition: var(--trans-mid); cursor: pointer;
+    }
+    .card-grid:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .card-grid__img { height: 185px; position: relative; overflow: hidden; }
+    .card-grid__img .img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; font-size: 2.8rem; }
+    .card-grid__img .img-placeholder span { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); }
+    .cat-dot { position: absolute; bottom: 8px; left: 8px; width: 10px; height: 10px; border-radius: 50%; }
+    .cat-dot.face     { background: var(--rose); }
+    .cat-dot.treats   { background: var(--gold); }
+    .cat-dot.exercise { background: var(--sage); }
+    .cat-dot.drinks   { background: #2d9e72; }
+    .num-badge { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); color: var(--bark); font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: var(--radius-pill); }
+    .card-grid__body { padding: 1rem 1.1rem 1.2rem; }
+    .card-grid__body h4 { font-family: var(--font-display); font-size: 0.9rem; color: var(--bark); margin-bottom: 5px; line-height: 1.35; }
+    .meta-sm { display: flex; align-items: center; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); }
+    .meta-sm .tag { color: var(--rose); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── LIST CARD ── */
+    .card-list { display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--trans-fast); }
+    .card-list:hover { transform: translateX(4px); }
+    .card-list:last-child { border-bottom: none; }
+    .card-list__num { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--border); flex: 0 0 34px; line-height: 1; }
+    .card-list:hover .card-list__num { color: var(--rose); }
+    .card-list__body h5 { font-size: 0.85rem; font-weight: 600; color: var(--bark); margin-bottom: 2px; line-height: 1.4; }
+    .card-list__body span { font-size: 0.7rem; color: var(--text-muted); }
+    .card-list__arr { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; flex-shrink: 0; transition: var(--trans-fast); }
+    .card-list:hover .card-list__arr { color: var(--rose); }
+
+    /* ── GRIDS ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+
+    /* ── INGREDIENT CARD ── */
+    .ingredient-card {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 1.8rem 1rem; background: var(--white);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--border); transition: var(--trans-mid); cursor: pointer; gap: 0.5rem;
+    }
+    .ingredient-card:hover { border-color: var(--rose); box-shadow: var(--shadow-md); transform: translateY(-6px); }
+    .ing-icon { width: 62px; height: 62px; background: linear-gradient(135deg, var(--blush), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; margin-bottom: 6px; }
+    .ingredient-card h4 { font-family: var(--font-display); font-size: 0.9rem; color: var(--bark); }
+    .ingredient-card p { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
+    .ing-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); }
+
+    /* ── EXERCISE CARD ── */
+    .exercise-card {
+      background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem;
+      cursor: pointer; transition: var(--trans-mid);
+    }
+    .exercise-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .ex-icon { flex: 0 0 48px; width: 48px; height: 48px; background: linear-gradient(135deg, var(--sage-light), var(--sage)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; }
+    .ex-body { flex: 1; }
+    .ex-body h4 { font-size: 0.85rem; font-weight: 700; color: var(--bark); margin-bottom: 2px; }
+    .ex-body p  { font-size: 0.72rem; color: var(--text-muted); }
+    .ex-arrow { color: var(--sage); font-size: 0.9rem; transition: var(--trans-fast); }
+    .exercise-card:hover .ex-arrow { transform: translateX(4px); }
+
+    /* ── DRINK CARD ── */
+    .drink-card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden; transition: var(--trans-mid); cursor: pointer; }
+    .drink-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .drink-card__top { padding: 1.5rem 1rem 0.7rem; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+    .drink-emoji { font-size: 2.4rem; }
+    .drink-card__top h4 { font-family: var(--font-display); font-size: 0.88rem; color: var(--bark); line-height: 1.3; }
+    .drink-card__bar { height: 4px; background: linear-gradient(90deg, var(--sage), #2d9e72); }
+    .drink-card__body { padding: 0.7rem 0.9rem 1.1rem; font-size: 0.73rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--bark) 0%, var(--rose-dark) 60%, var(--rose) 100%);
+      border-radius: var(--radius-lg); padding: 4rem 3rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before { content: ''; position: absolute; width: 350px; height: 350px; background: rgba(255,255,255,0.05); border-radius: 50%; top: -100px; right: -80px; }
+    .cta-banner__text { flex: 1; min-width: 220px; }
+    .cta-banner__text .eyebrow { color: var(--gold-light); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+    .cta-banner__text h2 { font-family: var(--font-script); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin: 6px 0; }
+    .cta-banner__text p { color: rgba(255,255,255,0.72); font-size: 0.88rem; }
+    .cta-banner__form { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .cta-banner__form input { padding: 0.72rem 1.2rem; border-radius: var(--radius-pill); border: none; font-family: var(--font-body); font-size: 0.86rem; outline: none; width: 230px; background: rgba(255,255,255,0.15); color: var(--white); }
+    .cta-banner__form input::placeholder { color: rgba(255,255,255,0.5); }
+    .cta-banner__form input:focus { background: rgba(255,255,255,0.25); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--bark); color: rgba(255,255,255,0.75); padding: 5rem 3rem 2rem; }
+    .footer__top { max-width: 1400px; margin: 0 auto 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+    .footer__brand .brand-name { font-family: var(--font-display); font-size: 1.35rem; color: var(--white); margin-bottom: 0.8rem; }
+    .footer__brand .brand-name span { font-family: var(--font-script); color: var(--rose); font-size: 1.7rem; }
+    .footer__brand p { font-size: 0.8rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .socials { display: flex; gap: 0.6rem; }
+    .socials a { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: var(--trans-fast); }
+    .socials a:hover { background: var(--rose); }
+    .footer__col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer__col ul li { margin-bottom: 0.45rem; }
+    .footer__col ul li a { font-size: 0.8rem; color: rgba(255,255,255,0.6); transition: var(--trans-fast); }
+    .footer__col ul li a:hover { color: var(--gold-light); padding-left: 4px; }
+    .contact-row { display: flex; gap: 8px; font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.6rem; }
+    .contact-row .icon { color: var(--rose); flex-shrink: 0; }
+    .footer__bottom { max-width: 1400px; margin: 0 auto; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .footer__bottom a { color: var(--gold-light); }
+    .back-top { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--trans-fast); font-size: 0.8rem; border: none; color: rgba(255,255,255,0.6); }
+    .back-top:hover { background: var(--rose); color: var(--white); }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(253,246,238,0.96); z-index: 2000;
+      flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem;
+      backdrop-filter: blur(12px);
+    }
+    .search-overlay.active { display: flex; }
+    .search-overlay input { width: min(600px, 90vw); padding: 1rem 1.6rem; font-size: 1.3rem; font-family: var(--font-display); border: 2px solid var(--rose); border-radius: var(--radius-pill); background: var(--white); outline: none; color: var(--bark); }
+    .search-hint { font-size: 0.8rem; color: var(--text-muted); }
+    .close-search { position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--trans-fast); }
+    .close-search:hover { color: var(--rose); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--cream);
+      z-index: 1500; padding: 5rem 2rem 2rem; overflow-y: auto;
+      flex-direction: column; gap: 0.5rem;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--bark); }
+    .mobile-nav-link { font-family: var(--font-display); font-size: 1.6rem; color: var(--bark); font-weight: 700; padding: 0.4rem 0; border-bottom: 1px solid var(--border); transition: var(--trans-fast); }
+    .mobile-nav-link:hover { color: var(--rose); }
+    .mobile-sub { font-size: 0.8rem; color: var(--text-muted); padding: 0.25rem 0.5rem; cursor: pointer; transition: var(--trans-fast); }
+    .mobile-sub:hover { color: var(--rose); }
+    .mobile-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); padding: 0.8rem 0 0.2rem; }
+
+    /* ── FADE IN UTILITY ── */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── SECTION COLOR ACCENTS ── */
+    .accent-rose    { color: var(--rose); }
+    .accent-sage    { color: var(--sage); }
+    .accent-gold    { color: var(--gold); }
+    .accent-green   { color: #2d7a5e; }
+    .accent-bark    { color: var(--bark-light); }
+
+    /* ── SKIN TYPE CARDS ── */
+    .skin-type-card {
+      padding: 1.5rem; border-radius: var(--radius-md); text-align: center;
+      transition: var(--trans-mid); cursor: pointer; border: 2px solid transparent;
+    }
+    .skin-type-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--rose); }
+    .skin-type-card .skin-icon { font-size: 2.6rem; margin-bottom: 0.6rem; }
+    .skin-type-card h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--bark); margin-bottom: 4px; }
+    .skin-type-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+    .skin-dry    { background: #faf3e6; }
+    .skin-oily   { background: #eaf2eb; }
+    .skin-acne   { background: #fdeee9; }
+    .skin-teen   { background: #e8f0fa; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .footer__top { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    }
+    @media (max-width: 900px) {
+      .navbar { padding: 0 1.5rem; }
+      .navbar__nav, .navbar__actions .btn-primary { display: none; }
+      .hamburger { display: flex; }
+      .hero__content { flex-direction: column; padding: 3rem 1.5rem; text-align: center; }
+      .hero__visual { flex: none; width: 100%; max-width: 320px; }
+      .hero-badge-1, .hero-badge-2 { display: none; }
+      .hero-eyebrow, .hero-ctas, .hero-stats { justify-content: center; }
+      .main-layout { flex-direction: column; padding: 2rem 1.5rem; gap: 2rem; }
+      .sidebar { position: static; max-height: 280px; width: 100%; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; background: var(--white); }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .category-strip { padding: 0.8rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .navbar { padding: 0 1rem; }
+      .hero__content { padding: 2rem 1rem; }
+      .main-layout { padding: 1.5rem 1rem; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .card-featured { flex-direction: column; }
+      .card-featured__img { min-height: 200px; }
+      .cta-banner { padding: 2.5rem 1.5rem; }
+      .footer { padding: 3rem 1.5rem 1.5rem; }
+      .footer__top { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     SEARCH OVERLAY
+════════════════════════════════════════════════ -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="close-search" onclick="closeSearch()">✕</button>
+  <input type="text" placeholder="Search natural remedies, ingredients…" autofocus />
+  <p class="search-hint">Try: "Aloe Vera", "Belly fat exercises", "Green tea benefits"</p>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     MOBILE MENU
+════════════════════════════════════════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a href="#" class="mobile-nav-link">Home</a>
+  <a href="#face-care" class="mobile-nav-link">Face Care</a>
+  <div class="mobile-section-label">Sub-categories</div>
+  <a href="#" class="mobile-sub">• Masks & Scrubs</a>
+  <a href="#" class="mobile-sub">• Brightening & Glow</a>
+  <a href="#" class="mobile-sub">• Skin Problems</a>
+  <a href="#" class="mobile-sub">• Ingredients Spotlight</a>
+  <a href="#" class="mobile-sub">• Skin Types</a>
+  <a href="#exercise" class="mobile-nav-link">Exercise</a>
+  <div class="mobile-section-label">Sub-categories</div>
+  <a href="#" class="mobile-sub">• Fat Reduction</a>
+  <a href="#" class="mobile-sub">• Posture & Shape</a>
+  <a href="#" class="mobile-sub">• Overall Fitness</a>
+  <a href="#drinks" class="mobile-nav-link"> Health Drinks</a>
+  <div class="mobile-section-label">Sub-categories</div>
+  <a href="#" class="mobile-sub">• Herbal Waters</a>
+  <a href="#" class="mobile-sub">• Glow Juices</a>
+  <a href="#" class="mobile-sub">• Teas & Infusions</a>
+  <a href="#" class="mobile-sub">• Superfoods</a>
+  <a href="#" class="mobile-nav-link"> Contact</a>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════ -->
+<header class="navbar">
+  <div class="navbar__logo">
+    <div class="logo-icon">🌿</div>
+    <div>
+      <div class="logo-text">Naturelle <span>Bloom</span></div>
+      <div class="logo-sub">Natural Body Care</div>
+    </div>
+  </div>
+
+  <nav class="navbar__nav">
+    <div class="nav-item">
+      <a href="#" class="nav-link active">Home</a>
+    </div>
+
+    <div class="nav-item">
+      <a href="#face-care" class="nav-link">Face Care <span class="arr">▼</span></a>
+      <div class="dropdown">
+        <div class="dropdown-section">DIY for Beautiful Skin</div>
+        <a href="#" class="dropdown-link">Top 10 Facial Masks</a>
+        <a href="#" class="dropdown-link">Top 10 Face Toners</a>
+        <a href="#" class="dropdown-link">Top 10 Natural Scrubs</a>
+        <a href="#" class="dropdown-link">Facial Moisturizers</a>
+        <div class="dropdown-section">Natural Ingredients Benefits </div>
+        <a href="#" class="dropdown-link">Aloe Vera Benefits</a>
+        <a href="#" class="dropdown-link">Multani Mitti</a>
+        <a href="#" class="dropdown-link">Rose Water</a>
+        <a href="#" class="dropdown-link">Charcoal & Neem</a>
+        <div class="dropdown-section"> Correct Your Skin</div>
+        <a href="#" class="dropdown-link">Dark Spots & Pigmentation</a>
+        <a href="#" class="dropdown-link">Glass Skin Guide</a>
+        <a href="#" class="dropdown-link">Acne Problem</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a href="#exercise" class="nav-link">Exercise <span class="arr">▼</span></a>
+      <div class="dropdown">
+        <div class="dropdown-section"> Fat Reduction</div>
+        <a href="#" class="dropdown-link">Reduce Belly Fat</a>
+        <a href="#" class="dropdown-link">Slim Thighs</a>
+        <a href="#" class="dropdown-link">Arm Fat Exercises</a>
+        <a href="#" class="dropdown-link">Reduce Breast Size</a>
+        <div class="dropdown-section"> Posture & Shape</div>
+        <a href="#" class="dropdown-link">Double Chin Fix</a>
+        <a href="#" class="dropdown-link">Hunch Back Correction</a>
+        <a href="#" class="dropdown-link">Neck & Collarbone</a>
+        <div class="dropdown-section"> Overall Fitness</div>
+        <a href="#" class="dropdown-link">Increase Stamina</a>
+        <a href="#" class="dropdown-link">Top 5 to Stay Fit</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a href="#drinks" class="nav-link">Glow Drinks with Ayurveda <span class="arr">▼</span></a>
+      <div class="dropdown">
+        <div class="dropdown-section">Ayurvedic Herbal Waters</div>
+        <a href="#" class="dropdown-link">Turmeric Water</a>
+        <a href="#" class="dropdown-link">Neem Water</a>
+        <a href="#" class="dropdown-link">Moringa Water</a>
+        <a href="#" class="dropdown-link">Methi Water</a>
+        <div class="dropdown-section"> Glow Juices</div>
+        <a href="#" class="dropdown-link">Skin Brightening Juice</a>
+        <a href="#" class="dropdown-link">Full Body Glow up Drink</a>
+        <div class="dropdown-section"> Teas</div>
+        <a href="#" class="dropdown-link">Green Tea Benefits</a>
+        <a href="#" class="dropdown-link">Spearmint Tea</a>
+        <a href="#" class="dropdown-link">Ashwagandha Water</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a href="#" class="nav-link">About</a>
+    </div>
+
+    <div class="nav-item">
+      <a href="#" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <div class="navbar__actions">
+    <button class="search-btn" onclick="openSearch()" title="Search">🔍</button>
+    <a href="#" class="btn btn-primary">Subscribe 🌿</a>
+    <button class="hamburger" onclick="openMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__shapes">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+  </div>
+  <div class="dot-grid"></div>
+
+  <div class="hero__content">
+    <div class="hero__text">
+      <div class="hero-eyebrow">
+        <span class="leaf">🌿</span>
+        <span>100% Natural • Holistic Beauty</span>
+      </div>
+      <h1>Glow From<br><em>Within</em><br>Naturally</h1>
+      <p class="hero-sub">Discover time-tested, nature-powered secrets for radiant skin, a healthy body, and glowing wellness — no chemicals, just pure goodness from your kitchen.</p>
+      <div class="hero-ctas">
+        <a href="#face-care" class="btn btn-primary">Explore Remedies </a>
+        <a href="#" class="btn btn-outline">About the Blog</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">180+</div>
+          <div class="stat-label">Natural Tips</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Core Categories</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Ingredients</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero-img-frame">
+        <div class="hero-placeholder">
+          <span class="plant-emoji">🌺</span>
+          <p>Pure • Natural • Radiant</p>
+        </div>
+      </div>
+      <div class="hero-badge hero-badge-1">
+        <span class="badge-icon">🍋</span>
+        <div>
+          <div style="font-weight:700;color:var(--bark);font-size:0.8rem">Kitchen Remedies</div>
+          <div style="font-size:0.68rem;color:var(--text-muted)">100% Natural</div>
+        </div>
+      </div>
+      <div class="hero-badge hero-badge-2">
+        <div class="badge-num">53</div>
+        <div style="font-size:0.72rem;color:var(--text-muted)">Face Care<br>Topics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Category Strip ── -->
+<div class="category-strip">
+  <span class="cat-pill face active">🌸 Face Care</span>
+  <span class="cat-pill treats">🌿 Natural Ingredients</span>
+  <span class="cat-pill body">💆 Skin Concerns</span>
+  <span class="cat-pill exercise">💪 Exercise</span>
+  <span class="cat-pill drinks">🍵 Health Drinks</span>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     MAIN LAYOUT
+════════════════════════════════════════════════ -->
+<div class="main-layout">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+
+    <div class="sidebar__section">
+      <div class="sidebar__title face">🌸 Face Care</div>
+      <div class="sb-subsection">Masks & Scrubs</div>
+      <a class="sb-item active" href="#">Top 10 Facial Masks</a>
+      <a class="sb-item" href="#">Top 10 Face Toners</a>
+      <a class="sb-item" href="#">Top 10 Natural Scrubs</a>
+      <a class="sb-item" href="#">Top 10 Moisturizers</a>
+      <div class="sb-subsection">Brightening & Glow</div>
+      <a class="sb-item" href="#">Ice Cubes for Glowing Skin</a>
+      <a class="sb-item" href="#">Egg Yolk for Glow</a>
+      <a class="sb-item" href="#">Curd for Skin</a>
+      <a class="sb-item" href="#">Best Way to Glass Skin</a>
+      <a class="sb-item" href="#">Face Steam & Icing</a>
+      <div class="sb-subsection">Skin Concerns</div>
+      <a class="sb-item" href="#">Under Eye Darkness</a>
+      <a class="sb-item" href="#">Dark Spots Corrector</a>
+      <a class="sb-item" href="#">Hyperpigmentation</a>
+      <a class="sb-item" href="#">Dark Lips</a>
+      <a class="sb-item" href="#">Anti-Aging Remedies</a>
+      <a class="sb-item" href="#">Reduce Melanin</a>
+      <a class="sb-item" href="#">Lighten Underarms</a>
+      <a class="sb-item" href="#">Remove Stretch Marks</a>
+      <a class="sb-item" href="#">Remove Tan</a>
+      <a class="sb-item" href="#">Neck Pigmentation</a>
+      <div class="sb-subsection">Ingredients</div>
+      <a class="sb-item" href="#">Aloe Vera Benefits</a>
+      <a class="sb-item" href="#">Multani Mitti</a>
+      <a class="sb-item" href="#">Rose Water</a>
+      <a class="sb-item" href="#">Sandalwood Powder</a>
+      <a class="sb-item" href="#">Charcoal Face Mask</a>
+      <a class="sb-item" href="#">Neem Water Face Wash</a>
+      <a class="sb-item" href="#">Lemon for Face Care</a>
+      <a class="sb-item" href="#">Tomato & Goodness</a>
+      <a class="sb-item" href="#">Beetroot Powder</a>
+      <a class="sb-item" href="#">Potato Juice</a>
+      <a class="sb-item" href="#">Rice Powder & Water</a>
+      <a class="sb-item" href="#">Orange Peel Powder</a>
+      <a class="sb-item" href="#">Besan Benefits</a>
+      <a class="sb-item" href="#">Glycerin & Milk</a>
+      <a class="sb-item" href="#">Castor Oil</a>
+      <a class="sb-item" href="#">Tea Tree Oil</a>
+      <a class="sb-item" href="#">Ginger Paste</a>
+      <a class="sb-item" href="#">Potash Alum for Acne</a>
+      <a class="sb-item" href="#">Avocado Paste</a>
+      <a class="sb-item" href="#">Natural AHA/BHA</a>
+      <a class="sb-item" href="#">Charcoal Powder</a>
+      <div class="sb-subsection">Skin Types</div>
+      <a class="sb-item" href="#">Best for Dry Skin</a>
+      <a class="sb-item" href="#">Best for Oily Skin</a>
+      <a class="sb-item" href="#">Best for Acne Skin</a>
+      <a class="sb-item" href="#">Best for Teenagers</a>
+      <div class="sb-subsection">Extras</div>
+      <a class="sb-item" href="#">Rosy Lips</a>
+      <a class="sb-item" href="#">Long Eyelids</a>
+      <a class="sb-item" href="#">Scaly Skin Removal</a>
+      <a class="sb-item" href="#">Homemade Foot Cleanse</a>
+      <a class="sb-item" href="#">Antioxidant-Rich Fruits</a>
+      <a class="sb-item" href="#">Sunscreen Importance</a>
+    </div>
+
+    <div class="sidebar__section">
+      <div class="sidebar__title exercise">💪 Exercise</div>
+      <div class="sb-subsection">Fat Reduction</div>
+      <a class="sb-item" href="#">Reduce Belly Fat</a>
+      <a class="sb-item" href="#">Reduce Thigh Fat</a>
+      <a class="sb-item" href="#">Reduce Arm Fat</a>
+      <a class="sb-item" href="#">Reduce Back Fat</a>
+      <a class="sb-item" href="#">Reduce Breast Size</a>
+      <div class="sb-subsection">Posture & Shape</div>
+      <a class="sb-item" href="#">Double Chin Fix</a>
+      <a class="sb-item" href="#">Remove Hunch Back</a>
+      <a class="sb-item" href="#">Uplift Collarbone</a>
+      <a class="sb-item" href="#">Long & Slim Neck</a>
+      <a class="sb-item" href="#">Flat Foot Exercise</a>
+      <div class="sb-subsection">Overall Fitness</div>
+      <a class="sb-item" href="#">Increase Stamina</a>
+      <a class="sb-item" href="#">Top 5 to Stay Fit</a>
+    </div>
+
+    <div class="sidebar__section">
+      <div class="sidebar__title drinks">🍵 Health Drinks</div>
+      <div class="sb-subsection">Herbal Waters</div>
+      <a class="sb-item" href="#">Turmeric Water</a>
+      <a class="sb-item" href="#">Neem Water</a>
+      <a class="sb-item" href="#">Moringa Water</a>
+      <a class="sb-item" href="#">Methi Water</a>
+      <a class="sb-item" href="#">Ashwagandha Water</a>
+      <a class="sb-item" href="#">Fennel & Cumin Water</a>
+      <div class="sb-subsection">Glow Juices</div>
+      <a class="sb-item" href="#">Beetroot Carrot Juice</a>
+      <a class="sb-item" href="#">Amla for Skin</a>
+      <a class="sb-item" href="#">Skin Brightening Juice</a>
+      <a class="sb-item" href="#">Lemon & Honey Water</a>
+      <a class="sb-item" href="#">Blueberry Drink</a>
+      <a class="sb-item" href="#">Fruits for Glow</a>
+      <div class="sb-subsection">Teas & Warm Drinks</div>
+      <a class="sb-item" href="#">Green Tea</a>
+      <a class="sb-item" href="#">Spearmint Tea</a>
+      <a class="sb-item" href="#">Turmeric Milk</a>
+      <a class="sb-item" href="#">Dark Coffee</a>
+      <div class="sb-subsection">Superfoods & Vitamins</div>
+      <a class="sb-item" href="#">Egg Yolk & Fish Vitamins</a>
+    </div>
+
+  </aside>
+
+  <!-- ══ CONTENT AREA ══ -->
+  <main class="content-area">
+
+    <!-- ── Featured Post ── -->
+    <div class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow">⭐ Editor's Pick</div>
+          <h2>Start Your Glow Journey</h2>
+        </div>
+        <a href="#" class="view-all">View All →</a>
+      </div>
+
+      <div class="card-featured">
+        <div class="card-featured__img">
+          <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#e8d5b0);">
+            🌸
+            <p>Facial Masks Guide</p>
+          </div>
+          <span class="cat-tag">Face Care</span>
+        </div>
+        <div class="card-featured__body">
+          <div class="meta">
+            <span>🌿 Natural Remedies</span>
+            <span class="dot"></span>
+            <span>8 min read</span>
+          </div>
+          <h3>Top 10 Facial Masks You Can Make at Home</h3>
+          <p>From brightening turmeric packs to deep-cleansing clay masks, discover how everyday kitchen ingredients transform your skin without a single harsh chemical. These time-tested recipes have been used for generations for good reason.</p>
+          <a href="#" class="btn btn-ghost">Read More →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Face Care Grid ── -->
+    <section id="face-care" class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-rose">🌸 Face Care</div>
+          <h2>Masks, Toners & Scrubs</h2>
+        </div>
+        <a href="#" class="view-all">See All 53 Articles →</a>
+      </div>
+      <div class="grid-3">
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#f9e8de);">🧖‍♀️<span>Facial Mask</span></div>
+            <div class="cat-dot face"></div>
+            <div class="num-badge">#1</div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Top 10 Facial Masks for Radiant Skin</h4>
+            <div class="meta-sm"><span>5 min read</span><span class="tag">Masks</span></div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#e8d5b0,#f4d6c8);">💧<span>Face Toner</span></div>
+            <div class="cat-dot face"></div>
+            <div class="num-badge">#2</div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Top 10 Natural Face Toners That Balance pH</h4>
+            <div class="meta-sm"><span>4 min read</span><span class="tag">Toners</span></div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#a8c5ab,#e8d5b0);">✨<span>Scrub</span></div>
+            <div class="cat-dot face"></div>
+            <div class="num-badge">#3</div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Top 10 Facial Natural Scrubs for Smooth Skin</h4>
+            <div class="meta-sm"><span>6 min read</span><span class="tag">Scrubs</span></div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#a8c5ab);">🌿<span>Moisturizer</span></div>
+            <div class="cat-dot face"></div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Top 10 Facial Moisturizers — Natural Options</h4>
+            <div class="meta-sm"><span>5 min read</span><span class="tag">Moisture</span></div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#e8d5b0,#f4d6c8);">🌙<span>Under Eye</span></div>
+            <div class="cat-dot face"></div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Natural Remedies for Under Eye Darkness</h4>
+            <div class="meta-sm"><span>4 min read</span><span class="tag">Eyes</span></div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <div class="card-grid__img">
+            <div class="img-placeholder" style="background: linear-gradient(135deg,#f9e8de,#e8d5b0);">☀️<span>Sunscreen</span></div>
+            <div class="cat-dot face"></div>
+          </div>
+          <div class="card-grid__body">
+            <h4>Importance of Sunscreen in Your Daily Routine</h4>
+            <div class="meta-sm"><span>6 min read</span><span class="tag">Protection</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Natural Ingredients Spotlight ── -->
+    <section class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-gold">🌿 Ingredients Spotlight</div>
+          <h2>Nature's Best Kept Secrets</h2>
+        </div>
+        <a href="#" class="view-all">All Ingredients →</a>
+      </div>
+      <div class="grid-4">
+        <div class="ingredient-card">
+          <div class="ing-icon">🌵</div>
+          <h4>Aloe Vera</h4>
+          <p>Soothing, hydrating & healing for all skin types</p>
+          <div class="ing-tag">Face • Body</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🌹</div>
+          <h4>Rose Water</h4>
+          <p>Natural toner with anti-inflammatory properties</p>
+          <div class="ing-tag">Toner • Mist</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🍋</div>
+          <h4>Lemon</h4>
+          <p>Natural brightener rich in Vitamin C for glow</p>
+          <div class="ing-tag">Brightening</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🌿</div>
+          <h4>Neem</h4>
+          <p>Powerful antibacterial for acne-free clear skin</p>
+          <div class="ing-tag">Acne • Purify</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🫚</div>
+          <h4>Castor Oil</h4>
+          <p>Deep nourishing oil for skin, hair & lashes</p>
+          <div class="ing-tag">Oil • Nourish</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🍅</div>
+          <h4>Tomato</h4>
+          <p>Natural astringent that minimises pores & brightens</p>
+          <div class="ing-tag">Pore-Tightening</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🍯</div>
+          <h4>Multani Mitti</h4>
+          <p>Fuller's earth for oil control & deep cleanse</p>
+          <div class="ing-tag">Clay • Detox</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ing-icon">🪴</div>
+          <h4>Sandalwood</h4>
+          <p>Ancient remedy for glowing, even-toned skin</p>
+          <div class="ing-tag">Glow • Even</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skin Concerns Section ── -->
+    <section class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-rose">💆 Skin Concerns</div>
+          <h2>Brightening & Correcting</h2>
+        </div>
+        <a href="#" class="view-all">All Concerns →</a>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">01</div>
+        <div class="card-list__body">
+          <h5>Dark Spots Corrector — Natural Methods That Work</h5>
+          <span>Skin Correcting • 7 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">02</div>
+        <div class="card-list__body">
+          <h5>Hyperpigmentation: Causes & Natural Cures</h5>
+          <span>Brightening • 6 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">03</div>
+        <div class="card-list__body">
+          <h5>Best Practice to Reduce Anti-Aging Signs</h5>
+          <span>Anti-Aging • 8 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">04</div>
+        <div class="card-list__body">
+          <h5>Best Known Remedies to Reduce Melanin</h5>
+          <span>Brightening • 5 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">05</div>
+        <div class="card-list__body">
+          <h5>Best Way to Get Glass Skin — The Complete Guide</h5>
+          <span>Glass Skin • 9 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">06</div>
+        <div class="card-list__body">
+          <h5>Top Ways to Lighten Underarms Naturally</h5>
+          <span>Body Care • 5 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">07</div>
+        <div class="card-list__body">
+          <h5>Best Way to Remove Neck Pigmentation</h5>
+          <span>Pigmentation • 6 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+      <div class="card-list">
+        <div class="card-list__num">08</div>
+        <div class="card-list__body">
+          <h5>Best Way to Reduce Stretch Marks Naturally</h5>
+          <span>Skin Repair • 5 min read</span>
+        </div>
+        <span class="card-list__arr">→</span>
+      </div>
+    </section>
+
+    <!-- ── Skin Type Cards ── -->
+    <section class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-bark">🔬 By Skin Type</div>
+          <h2>Routines Made for You</h2>
+        </div>
+      </div>
+      <div class="grid-4">
+        <div class="skin-type-card skin-dry">
+          <div class="skin-icon">💦</div>
+          <h4>Dry Skin</h4>
+          <p>Best face packs & deep hydration tips for dry skin</p>
+        </div>
+        <div class="skin-type-card skin-oily">
+          <div class="skin-icon">✨</div>
+          <h4>Oily Skin</h4>
+          <p>Oil-control routines using natural clays & herbs</p>
+        </div>
+        <div class="skin-type-card skin-acne">
+          <div class="skin-icon">🌿</div>
+          <h4>Acne-Prone</h4>
+          <p>Gentle, antibacterial natural remedies for clear skin</p>
+        </div>
+        <div class="skin-type-card skin-teen" style="background:#e8f0fa;">
+          <div class="skin-icon">🌼</div>
+          <h4>Teens</h4>
+          <p>Safe, natural skincare routines for young skin</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── Exercise Section ── -->
+    <section id="exercise" class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-sage">💪 Exercise</div>
+          <h2>Move, Tone & Thrive</h2>
+        </div>
+        <a href="#" class="view-all">All 12 Routines →</a>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:1.2rem">
+        <div class="card-featured" style="margin-bottom:0">
+          <div class="card-featured__img" style="flex:0 0 40%">
+            <div class="img-placeholder" style="background:linear-gradient(135deg,#eaf2eb,#a8c5ab);min-height:200px">💪<p>Belly Fat</p></div>
+            <span class="cat-tag" style="background:var(--sage)">Exercise</span>
+          </div>
+          <div class="card-featured__body">
+            <div class="meta"><span>💪 Fat Reduction</span></div>
+            <h3 style="font-size:1.1rem">Best Exercises to Reduce Belly Fat</h3>
+            <p style="font-size:0.82rem">Targeted core workouts that burn visceral fat and flatten the stomach — no gym required.</p>
+            <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
+          </div>
+        </div>
+        <div class="card-featured" style="margin-bottom:0">
+          <div class="card-featured__img" style="flex:0 0 40%">
+            <div class="img-placeholder" style="background:linear-gradient(135deg,#a8c5ab,#7a9e7e);min-height:200px">🧘<p>Posture</p></div>
+            <span class="cat-tag" style="background:var(--sage)">Posture</span>
+          </div>
+          <div class="card-featured__body">
+            <div class="meta"><span>🧘 Shape & Posture</span></div>
+            <h3 style="font-size:1.1rem">Fix Your Hunch Back with These Exercises</h3>
+            <p style="font-size:0.82rem">Daily stretches and strengthening moves to correct posture and open your chest naturally.</p>
+            <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="exercise-card">
+          <div class="ex-icon">🦵</div>
+          <div class="ex-body"><h4>Reduce Thigh Fat</h4><p>Targeted leg exercises & stretches</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+        <div class="exercise-card">
+          <div class="ex-icon">💪</div>
+          <div class="ex-body"><h4>Slim Arm Fat</h4><p>Toning moves for upper arms</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+        <div class="exercise-card">
+          <div class="ex-icon">😊</div>
+          <div class="ex-body"><h4>Double Chin Fix</h4><p>Face & neck exercises that work</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+        <div class="exercise-card">
+          <div class="ex-icon">🏃</div>
+          <div class="ex-body"><h4>Increase Stamina</h4><p>Build endurance step by step</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+        <div class="exercise-card">
+          <div class="ex-icon">🦢</div>
+          <div class="ex-body"><h4>Long Slim Neck</h4><p>Elongate & tone neck muscles</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+        <div class="exercise-card">
+          <div class="ex-icon">🔝</div>
+          <div class="ex-body"><h4>Uplift Collarbone</h4><p>Shoulder & chest sculpting moves</p></div>
+          <span class="ex-arrow">→</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── Health Drinks ── -->
+    <section id="drinks" class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-green">🍵 Health Drinks</div>
+          <h2>Glow From the Inside</h2>
+        </div>
+        <a href="#" class="view-all">All 16 Drinks →</a>
+      </div>
+
+      <!-- Sub: Herbal Waters -->
+      <div style="margin-bottom:1.4rem">
+        <div class="eyebrow" style="margin-bottom:0.8rem">🌿 Herbal Waters</div>
+        <div class="grid-4">
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">💛</div><h4>Turmeric Water</h4></div>
+            <div class="drink-card__bar"></div>
+            <div class="drink-card__body">Anti-inflammatory powerhouse that boosts glow and fights acne from within</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🌿</div><h4>Neem Water</h4></div>
+            <div class="drink-card__bar"></div>
+            <div class="drink-card__body">Purifying antibacterial drink for clearer, acne-free skin</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🌱</div><h4>Moringa Water</h4></div>
+            <div class="drink-card__bar"></div>
+            <div class="drink-card__body">Superfood packed with vitamins for radiant skin & energy</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🌾</div><h4>Methi Water</h4></div>
+            <div class="drink-card__bar"></div>
+            <div class="drink-card__body">Fenugreek-infused water for glowing skin and weight management</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub: Glow Juices -->
+      <div style="margin-bottom:1.4rem">
+        <div class="eyebrow" style="margin-bottom:0.8rem;color:#2d7a5e">🥤 Glow Juices</div>
+        <div class="grid-3">
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🥕</div><h4>Beetroot Carrot Glow Juice</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#d44#f90)"></div>
+            <div class="drink-card__body">Rich in beta-carotene & antioxidants for vibrant, radiant skin</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🍋</div><h4>Lemon & Honey Water</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#f9a825)"></div>
+            <div class="drink-card__body">Morning detox that flushes toxins and brightens complexion</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🫐</div><h4>Blueberry Glow Drink</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5b2d8e,#2d7a5e)"></div>
+            <div class="drink-card__body">Antioxidant-rich berry drink that fights free radicals and aging</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub: Teas -->
+      <div>
+        <div class="eyebrow" style="margin-bottom:0.8rem;color:#3d6b41">☕ Teas & Warm Drinks</div>
+        <div class="grid-4">
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🍵</div><h4>Green Tea</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#6ab04c,#2d7a5e)"></div>
+            <div class="drink-card__body">EGCG-rich tea that reduces inflammation & promotes skin glow</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🌿</div><h4>Spearmint Tea</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#2d9e72,#6ab04c)"></div>
+            <div class="drink-card__body">Hormonal balance tea — excellent for reducing acne naturally</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">🥛</div><h4>Turmeric Milk</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#c9a96e)"></div>
+            <div class="drink-card__body">Golden milk for deep sleep, skin repair and anti-aging benefits</div>
+          </div>
+          <div class="drink-card">
+            <div class="drink-card__top"><div class="drink-emoji">☕</div><h4>Dark Coffee</h4></div>
+            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5c3d2e,#8b6355)"></div>
+            <div class="drink-card__body">Antioxidant-rich coffee that boosts skin cell renewal when consumed right</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Banner ── -->
+    <div class="cta-banner fade-in">
+      <div class="cta-banner__text">
+        <div class="eyebrow">🌿 Stay Updated</div>
+        <h2>Get Weekly Glow Tips</h2>
+        <p>Join 5,000+ natural beauty lovers who get exclusive remedies, seasonal skin tips, and ingredient guides delivered to their inbox every week.</p>
+      </div>
+      <div class="cta-banner__form">
+        <input type="email" placeholder="your@email.com" />
+        <button class="btn btn-primary" style="background:var(--gold);border-color:var(--gold);color:var(--bark)">Subscribe 🌸</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="brand-name">Naturelle <span>Bloom</span></div>
+      <p>Your trusted guide to natural body care, holistic wellness, and kitchen-to-skin remedies. Real ingredients, real results, no harmful chemicals.</p>
+      <div class="socials">
+        <a href="#" title="Pinterest">📌</a>
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="YouTube">▶️</a>
+        <a href="#" title="Facebook">👍</a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h4>Face Care</h4>
+      <ul>
+        <li><a href="#">Top 10 Facial Masks</a></li>
+        <li><a href="#">Natural Scrubs</a></li>
+        <li><a href="#">Aloe Vera Benefits</a></li>
+        <li><a href="#">Rose Water Uses</a></li>
+        <li><a href="#">Glass Skin Guide</a></li>
+        <li><a href="#">Anti-Aging Remedies</a></li>
+        <li><a href="#">Dark Spot Correctors</a></li>
+        <li><a href="#">Skin by Type</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Exercise & Drinks</h4>
+      <ul>
+        <li><a href="#">Belly Fat Exercises</a></li>
+        <li><a href="#">Slim Thighs Workout</a></li>
+        <li><a href="#">Double Chin Fix</a></li>
+        <li><a href="#">Top 5 Fitness Moves</a></li>
+        <li><a href="#">Turmeric Water</a></li>
+        <li><a href="#">Beetroot Carrot Juice</a></li>
+        <li><a href="#">Green Tea Benefits</a></li>
+        <li><a href="#">Moringa Superfood</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <div class="contact-row"><span class="icon">📍</span><span>Based in India, sharing globally</span></div>
+      <div class="contact-row"><span class="icon">✉️</span><span>hello@naturellebloom.in</span></div>
+      <div class="contact-row"><span class="icon">📱</span><span>DM us on Instagram</span></div>
+      <br>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">About the Blog</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Write for Us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <span>© 2026 <a href="#">Naturelle Bloom</a> • All rights reserved • Made with 🌿 and love</span>
+    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  </div>
+</footer>
+
+<script>
+  // ── Search overlay ──
+  function openSearch()  { document.getElementById('searchOverlay').classList.add('active'); }
+  function closeSearch() { document.getElementById('searchOverlay').classList.remove('active'); }
+
+  // ── Mobile menu ──
+  function openMobile()  { document.getElementById('mobileMenu').classList.add('active'); }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('active'); }
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeSearch(); closeMobile(); }
+  });
+
+  // ── Fade-in on scroll ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Category pill filter ──
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // ── Sidebar link active state ──
+  document.querySelectorAll('.sb-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
