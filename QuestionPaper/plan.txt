@@ -1,0 +1,35 @@
+1.Subjects
+    1. COA
+    2. DBMS
+    3. OOP
+    4. OS
+    5. TOC
+    6. CD
+    7. NETWORKS
+    8. AI/ML
+    9. DLD
+    10.Embedded System
+    11.Software Engineering (Later)
+
+2.Topics
+  A.AI/ML
+    1. Probability
+    2. Expectation
+    3. Markov Inequality
+    4. Chebyshev Inequality
+    5. Marginal Probability
+    6. Conditional Probability
+    7. Coefficient of variation
+    8. Covariance
+    9. Correlation
+    10.Skewness
+    11.Population to Sample
+    12.Normal Distribution
+    13.Central Limit Theorem
+    14.Chi square Distribution
+    15.T-Distribution
+    16.F-Distribution
+    17.
+
+    
+

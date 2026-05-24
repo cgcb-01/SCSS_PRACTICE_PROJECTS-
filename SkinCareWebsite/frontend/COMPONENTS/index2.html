@@ -3,1368 +3,1320 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naturelle Bloom — Natural Body Care Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@600;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- EDIT: Change the title for each article -->
+  <title>Glass Skin Guide — Naturelle Bloom</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
   <style>
-
+    /* ═══════════════════════════════════════
+       DESIGN TOKENS — do not edit
+    ═══════════════════════════════════════ */
     :root {
-      --cream:        #fdf6ee;
-      --blush:        #f4d6c8;
-      --rose:         #d46baa;
-      --rose-dark:    #b8526a;
-      --sage:         #7a9e7e;
-      --sage-light:   #a8c5ab;
-      --bark:         #5c2e32;
-      --bark-light:   #8b6355;
-      --gold:         #c9a96e;
-      --gold-light:   #e8d5b0;
-      --text:         #250714;
-      --text-muted:   #8a6376;
-      --white:        #ffffff;
-      --border:       #e8d5c8;
+      --cream:#fdf6ee; --blush:#f4d6c8; --rose:#d46baa; --rose-dark:#b8526a;
+      --rose-pale:#fdeee9; --sage:#7a9e7e; --sage-light:#a8c5ab; --sage-pale:#eaf2eb;
+      --bark:#5c2e32; --bark-light:#8b6355; --gold:#c9a96e; --gold-light:#e8d5b0;
+      --gold-pale:#faf3e6; --text:#250714; --muted:#8a6376; --white:#ffffff;
+      --border:#e8d5c8;
 
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-script:  'Dancing Script', cursive;
-      --font-body:    'Lato', 'Trebuchet MS', sans-serif;
+      /* EDIT: Change accent colour to match the topic feel
+         Glass Skin → blue  |  Acne → green  |  Anti-aging → gold  |  Dark spots → purple
+         Just update these three lines and the whole page re-themes */
+      --accent:       #4a8fd4;   /* main accent */
+      --accent-pale:  #e8f0fa;   /* light bg */
+      --accent-mid:   #c4daf5;   /* border / mid */
+      --accent-dark:  #1a4a8e;   /* dark text on pale */
 
-      --shadow-sm:  0 2px 12px rgba(92,61,46,0.08);
-      --shadow-md:  0 6px 28px rgba(92,61,46,0.14);
-      --shadow-lg:  0 16px 56px rgba(92,61,46,0.18);
+      --ff:'Playfair Display',Georgia,serif;
+      --fs:'Dancing Script',cursive;
+      --fb:'Lato',sans-serif;
 
-      --radius-sm:   6px;
-      --radius-md:   14px;
-      --radius-lg:   28px;
-      --radius-pill: 999px;
-
-      --trans-fast: all 0.18s ease;
-      --trans-mid:  all 0.32s cubic-bezier(0.4,0,0.2,1);
-      --trans-slow: all 0.56s cubic-bezier(0.4,0,0.2,1);
+      --sh-sm:0 2px 14px rgba(92,46,50,.07);
+      --sh-md:0 8px 32px rgba(92,46,50,.13);
+      --sh-lg:0 20px 60px rgba(28,14,18,.18);
+      --r-sm:8px; --r-md:16px; --r-lg:28px; --r-pill:999px;
+      --tr:all .28s cubic-bezier(.4,0,.2,1);
     }
 
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; font-size:16px; }
+    body { font-family:var(--fb); background:var(--cream); color:var(--text); line-height:1.7; overflow-x:hidden; }
+    img  { max-width:100%; display:block; }
+    a    { text-decoration:none; color:inherit; }
+
+    /* ─── READING PROGRESS ─── */
+    .progress-bar {
+      position:fixed; top:0; left:0; height:3px; z-index:9999;
+      background:linear-gradient(90deg,var(--rose),var(--gold));
+      width:0%; transition:width .1s linear; pointer-events:none;
     }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
 
-    /* ── BUTTON MIXIN ── */
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.7rem 1.8rem; border-radius: var(--radius-pill); font-family: var(--font-body); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: 2px solid transparent; transition: var(--trans-mid); text-decoration: none; }
-    .btn-primary { background: var(--rose); color: var(--white); border-color: var(--rose); }
-    .btn-primary:hover { background: var(--rose-dark); border-color: var(--rose-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .btn-outline { background: transparent; color: var(--bark); border-color: var(--bark); }
-    .btn-outline:hover { background: var(--bark); color: var(--white); }
-    .btn-sage { background: var(--sage); color: var(--white); border-color: var(--sage); }
-    .btn-sage:hover { background: #5e8262; border-color: #5e8262; }
-    .btn-ghost { background: transparent; color: var(--rose); border-color: var(--rose); font-size: 0.78rem; padding: 0.5rem 1.2rem; }
-    .btn-ghost:hover { background: var(--rose); color: var(--white); }
-
-    /* ── NAVBAR ── */
+    /* ─── NAVBAR ─── */
     .navbar {
-      position: sticky; top: 0; z-index: 1000;
-      background: rgba(253,246,238,0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 3rem;
-      height: 68px;
-      display: flex; align-items: center; justify-content: space-between;
+      position:sticky; top:0; z-index:200;
+      background:rgba(253,246,238,.96); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      padding:0 3rem; height:68px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .navbar__logo { display: flex; align-items: center; gap: 10px; }
-    .logo-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--rose), var(--gold));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.15rem;
+    .logo-wrap  { display:flex; align-items:center; gap:10px; }
+    .logo-icon  { width:38px; height:38px; background:linear-gradient(135deg,var(--rose),var(--gold)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; }
+    .logo-text  { font-family:var(--ff); font-size:1.25rem; color:var(--bark); font-weight:700; }
+    .logo-text span { font-family:var(--fs); color:var(--rose); font-size:1.5rem; }
+    .logo-sub   { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+    .nav-back   { display:flex; align-items:center; gap:6px; font-size:.8rem; font-weight:700; color:var(--muted); letter-spacing:.04em; transition:var(--tr); }
+    .nav-back:hover { color:var(--rose); }
+    .nav-actions { display:flex; align-items:center; gap:.7rem; }
+    .nbtn { display:inline-flex; align-items:center; gap:5px; padding:.42rem 1rem; border-radius:var(--r-pill); font-family:var(--fb); font-size:.74rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; cursor:pointer; border:none; transition:var(--tr); }
+    .nbtn-ghost { background:transparent; border:1.5px solid var(--border); color:var(--muted); }
+    .nbtn-ghost:hover { border-color:var(--rose); color:var(--rose); }
+    .nbtn-fill  { background:var(--rose); color:#fff; }
+    .nbtn-fill:hover { background:var(--rose-dark); transform:translateY(-1px); }
+
+    /* ─── ARTICLE HERO ─── */
+    .art-hero {
+      position:relative; overflow:hidden;
+      background:linear-gradient(150deg,#fdf6ee 0%,#f9e8de 45%,var(--blush) 100%);
+      padding:3.5rem 3rem 0;
     }
-    .logo-text { font-family: var(--font-display); font-size: 1.3rem; color: var(--bark); font-weight: 700; }
-    .logo-text span { font-family: var(--font-script); color: var(--rose); font-size: 1.55rem; }
-    .logo-sub { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    .hero-bg-s1 { position:absolute; width:380px; height:380px; border-radius:50%; background:radial-gradient(circle,var(--rose),transparent 68%); opacity:.1; top:-100px; right:-60px; pointer-events:none; }
+    .hero-bg-s2 { position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,var(--accent),transparent 68%); opacity:.09; bottom:-40px; left:5%; pointer-events:none; }
+    .hero-dots  { position:absolute; top:18px; right:5%; width:110px; height:110px; background-image:radial-gradient(var(--rose) 1.2px,transparent 1.2px); background-size:12px 12px; opacity:.3; border-radius:var(--r-md); pointer-events:none; }
 
-    .navbar__nav { display: flex; align-items: center; }
-    .nav-item { position: relative; }
-    .nav-item:hover > .dropdown { display: block; }
-    .nav-link {
-      display: flex; align-items: center; gap: 4px;
-      padding: 0.5rem 0.9rem;
-      font-size: 0.83rem; font-weight: 600; letter-spacing: 0.03em;
-      color: var(--text); transition: var(--trans-fast);
+    .hero-inner {
+      max-width:900px; margin:0 auto; position:relative; z-index:2;
+      display:grid; grid-template-columns:1fr 320px; gap:3rem; align-items:end;
     }
-    .nav-link:hover, .nav-link.active { color: var(--rose); }
-    .nav-link .arr { font-size: 0.55rem; transition: var(--trans-fast); display: inline-block; }
-    .nav-item:hover .arr { transform: rotate(180deg); }
+    .hero-breadcrumb { display:flex; align-items:center; gap:6px; margin-bottom:1rem; flex-wrap:wrap; }
+    .bc  { font-size:.66rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .bc-sep { color:var(--border); font-size:.6rem; }
+    .bc.active { color:var(--rose); }
 
-    .navbar__actions { display: flex; align-items: center; gap: 1.2rem; }
-    .search-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); transition: var(--trans-fast); padding: 4px; }
-    .search-btn:hover { color: var(--rose); }
-
-    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); border-radius: 2px; transition: var(--trans-mid); }
-
-    /* ── DROPDOWN ── */
-    .dropdown {
-      display:none;
-      position: absolute; top: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%);
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      min-width: 230px;
-      padding: 8px 0;
-      border: 1px solid var(--border);
-      z-index: 999;
-      animation: fadeDown 0.18s ease;
+    .hero-pills { display:flex; align-items:center; gap:.45rem; margin-bottom:1.1rem; flex-wrap:wrap; }
+    .pill {
+      display:inline-flex; align-items:center; gap:4px;
+      padding:.26rem .72rem; border-radius:var(--r-pill);
+      font-size:.63rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
     }
-    .dropdown-link { display: block; padding: 0.45rem 1.2rem; font-size: 0.8rem; color: var(--text-muted); transition: var(--trans-fast); }
-    .dropdown-link:hover { background: var(--cream); color: var(--rose); padding-left: 1.6rem; }
-    .dropdown-section { padding: 0.4rem 1.2rem 0.1rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); margin-top: 4px; }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
-      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
+    /* EDIT: add/remove pills as needed */
+    .pill-accent { background:var(--accent-pale); color:var(--accent-dark); }
+    .pill-rose   { background:var(--rose-pale); color:var(--rose-dark); }
+    .pill-sage   { background:var(--sage-pale); color:#2e6b32; }
+    .pill-gold   { background:var(--gold-pale); color:#7a5500; }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 88vh; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--cream) 0%, #f9e8de 40%, var(--blush) 100%);
+    /* EDIT: Main article title */
+    .hero-title {
+      font-family:var(--ff); font-size:clamp(1.9rem,4vw,3rem);
+      font-weight:900; line-height:1.1; color:var(--bark); margin-bottom:.9rem;
     }
-    .hero__shapes { position: absolute; inset: 0; pointer-events: none; }
-    .shape { position: absolute; border-radius: 50%; opacity: 0.18; }
-    .s1 { width: 520px; height: 520px; background: radial-gradient(circle, var(--rose), transparent 70%); top: -100px; right: -80px; }
-    .s2 { width: 340px; height: 340px; background: radial-gradient(circle, var(--sage), transparent 70%); bottom: -60px; left: 5%; }
-    .s3 { width: 220px; height: 220px; background: radial-gradient(circle, var(--gold), transparent 70%); top: 30%; left: 28%; }
-    .dot-grid { position: absolute; right: 10%; top: 10%; width: 180px; height: 180px; background-image: radial-gradient(var(--rose) 1.5px, transparent 1.5px); background-size: 14px 14px; opacity: 0.3; border-radius: var(--radius-md); }
+    .hero-title em { font-family:var(--fs); color:var(--rose); font-style:normal; font-size:1.1em; }
+    .hero-intro { font-size:.93rem; color:var(--muted); line-height:1.8; max-width:480px; margin-bottom:1.3rem; }
 
-    .hero__content {
-      position: relative; z-index: 2;
-      max-width: 1200px; width: 100%;
-      padding: 5rem 3rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 4rem;
-    }
-    .hero__text { flex: 1; max-width: 560px; animation: heroIn 0.9s cubic-bezier(0.4,0,0.2,1) both; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; }
-    .hero-eyebrow .leaf { font-size: 1.1rem; }
-    .hero-eyebrow span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); }
-    .hero__text h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.1; color: var(--bark); margin-bottom: 1rem; }
-    .hero__text h1 em { font-family: var(--font-script); color: var(--rose); font-style: normal; font-size: 1.15em; }
-    .hero-sub { font-size: 1.02rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; max-width: 440px; }
-    .hero-ctas { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .hero-stats { display: flex; align-items: center; gap: 2.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-    .stat .stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--bark); }
-    .stat .stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+    .hero-statbar { display:flex; align-items:center; gap:1.6rem; padding:1rem 0; border-top:1px solid var(--border); }
+    .hstat .n { font-family:var(--ff); font-size:1.35rem; font-weight:700; color:var(--bark); }
+    .hstat .l { font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    .hdiv { width:1px; height:28px; background:var(--border); }
 
-    .hero__visual { flex: 0 0 420px; position: relative; animation: heroIn 0.9s 0.2s cubic-bezier(0.4,0,0.2,1) both; }
-    .hero-img-frame {
-      width: 100%; aspect-ratio: 4/5;
-      border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%;
-      overflow: hidden; box-shadow: var(--shadow-lg);
-      background: linear-gradient(135deg, var(--blush), var(--sage-light));
-      animation: morphBlob 8s ease-in-out infinite;
-    }
-    .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-
-    /* Hero placeholder visual */
-    .hero-placeholder {
-      width: 100%; height: 100%; min-height: 380px;
-      background: linear-gradient(135deg, #f0c8bc 0%, #c5d9c7 50%, #e8d5b0 100%);
-      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px;
-    }
-    .hero-placeholder .plant-emoji { font-size: 5rem; }
-    .hero-placeholder p { font-family: var(--font-script); font-size: 1.4rem; color: var(--bark); opacity: 0.7; }
-
+    .hero-img-col { position:relative; align-self:end; }
+    .hero-img-wrap { width:100%; border-radius:var(--r-lg) var(--r-lg) 0 0; overflow:hidden; box-shadow:var(--sh-lg); }
+    .hero-img-wrap img { width:100%; height:280px; object-fit:cover; object-position:center top; display:block; }
     .hero-badge {
-      position: absolute; background: var(--white); border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md); padding: 0.8rem 1rem;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.76rem; font-weight: 600; color: var(--bark);
+      position:absolute; bottom:18px; left:-16px;
+      background:var(--white); border-radius:var(--r-md); box-shadow:var(--sh-md);
+      padding:.65rem .9rem; display:flex; align-items:center; gap:8px;
     }
-    .hero-badge-1 { bottom: 12%; left: -14%; }
-    .hero-badge-2 { top: 10%; right: -10%; flex-direction: column; align-items: flex-start; }
-    .hero-badge-2 .badge-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--rose); line-height: 1; }
-    .badge-icon { font-size: 1.4rem; }
+    .badge-circle { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); display:flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:.72rem; font-weight:900; color:#fff; flex-shrink:0; }
+    .badge-t1 { font-size:.72rem; font-weight:700; color:var(--bark); }
+    .badge-t2 { font-size:.6rem; color:var(--muted); }
 
-    @keyframes heroIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes morphBlob {
-      0%,100% { border-radius: 60% 40% 54% 46% / 44% 56% 44% 56%; }
-      25%      { border-radius: 40% 60% 46% 54% / 56% 44% 56% 44%; }
-      50%      { border-radius: 54% 46% 60% 40% / 44% 56% 44% 56%; }
-      75%      { border-radius: 46% 54% 40% 60% / 56% 44% 56% 44%; }
+    /* ─── STICKY SECTION TABS ─── */
+    .sec-tabs {
+      background:var(--white); border-bottom:1px solid var(--border);
+      position:sticky; top:68px; z-index:190; padding:0 3rem; overflow-x:auto;
     }
-
-    /* ── CATEGORY STRIP ── */
-    .category-strip {
-      background: var(--white); border-bottom: 1px solid var(--border);
-      padding: 1rem 3rem;
-      display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap;
+    .sec-tabs::-webkit-scrollbar { display:none; }
+    .st-inner { max-width:900px; margin:0 auto; display:flex; align-items:center; }
+    .st-item {
+      display:flex; align-items:center; gap:6px; white-space:nowrap;
+      padding:.9rem 1.2rem; font-size:.73rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+      color:var(--muted); border-bottom:2.5px solid transparent; cursor:pointer; transition:var(--tr);
     }
-    .cat-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 0.42rem 1rem; border-radius: var(--radius-pill);
-      font-size: 0.78rem; font-weight: 600; cursor: pointer;
-      transition: var(--trans-fast); border: 2px solid transparent;
+    .st-item:hover { color:var(--rose); }
+    .st-item.active { color:var(--rose); border-bottom-color:var(--rose); }
+    .st-n { width:19px; height:19px; border-radius:50%; background:var(--border); color:var(--muted); font-size:.6rem; font-weight:700; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+    .st-item.active .st-n, .st-item:hover .st-n { background:var(--rose); color:#fff; }
+
+    /* ─── MAIN LAYOUT ─── */
+    .page-wrap { max-width:1120px; margin:0 auto; padding:3.5rem 3rem; display:grid; grid-template-columns:1fr 275px; gap:4rem; align-items:start; }
+
+    /* ─── SHARED SECTION STYLES ─── */
+    .art-section { margin-bottom:3.8rem; scroll-margin-top:130px; }
+    .sec-eyebrow { display:inline-flex; align-items:center; gap:7px; margin-bottom:.55rem; }
+    .sec-chip { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.62rem; font-weight:700; color:#fff; }
+    .sec-eye-text { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+    .sec-title { font-family:var(--ff); font-size:clamp(1.45rem,2.8vw,2rem); font-weight:700; color:var(--bark); line-height:1.2; margin-bottom:1rem; }
+    .sec-title em { font-family:var(--fs); color:var(--rose); font-style:normal; }
+    .sec-lead  { font-size:.92rem; color:var(--muted); line-height:1.8; margin-bottom:1.5rem; max-width:620px; }
+
+    /* ─── PULL QUOTE ─── */
+    .pull-quote {
+      margin:2.2rem 0; padding:1.8rem 2.2rem;
+      border-radius:var(--r-md);
+      background:linear-gradient(135deg,var(--bark) 0%,var(--rose-dark) 100%);
+      position:relative; overflow:hidden;
     }
-    .cat-pill.face    { background: #fdeee9; color: var(--rose-dark); border-color: var(--blush); }
-    .cat-pill.treats  { background: #faf3e6; color: #8b6a20; border-color: var(--gold-light); }
-    .cat-pill.exercise{ background: #eaf2eb; color: #3d6b41; border-color: var(--sage-light); }
-    .cat-pill.drinks  { background: #e8f4f0; color: #2d7a5e; border-color: #b8dfd4; }
-    .cat-pill.body    { background: #f3eee8; color: var(--bark); border-color: var(--gold-light); }
-    .cat-pill:hover, .cat-pill.active { filter: brightness(0.92); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .pull-quote::before { content:'\201C'; position:absolute; top:-28px; left:14px; font-family:var(--ff); font-size:9rem; font-weight:900; color:rgba(255,255,255,.06); line-height:1; }
+    .pull-quote p  { font-family:var(--ff); font-size:1.1rem; font-style:italic; color:rgba(255,255,255,.92); line-height:1.65; position:relative; z-index:1; }
+    .pull-quote cite { display:block; margin-top:.7rem; font-size:.68rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--gold-light); position:relative; z-index:1; }
 
-    /* ── MAIN LAYOUT ── */
-    .main-layout {
-      max-width: 1400px; margin: 0 auto; padding: 4rem 3rem;
-      display: flex; align-items: flex-start; gap: 4rem;
+    /* ─── SCIENCE BOX ─── */
+    .science-box { border-radius:var(--r-md); padding:1.4rem 1.6rem; background:var(--accent-pale); border:1.5px solid var(--accent-mid); margin:1.4rem 0; }
+    .science-box h5 { font-family:var(--ff); font-size:.93rem; font-weight:700; color:var(--accent-dark); margin-bottom:.45rem; display:flex; align-items:center; gap:7px; }
+    .science-box p  { font-size:.82rem; color:var(--accent-dark); line-height:1.75; opacity:.85; }
+
+    /* ─── WHAT SKIN LACKS — icon grid ─── */
+    .lacks-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .lack-card {
+      padding:1.2rem 1.1rem 1.1rem; border-radius:var(--r-md);
+      background:var(--white); border:1.5px solid var(--border);
+      text-align:center; transition:var(--tr); cursor:default;
+      position:relative; overflow:hidden;
     }
+    .lack-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; }
+    .lack-card:hover { box-shadow:var(--sh-md); transform:translateY(-3px); }
+    .lack-icon { font-size:1.8rem; margin-bottom:.6rem; }
+    .lack-name { font-family:var(--ff); font-size:.88rem; font-weight:700; color:var(--bark); margin-bottom:.35rem; }
+    .lack-val  { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .6rem; border-radius:var(--r-pill); display:inline-block; margin-bottom:.5rem; }
+    .lack-desc { font-size:.77rem; color:var(--muted); line-height:1.6; }
 
-    /* ── SIDEBAR ── */
-    .sidebar {
-      flex: 0 0 270px; position: sticky; top: 84px;
-      max-height: calc(100vh - 100px); overflow-y: auto;
+    /* ─── CAUSES — 2-col accent cards ─── */
+    .causes-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .cause-card {
+      padding:1.15rem 1.25rem; border-radius:var(--r-md);
+      background:var(--white); border:1.5px solid var(--border);
+      position:relative; overflow:hidden; transition:var(--tr);
     }
-    .sidebar::-webkit-scrollbar { width: 4px; }
-    .sidebar::-webkit-scrollbar-track { background: var(--blush); border-radius: 99px; }
-    .sidebar::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 99px; }
+    .cause-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; }
+    .cause-card:hover { box-shadow:var(--sh-md); transform:translateY(-2px); }
+    .cause-icon  { font-size:1.3rem; margin-bottom:.45rem; }
+    .cause-title { font-family:var(--ff); font-size:.93rem; font-weight:700; color:var(--bark); margin-bottom:.35rem; }
+    .cause-desc  { font-size:.79rem; color:var(--muted); line-height:1.65; }
+    .cause-badge { display:inline-flex; align-items:center; gap:4px; font-size:.59rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.18rem .58rem; border-radius:var(--r-pill); margin-top:.6rem; }
 
-    .sidebar__section { margin-bottom: 2rem; }
-    .sidebar__title {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 0.6rem 0; margin-bottom: 4px;
-      border-bottom: 2px solid var(--border);
+    /* ─── REMEDIES — numbered left-panel cards ─── */
+    .remedies-list { display:flex; flex-direction:column; gap:1.3rem; }
+    .remedy-card  { display:grid; grid-template-columns:70px 1fr; border-radius:var(--r-md); background:var(--white); border:1.5px solid var(--border); overflow:hidden; transition:var(--tr); }
+    .remedy-card:hover { box-shadow:var(--sh-md); transform:translateX(4px); }
+    .rem-num { display:flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:2rem; font-weight:900; color:rgba(255,255,255,.88); position:relative; }
+    .rem-num::after { content:''; position:absolute; top:50%; right:-1px; transform:translateY(-50%); width:0; height:0; border-top:13px solid transparent; border-bottom:13px solid transparent; }
+    .rem-body  { padding:1.15rem 1.35rem; }
+    .rem-head  { display:flex; align-items:flex-start; justify-content:space-between; gap:.5rem; margin-bottom:.45rem; }
+    .rem-title { font-family:var(--ff); font-size:.97rem; font-weight:700; color:var(--bark); }
+    .rem-tag   { font-size:.59rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.18rem .55rem; border-radius:var(--r-pill); white-space:nowrap; flex-shrink:0; }
+    .rem-desc  { font-size:.81rem; color:var(--muted); line-height:1.7; margin-bottom:.75rem; }
+    .rem-ings  { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .ing-chip  { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .58rem; border-radius:var(--r-pill); background:var(--cream); color:var(--bark-light); border:1px solid var(--border); }
+    .rem-toggle { display:flex; align-items:center; gap:5px; margin-top:.75rem; font-size:.7rem; font-weight:700; color:var(--rose); cursor:pointer; border:none; background:none; padding:0; transition:var(--tr); }
+    .rem-toggle:hover { gap:9px; }
+    .steps-panel { display:none; margin-top:.75rem; padding-top:.75rem; border-top:1px solid var(--border); }
+    .steps-panel.open { display:block; }
+    .step-row  { display:flex; align-items:flex-start; gap:9px; margin-bottom:.55rem; font-size:.79rem; color:var(--muted); }
+    .step-row:last-child { margin-bottom:0; }
+    .step-dot  { width:19px; height:19px; border-radius:50%; background:var(--rose); color:#fff; font-size:.58rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+
+    /* ─── HOW THEY HELP — vertical timeline ─── */
+    .help-timeline { display:flex; flex-direction:column; }
+    .help-row { display:grid; grid-template-columns:54px 1fr; position:relative; }
+    .help-row:not(:last-child)::after { content:''; position:absolute; left:26px; top:54px; width:2px; height:calc(100% - 14px); background:linear-gradient(to bottom,var(--rose),var(--blush)); z-index:0; }
+    .h-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:4px; position:relative; z-index:1; }
+    .h-dot { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:.68rem; font-weight:900; color:#fff; flex-shrink:0; border:3px solid var(--white); box-shadow:var(--sh-sm); }
+    .h-body { padding:0 0 2rem 1.3rem; }
+    .h-body h4 { font-family:var(--ff); font-size:.97rem; font-weight:700; color:var(--bark); margin-bottom:.4rem; }
+    .h-body p  { font-size:.82rem; color:var(--muted); line-height:1.75; }
+    .benefit-chips { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.6rem; }
+    .bc-chip { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .62rem; border-radius:var(--r-pill); }
+
+    /* ─── SCIENTIFIC REASON — two-col deep-dive ─── */
+    .sci-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .sci-card  {
+      padding:1.3rem 1.4rem; border-radius:var(--r-md);
+      background:var(--white); border:1.5px solid var(--border); transition:var(--tr);
     }
-    .sidebar__title.face      { color: var(--rose); }
-    .sidebar__title.treats    { color: #8b6a20; }
-    .sidebar__title.exercise  { color: #3d6b41; }
-    .sidebar__title.drinks    { color: #2d7a5e; }
-    .sidebar__title.body      { color: var(--bark-light); }
+    .sci-card:hover { box-shadow:var(--sh-md); transform:translateY(-2px); }
+    .sci-card-head { display:flex; align-items:center; gap:9px; margin-bottom:.7rem; }
+    .sci-num   { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700; color:#fff; flex-shrink:0; }
+    .sci-name  { font-family:var(--ff); font-size:.93rem; font-weight:700; color:var(--bark); }
+    .sci-mechanism { font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-dark); background:var(--accent-pale); padding:.18rem .55rem; border-radius:var(--r-pill); margin-bottom:.5rem; display:inline-block; }
+    .sci-text   { font-size:.8rem; color:var(--muted); line-height:1.7; }
+    .sci-result { display:flex; align-items:center; gap:7px; margin-top:.7rem; padding:.55rem .8rem; border-radius:var(--r-sm); background:var(--cream); border-left:3px solid var(--rose); }
+    .sci-result-label { font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--rose); white-space:nowrap; }
+    .sci-result-val   { font-size:.78rem; color:var(--muted); }
 
-    .sb-subsection { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding: 0.5rem 0.5rem 0.2rem; margin-top: 0.5rem; }
-    .sb-item {
-      display: block; padding: 0.32rem 0.5rem;
-      font-size: 0.78rem; color: var(--text-muted); border-radius: var(--radius-sm);
-      transition: var(--trans-fast); border-left: 2px solid transparent; cursor: pointer;
+    /* ─── ROUTINE TIMELINE ─── */
+    .routine-box { padding:1.4rem 1.6rem; border-radius:var(--r-md); background:var(--white); border:1.5px solid var(--border); margin-bottom:1.2rem; }
+    .routine-timeline { display:flex; gap:0; justify-content:space-between; }
+    .rt-step   { flex:1; position:relative; text-align:center; padding:0 .4rem; }
+    .rt-step:not(:last-child)::after { content:''; position:absolute; top:17px; left:50%; width:100%; height:2px; background:linear-gradient(90deg,var(--rose),var(--blush)); z-index:0; }
+    .rt-dot    { width:34px; height:34px; border-radius:50%; background:var(--rose); border:3px solid var(--white); box-shadow:var(--sh-sm); display:flex; align-items:center; justify-content:center; font-size:.62rem; font-weight:700; color:#fff; margin:0 auto .55rem; position:relative; z-index:1; }
+    .rt-time   { font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--rose); margin-bottom:2px; }
+    .rt-label  { font-size:.75rem; font-weight:600; color:var(--bark); line-height:1.3; }
+
+    .weekly-box { padding:1.1rem 1.4rem; border-radius:var(--r-md); background:var(--sage-pale); border:1.5px solid var(--sage-light); }
+    .weekly-box p { font-size:.82rem; color:#2e5a30; line-height:1.7; }
+
+    /* ─── PRO TIPS ─── */
+    .tips-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .tip-card  { display:flex; align-items:flex-start; gap:10px; padding:1rem 1.1rem; border-radius:var(--r-md); background:var(--white); border:1.5px solid var(--border); transition:var(--tr); }
+    .tip-card:hover { box-shadow:var(--sh-sm); }
+    .tip-dot   { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:6px; }
+    .tip-text  { font-size:.8rem; color:var(--muted); line-height:1.65; }
+    .tip-text strong { font-family:var(--ff); color:var(--bark); font-weight:700; }
+
+    /* ─── INGREDIENTS QUICK REF ─── */
+    .ing-table { width:100%; border-collapse:collapse; }
+    .ing-table th { font-size:.63rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); padding:.5rem .8rem; border-bottom:2px solid var(--border); text-align:left; }
+    .ing-table td { font-size:.8rem; color:var(--text); padding:.65rem .8rem; border-bottom:1px solid var(--border); vertical-align:top; }
+    .ing-table tr:last-child td { border-bottom:none; }
+    .ing-table tr:hover td { background:var(--cream); }
+    .ing-swatch-sm { width:26px; height:26px; border-radius:var(--r-sm); display:inline-flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:.58rem; font-weight:900; color:#fff; flex-shrink:0; }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar { position:sticky; top:130px; display:flex; flex-direction:column; gap:1.3rem; }
+    .sb-card  { background:var(--white); border-radius:var(--r-md); border:1.5px solid var(--border); overflow:hidden; }
+    .sb-head  { padding:.75rem 1rem .6rem; border-bottom:1px solid var(--border); font-size:.63rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .sb-body  { padding:.85rem 1rem; }
+
+    .toc-item  { display:flex; align-items:center; gap:8px; padding:.32rem 0; border-bottom:1px solid var(--border); cursor:pointer; transition:var(--tr); }
+    .toc-item:last-child { border-bottom:none; }
+    .toc-item:hover .toc-text { color:var(--rose); }
+    .toc-item:hover .toc-arr  { color:var(--rose); transform:translateX(3px); }
+    .toc-n     { font-family:var(--ff); font-size:.82rem; font-weight:700; color:var(--border); flex:0 0 18px; }
+    .toc-text  { font-size:.76rem; color:var(--muted); flex:1; line-height:1.3; transition:var(--tr); }
+    .toc-arr   { font-size:.68rem; color:var(--border); transition:var(--tr); }
+
+    .kstat     { display:flex; align-items:center; gap:9px; padding:.48rem 0; border-bottom:1px solid var(--border); }
+    .kstat:last-child { border-bottom:none; }
+    .ks-dot    { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .ks-lbl    { font-size:.74rem; color:var(--muted); flex:1; }
+    .ks-val    { font-family:var(--ff); font-size:.88rem; font-weight:700; color:var(--bark); }
+
+    .rel-post  { display:flex; gap:9px; padding:.48rem 0; border-bottom:1px solid var(--border); cursor:pointer; transition:var(--tr); }
+    .rel-post:last-child { border-bottom:none; }
+    .rel-post:hover { transform:translateX(3px); }
+    .rel-thumb { width:42px; height:42px; border-radius:var(--r-sm); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:.72rem; font-weight:900; color:#fff; }
+    .rel-title { font-size:.74rem; font-weight:600; color:var(--bark); line-height:1.35; }
+    .rel-meta  { font-size:.61rem; color:var(--muted); margin-top:2px; }
+
+    .nl-mini   { background:linear-gradient(135deg,var(--bark),var(--rose-dark)); border-radius:var(--r-md); padding:1.1rem 1rem; }
+    .nl-mini h5 { font-family:var(--fs); font-size:1.2rem; color:#fff; margin-bottom:.35rem; }
+    .nl-mini p  { font-size:.7rem; color:rgba(255,255,255,.68); margin-bottom:.8rem; line-height:1.5; }
+    .nl-mini input { width:100%; padding:.52rem .85rem; border-radius:var(--r-pill); border:none; font-family:var(--fb); font-size:.78rem; background:rgba(255,255,255,.14); color:#fff; outline:none; margin-bottom:.45rem; }
+    .nl-mini input::placeholder { color:rgba(255,255,255,.4); }
+    .nl-mini button { width:100%; padding:.52rem; border-radius:var(--r-pill); border:none; cursor:pointer; font-family:var(--fb); font-size:.73rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:var(--gold); color:var(--bark); transition:var(--tr); }
+    .nl-mini button:hover { background:var(--gold-light); }
+
+    /* ─── ARTICLE FOOTER ─── */
+    .art-footer { max-width:1120px; margin:0 auto; padding:0 3rem 4rem; }
+    .author-card { display:flex; align-items:center; gap:1.3rem; padding:1.6rem 1.8rem; border-radius:var(--r-md); background:var(--white); border:1.5px solid var(--border); margin-bottom:2.5rem; }
+    .author-ava  { width:64px; height:64px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,var(--rose),var(--gold)); display:flex; align-items:center; justify-content:center; font-family:var(--ff); font-size:1.3rem; font-weight:900; color:#fff; }
+    .author-role { font-size:.68rem; color:var(--rose); font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:.3rem; }
+    .author-name { font-family:var(--ff); font-size:.98rem; font-weight:700; color:var(--bark); }
+    .author-bio  { font-size:.78rem; color:var(--muted); line-height:1.6; }
+
+    .more-eye  { font-size:.63rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--rose); margin-bottom:.8rem; }
+    .more-h    { font-family:var(--fs); font-size:1.9rem; color:var(--bark); margin-bottom:1.3rem; }
+    .more-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+    .more-card { background:var(--white); border-radius:var(--r-md); border:1.5px solid var(--border); overflow:hidden; cursor:pointer; transition:var(--tr); }
+    .more-card:hover { box-shadow:var(--sh-md); transform:translateY(-4px); }
+    .more-visual { height:90px; display:flex; align-items:center; justify-content:center; }
+    .more-visual .big { font-family:var(--ff); font-size:1.9rem; font-weight:900; opacity:.3; letter-spacing:-.02em; }
+    .more-body  { padding:.85rem .95rem 1rem; }
+    .more-body h5 { font-family:var(--ff); font-size:.84rem; font-weight:700; color:var(--bark); line-height:1.35; margin-bottom:.25rem; }
+    .more-body span { font-size:.65rem; color:var(--muted); }
+
+    /* ─── FOOTER ─── */
+    .site-footer { background:var(--bark); color:rgba(255,255,255,.7); padding:2.5rem 3rem; }
+    .sf-inner { max-width:1120px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    .sf-brand { font-family:var(--ff); font-size:1.05rem; color:#fff; }
+    .sf-brand span { font-family:var(--fs); color:var(--rose); font-size:1.3rem; }
+    .sf-copy  { font-size:.65rem; color:rgba(255,255,255,.32); margin-top:.3rem; }
+    .sf-links { display:flex; gap:1.4rem; flex-wrap:wrap; }
+    .sf-links a { font-size:.72rem; color:rgba(255,255,255,.52); transition:var(--tr); }
+    .sf-links a:hover { color:var(--gold-light); }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up { opacity:0; transform:translateY(20px); transition:opacity .55s ease,transform .55s ease; }
+    .fade-up.vis { opacity:1; transform:translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:960px){
+      .hero-inner { grid-template-columns:1fr; }
+      .hero-img-col { display:none; }
+      .page-wrap { grid-template-columns:1fr; gap:2rem; padding:2rem 1.5rem; }
+      .sidebar { position:static; }
+      .causes-grid, .sci-grid, .tips-grid { grid-template-columns:1fr; }
+      .lacks-grid { grid-template-columns:repeat(2,1fr); }
+      .more-grid { grid-template-columns:repeat(2,1fr); }
+      .art-hero, .sec-tabs { padding-left:1.5rem; padding-right:1.5rem; }
+      .art-footer { padding-left:1.5rem; padding-right:1.5rem; }
     }
-    .sb-item:hover, .sb-item.active {
-      background: var(--cream); border-left-color: var(--rose);
-      color: var(--rose); padding-left: 0.9rem;
-    }
-
-    /* ── CONTENT AREA ── */
-    .content-area { flex: 1; min-width: 0; }
-
-    /* ── BLOG SECTION ── */
-    .blog-section { margin-bottom: 4.5rem; }
-    .blog-section__header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 1.8rem; flex-wrap: wrap; gap: 0.8rem;
-    }
-    .section-left .eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); margin-bottom: 4px; }
-    .section-left h2 { font-family: var(--font-script); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--bark); line-height: 1.15; }
-    .view-all { font-size: 0.78rem; font-weight: 600; color: var(--rose); display: flex; align-items: center; gap: 4px; transition: var(--trans-fast); }
-    .view-all:hover { gap: 8px; }
-
-    /* ── FEATURED CARD ── */
-    .card-featured {
-      display: flex; background: var(--white);
-      border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
-      overflow: hidden; transition: var(--trans-mid); margin-bottom: 1.8rem;
-    }
-    .card-featured:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .card-featured__img { flex: 0 0 44%; min-height: 280px; position: relative; overflow: hidden; }
-    .card-featured__img .img-placeholder {
-      width: 100%; height: 100%; min-height: 280px;
-      display: flex; align-items: center; justify-content: center; flex-direction: column;
-      font-size: 4rem; gap: 8px;
-    }
-    .card-featured__img .img-placeholder p { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
-    .cat-tag { position: absolute; top: 1rem; left: 1rem; background: var(--rose); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: var(--radius-pill); }
-    .card-featured__body { flex: 1; padding: 2rem; display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; }
-    .meta { display: flex; align-items: center; gap: 1rem; font-size: 0.72rem; color: var(--text-muted); }
-    .meta .dot { width: 3px; height: 3px; background: var(--text-muted); border-radius: 50%; }
-    .card-featured__body h3 { font-family: var(--font-display); font-size: 1.45rem; color: var(--bark); line-height: 1.25; }
-    .card-featured__body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
-
-    /* ── GRID CARD ── */
-    .card-grid {
-      background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
-      overflow: hidden; transition: var(--trans-mid); cursor: pointer;
-    }
-    .card-grid:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
-    .card-grid__img { height: 185px; position: relative; overflow: hidden; }
-    .card-grid__img .img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; font-size: 2.8rem; }
-    .card-grid__img .img-placeholder span { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); }
-    .cat-dot { position: absolute; bottom: 8px; left: 8px; width: 10px; height: 10px; border-radius: 50%; }
-    .cat-dot.face     { background: var(--rose); }
-    .cat-dot.treats   { background: var(--gold); }
-    .cat-dot.exercise { background: var(--sage); }
-    .cat-dot.drinks   { background: #2d9e72; }
-    .num-badge { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); color: var(--bark); font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: var(--radius-pill); }
-    .card-grid__body { padding: 1rem 1.1rem 1.2rem; }
-    .card-grid__body h4 { font-family: var(--font-display); font-size: 0.9rem; color: var(--bark); margin-bottom: 5px; line-height: 1.35; }
-    .meta-sm { display: flex; align-items: center; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); }
-    .meta-sm .tag { color: var(--rose); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; }
-
-    /* ── LIST CARD ── */
-    .card-list { display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--trans-fast); }
-    .card-list:hover { transform: translateX(4px); }
-    .card-list:last-child { border-bottom: none; }
-    .card-list__num { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--border); flex: 0 0 34px; line-height: 1; }
-    .card-list:hover .card-list__num { color: var(--rose); }
-    .card-list__body h5 { font-size: 0.85rem; font-weight: 600; color: var(--bark); margin-bottom: 2px; line-height: 1.4; }
-    .card-list__body span { font-size: 0.7rem; color: var(--text-muted); }
-    .card-list__arr { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; flex-shrink: 0; transition: var(--trans-fast); }
-    .card-list:hover .card-list__arr { color: var(--rose); }
-
-    /* ── GRIDS ── */
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
-
-    /* ── INGREDIENT CARD ── */
-    .ingredient-card {
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-      padding: 1.8rem 1rem; background: var(--white);
-      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
-      border: 1.5px solid var(--border); transition: var(--trans-mid); cursor: pointer; gap: 0.5rem;
-    }
-    .ingredient-card:hover { border-color: var(--rose); box-shadow: var(--shadow-md); transform: translateY(-6px); }
-    .ing-icon { width: 62px; height: 62px; background: linear-gradient(135deg, var(--blush), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; margin-bottom: 6px; }
-    .ingredient-card h4 { font-family: var(--font-display); font-size: 0.9rem; color: var(--bark); }
-    .ingredient-card p { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
-    .ing-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); }
-
-    /* ── EXERCISE CARD ── */
-    .exercise-card {
-      background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
-      display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem;
-      cursor: pointer; transition: var(--trans-mid);
-    }
-    .exercise-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .ex-icon { flex: 0 0 48px; width: 48px; height: 48px; background: linear-gradient(135deg, var(--sage-light), var(--sage)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; }
-    .ex-body { flex: 1; }
-    .ex-body h4 { font-size: 0.85rem; font-weight: 700; color: var(--bark); margin-bottom: 2px; }
-    .ex-body p  { font-size: 0.72rem; color: var(--text-muted); }
-    .ex-arrow { color: var(--sage); font-size: 0.9rem; transition: var(--trans-fast); }
-    .exercise-card:hover .ex-arrow { transform: translateX(4px); }
-
-    /* ── DRINK CARD ── */
-    .drink-card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden; transition: var(--trans-mid); cursor: pointer; }
-    .drink-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .drink-card__top { padding: 1.5rem 1rem 0.7rem; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    .drink-emoji { font-size: 2.4rem; }
-    .drink-card__top h4 { font-family: var(--font-display); font-size: 0.88rem; color: var(--bark); line-height: 1.3; }
-    .drink-card__bar { height: 4px; background: linear-gradient(90deg, var(--sage), #2d9e72); }
-    .drink-card__body { padding: 0.7rem 0.9rem 1.1rem; font-size: 0.73rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
-
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      background: linear-gradient(135deg, var(--bark) 0%, var(--rose-dark) 60%, var(--rose) 100%);
-      border-radius: var(--radius-lg); padding: 4rem 3rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
-      position: relative; overflow: hidden;
-    }
-    .cta-banner::before { content: ''; position: absolute; width: 350px; height: 350px; background: rgba(255,255,255,0.05); border-radius: 50%; top: -100px; right: -80px; }
-    .cta-banner__text { flex: 1; min-width: 220px; }
-    .cta-banner__text .eyebrow { color: var(--gold-light); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-    .cta-banner__text h2 { font-family: var(--font-script); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin: 6px 0; }
-    .cta-banner__text p { color: rgba(255,255,255,0.72); font-size: 0.88rem; }
-    .cta-banner__form { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
-    .cta-banner__form input { padding: 0.72rem 1.2rem; border-radius: var(--radius-pill); border: none; font-family: var(--font-body); font-size: 0.86rem; outline: none; width: 230px; background: rgba(255,255,255,0.15); color: var(--white); }
-    .cta-banner__form input::placeholder { color: rgba(255,255,255,0.5); }
-    .cta-banner__form input:focus { background: rgba(255,255,255,0.25); }
-
-    /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
-
-    /* ── FOOTER ── */
-    .footer { background: var(--bark); color: rgba(255,255,255,0.75); padding: 5rem 3rem 2rem; }
-    .footer__top { max-width: 1400px; margin: 0 auto 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
-    .footer__brand .brand-name { font-family: var(--font-display); font-size: 1.35rem; color: var(--white); margin-bottom: 0.8rem; }
-    .footer__brand .brand-name span { font-family: var(--font-script); color: var(--rose); font-size: 1.7rem; }
-    .footer__brand p { font-size: 0.8rem; line-height: 1.7; margin-bottom: 1.2rem; }
-    .socials { display: flex; gap: 0.6rem; }
-    .socials a { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: var(--trans-fast); }
-    .socials a:hover { background: var(--rose); }
-    .footer__col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .footer__col ul li { margin-bottom: 0.45rem; }
-    .footer__col ul li a { font-size: 0.8rem; color: rgba(255,255,255,0.6); transition: var(--trans-fast); }
-    .footer__col ul li a:hover { color: var(--gold-light); padding-left: 4px; }
-    .contact-row { display: flex; gap: 8px; font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.6rem; }
-    .contact-row .icon { color: var(--rose); flex-shrink: 0; }
-    .footer__bottom { max-width: 1400px; margin: 0 auto; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-    .footer__bottom a { color: var(--gold-light); }
-    .back-top { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--trans-fast); font-size: 0.8rem; border: none; color: rgba(255,255,255,0.6); }
-    .back-top:hover { background: var(--rose); color: var(--white); }
-
-    /* ── SEARCH OVERLAY ── */
-    .search-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(253,246,238,0.96); z-index: 2000;
-      flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem;
-      backdrop-filter: blur(12px);
-    }
-    .search-overlay.active { display: flex; }
-    .search-overlay input { width: min(600px, 90vw); padding: 1rem 1.6rem; font-size: 1.3rem; font-family: var(--font-display); border: 2px solid var(--rose); border-radius: var(--radius-pill); background: var(--white); outline: none; color: var(--bark); }
-    .search-hint { font-size: 0.8rem; color: var(--text-muted); }
-    .close-search { position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--trans-fast); }
-    .close-search:hover { color: var(--rose); }
-
-    /* ── MOBILE MENU ── */
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; background: var(--cream);
-      z-index: 1500; padding: 5rem 2rem 2rem; overflow-y: auto;
-      flex-direction: column; gap: 0.5rem;
-    }
-    .mobile-menu.active { display: flex; }
-    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--bark); }
-    .mobile-nav-link { font-family: var(--font-display); font-size: 1.6rem; color: var(--bark); font-weight: 700; padding: 0.4rem 0; border-bottom: 1px solid var(--border); transition: var(--trans-fast); }
-    .mobile-nav-link:hover { color: var(--rose); }
-    .mobile-sub { font-size: 0.8rem; color: var(--text-muted); padding: 0.25rem 0.5rem; cursor: pointer; transition: var(--trans-fast); }
-    .mobile-sub:hover { color: var(--rose); }
-    .mobile-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); padding: 0.8rem 0 0.2rem; }
-
-    /* ── FADE IN UTILITY ── */
-    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── SECTION COLOR ACCENTS ── */
-    .accent-rose    { color: var(--rose); }
-    .accent-sage    { color: var(--sage); }
-    .accent-gold    { color: var(--gold); }
-    .accent-green   { color: #2d7a5e; }
-    .accent-bark    { color: var(--bark-light); }
-
-    /* ── SKIN TYPE CARDS ── */
-    .skin-type-card {
-      padding: 1.5rem; border-radius: var(--radius-md); text-align: center;
-      transition: var(--trans-mid); cursor: pointer; border: 2px solid transparent;
-    }
-    .skin-type-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--rose); }
-    .skin-type-card .skin-icon { font-size: 2.6rem; margin-bottom: 0.6rem; }
-    .skin-type-card h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--bark); margin-bottom: 4px; }
-    .skin-type-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
-    .skin-dry    { background: #faf3e6; }
-    .skin-oily   { background: #eaf2eb; }
-    .skin-acne   { background: #fdeee9; }
-    .skin-teen   { background: #e8f0fa; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) {
-      .grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .footer__top { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    }
-    @media (max-width: 900px) {
-      .navbar { padding: 0 1.5rem; }
-      .navbar__nav, .navbar__actions .btn-primary { display: none; }
-      .hamburger { display: flex; }
-      .hero__content { flex-direction: column; padding: 3rem 1.5rem; text-align: center; }
-      .hero__visual { flex: none; width: 100%; max-width: 320px; }
-      .hero-badge-1, .hero-badge-2 { display: none; }
-      .hero-eyebrow, .hero-ctas, .hero-stats { justify-content: center; }
-      .main-layout { flex-direction: column; padding: 2rem 1.5rem; gap: 2rem; }
-      .sidebar { position: static; max-height: 280px; width: 100%; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; background: var(--white); }
-      .grid-3 { grid-template-columns: repeat(2, 1fr); }
-      .category-strip { padding: 0.8rem 1.5rem; }
-    }
-    @media (max-width: 600px) {
-      .navbar { padding: 0 1rem; }
-      .hero__content { padding: 2rem 1rem; }
-      .main-layout { padding: 1.5rem 1rem; }
-      .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: 1fr; }
-      .card-featured { flex-direction: column; }
-      .card-featured__img { min-height: 200px; }
-      .cta-banner { padding: 2.5rem 1.5rem; }
-      .footer { padding: 3rem 1.5rem 1.5rem; }
-      .footer__top { grid-template-columns: 1fr; gap: 1.5rem; }
+    @media(max-width:600px){
+      .navbar { padding:0 1rem; }
+      .art-hero { padding:2rem 1rem 0; }
+      .lacks-grid, .more-grid { grid-template-columns:1fr; }
+      .routine-timeline { flex-direction:column; gap:1rem; }
+      .rt-step:not(:last-child)::after { display:none; }
+      .art-footer { padding:0 1rem 3rem; }
+      .site-footer { padding:2rem 1rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════════
-     SEARCH OVERLAY
-════════════════════════════════════════════════ -->
-<div class="search-overlay" id="searchOverlay">
-  <button class="close-search" onclick="closeSearch()">✕</button>
-  <input type="text" placeholder="Search natural remedies, ingredients…" autofocus />
-  <p class="search-hint">Try: "Aloe Vera", "Belly fat exercises", "Green tea benefits"</p>
-</div>
+<div class="progress-bar" id="progressBar"></div>
 
-<!-- ════════════════════════════════════════════════
-     MOBILE MENU
-════════════════════════════════════════════════ -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">✕</button>
-  <a href="#" class="mobile-nav-link">Home</a>
-  <a href="#face-care" class="mobile-nav-link">Face Care</a>
-  <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Masks & Scrubs</a>
-  <a href="#" class="mobile-sub">• Brightening & Glow</a>
-  <a href="#" class="mobile-sub">• Skin Problems</a>
-  <a href="#" class="mobile-sub">• Ingredients Spotlight</a>
-  <a href="#" class="mobile-sub">• Skin Types</a>
-  <a href="#exercise" class="mobile-nav-link">Exercise</a>
-  <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Fat Reduction</a>
-  <a href="#" class="mobile-sub">• Posture & Shape</a>
-  <a href="#" class="mobile-sub">• Overall Fitness</a>
-  <a href="#drinks" class="mobile-nav-link"> Health Drinks</a>
-  <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Herbal Waters</a>
-  <a href="#" class="mobile-sub">• Glow Juices</a>
-  <a href="#" class="mobile-sub">• Teas & Infusions</a>
-  <a href="#" class="mobile-sub">• Superfoods</a>
-  <a href="#" class="mobile-nav-link"> Contact</a>
-</div>
-
-<!-- ════════════════════════════════════════════════
+<!-- ══════════════════════════════════════
      NAVBAR
-════════════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <header class="navbar">
-  <div class="navbar__logo">
+  <div class="logo-wrap">
     <div class="logo-icon">🌿</div>
     <div>
       <div class="logo-text">Naturelle <span>Bloom</span></div>
       <div class="logo-sub">Natural Body Care</div>
     </div>
   </div>
-
-  <nav class="navbar__nav">
-    <div class="nav-item">
-      <a href="#" class="nav-link active">Home</a>
-    </div>
-
-    <div class="nav-item">
-      <a href="#face-care" class="nav-link">Face Care <span class="arr">▼</span></a>
-      <div class="dropdown">
-        <div class="dropdown-section">DIY for Beautiful Skin</div>
-        <a href="#" class="dropdown-link">Top 10 Facial Masks</a>
-        <a href="#" class="dropdown-link">Top 10 Face Toners</a>
-        <a href="#" class="dropdown-link">Top 10 Natural Scrubs</a>
-        <a href="#" class="dropdown-link">Facial Moisturizers</a>
-        <div class="dropdown-section">Natural Ingredients Benefits </div>
-        <a href="#" class="dropdown-link">Aloe Vera Benefits</a>
-        <a href="#" class="dropdown-link">Multani Mitti</a>
-        <a href="#" class="dropdown-link">Rose Water</a>
-        <a href="#" class="dropdown-link">Charcoal & Neem</a>
-        <div class="dropdown-section"> Correct Your Skin</div>
-        <a href="#" class="dropdown-link">Dark Spots & Pigmentation</a>
-        <a href="#" class="dropdown-link">Glass Skin Guide</a>
-        <a href="#" class="dropdown-link">Acne Problem</a>
-      </div>
-    </div>
-
-    <div class="nav-item">
-      <a href="#exercise" class="nav-link">Exercise <span class="arr">▼</span></a>
-      <div class="dropdown">
-        <div class="dropdown-section"> Fat Reduction</div>
-        <a href="#" class="dropdown-link">Reduce Belly Fat</a>
-        <a href="#" class="dropdown-link">Slim Thighs</a>
-        <a href="#" class="dropdown-link">Arm Fat Exercises</a>
-        <a href="#" class="dropdown-link">Reduce Breast Size</a>
-        <div class="dropdown-section"> Posture & Shape</div>
-        <a href="#" class="dropdown-link">Double Chin Fix</a>
-        <a href="#" class="dropdown-link">Hunch Back Correction</a>
-        <a href="#" class="dropdown-link">Neck & Collarbone</a>
-        <div class="dropdown-section"> Overall Fitness</div>
-        <a href="#" class="dropdown-link">Increase Stamina</a>
-        <a href="#" class="dropdown-link">Top 5 to Stay Fit</a>
-      </div>
-    </div>
-
-    <div class="nav-item">
-      <a href="#drinks" class="nav-link">Glow Drinks with Ayurveda <span class="arr">▼</span></a>
-      <div class="dropdown">
-        <div class="dropdown-section">Ayurvedic Herbal Waters</div>
-        <a href="#" class="dropdown-link">Turmeric Water</a>
-        <a href="#" class="dropdown-link">Neem Water</a>
-        <a href="#" class="dropdown-link">Moringa Water</a>
-        <a href="#" class="dropdown-link">Methi Water</a>
-        <div class="dropdown-section"> Glow Juices</div>
-        <a href="#" class="dropdown-link">Skin Brightening Juice</a>
-        <a href="#" class="dropdown-link">Full Body Glow up Drink</a>
-        <div class="dropdown-section"> Teas</div>
-        <a href="#" class="dropdown-link">Green Tea Benefits</a>
-        <a href="#" class="dropdown-link">Spearmint Tea</a>
-        <a href="#" class="dropdown-link">Ashwagandha Water</a>
-      </div>
-    </div>
-
-    <div class="nav-item">
-      <a href="#" class="nav-link">About</a>
-    </div>
-
-    <div class="nav-item">
-      <a href="#" class="nav-link">Contact</a>
-    </div>
-  </nav>
-
-  <div class="navbar__actions">
-    <button class="search-btn" onclick="openSearch()" title="Search">🔍</button>
-    <a href="#" class="btn btn-primary">Subscribe 🌿</a>
-    <button class="hamburger" onclick="openMobile()">
-      <span></span><span></span><span></span>
-    </button>
+  <a href="index.html" class="nav-back">&#8592; Back to Blog</a>
+  <div class="nav-actions">
+    <button class="nbtn nbtn-ghost">Save Article</button>
+    <button class="nbtn nbtn-fill">Share</button>
   </div>
 </header>
 
-<!-- ════════════════════════════════════════════════
-     HERO
-════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="hero__shapes">
-    <div class="shape s1"></div>
-    <div class="shape s2"></div>
-    <div class="shape s3"></div>
-  </div>
-  <div class="dot-grid"></div>
+<!-- ══════════════════════════════════════
+     ARTICLE HERO
+     EDIT: breadcrumb, pills, title, intro, stats, image, badge
+══════════════════════════════════════ -->
+<section class="art-hero">
+  <div class="hero-bg-s1"></div><div class="hero-bg-s2"></div><div class="hero-dots"></div>
 
-  <div class="hero__content">
-    <div class="hero__text">
-      <div class="hero-eyebrow">
-        <span class="leaf">🌿</span>
-        <span>100% Natural • Holistic Beauty</span>
+  <div class="hero-inner">
+    <div>
+      <!-- EDIT: breadcrumb path -->
+      <div class="hero-breadcrumb">
+        <span class="bc">Home</span><span class="bc-sep">&#9656;</span>
+        <span class="bc">Face Care</span><span class="bc-sep">&#9656;</span>
+        <span class="bc active">Glass Skin Guide</span>
       </div>
-      <h1>Glow From<br><em>Within</em><br>Naturally</h1>
-      <p class="hero-sub">Discover time-tested, nature-powered secrets for radiant skin, a healthy body, and glowing wellness — no chemicals, just pure goodness from your kitchen.</p>
-      <div class="hero-ctas">
-        <a href="#face-care" class="btn btn-primary">Explore Remedies </a>
-        <a href="#" class="btn btn-outline">About the Blog</a>
+
+      <!-- EDIT: topic pills — pick relevant ones or add new -->
+      <div class="hero-pills">
+        <span class="pill pill-accent">Glass Skin</span>
+        <span class="pill pill-rose">Face Care</span>
+        <span class="pill pill-sage">Natural Remedies</span>
+        <span class="pill pill-gold">9 min read</span>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">180+</div>
-          <div class="stat-label">Natural Tips</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Core Categories</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">50+</div>
-          <div class="stat-label">Ingredients</div>
-        </div>
+
+      <!-- EDIT: main title — use <em> for the script-font word -->
+      <h1 class="hero-title">
+        The Complete Guide to<br>
+        <em>Glass Skin</em> — Naturally &amp; at Home
+      </h1>
+
+      <!-- EDIT: 1–2 sentence intro -->
+      <p class="hero-intro">Achieve that luminous, translucent, pore-less finish using nothing but time-tested kitchen ingredients. No costly serums — just pure, consistent natural care that actually works.</p>
+
+      <!-- EDIT: 4 quick stats -->
+      <div class="hero-statbar">
+        <div class="hstat"><div class="n">6</div><div class="l">Causes</div></div>
+        <div class="hdiv"></div>
+        <div class="hstat"><div class="n">6</div><div class="l">Remedies</div></div>
+        <div class="hdiv"></div>
+        <div class="hstat"><div class="n">12</div><div class="l">Benefits</div></div>
+        <div class="hdiv"></div>
+        <div class="hstat"><div class="n">100%</div><div class="l">Chemical-Free</div></div>
       </div>
     </div>
 
-    <div class="hero__visual">
-      <div class="hero-img-frame">
-        <div class="hero-placeholder">
-          <span class="plant-emoji">🌺</span>
-          <p>Pure • Natural • Radiant</p>
-        </div>
+    <!-- EDIT: replace src with your image -->
+    <div class="hero-img-col">
+      <div class="hero-img-wrap">
+        <img src="img2.jpeg" alt="Glass Skin — natural glow" />
       </div>
-      <div class="hero-badge hero-badge-1">
-        <span class="badge-icon">🍋</span>
+      <!-- EDIT: badge initials and text -->
+      <div class="hero-badge">
+        <div class="badge-circle">GS</div>
         <div>
-          <div style="font-weight:700;color:var(--bark);font-size:0.8rem">Kitchen Remedies</div>
-          <div style="font-size:0.68rem;color:var(--text-muted)">100% Natural</div>
+          <div class="badge-t1">Glass Skin Guide</div>
+          <div class="badge-t2">Complete 3-step method</div>
         </div>
-      </div>
-      <div class="hero-badge hero-badge-2">
-        <div class="badge-num">53</div>
-        <div style="font-size:0.72rem;color:var(--text-muted)">Face Care<br>Topics</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Category Strip ── -->
-<div class="category-strip">
-  <span class="cat-pill face active">🌸 Face Care</span>
-  <span class="cat-pill treats">🌿 Natural Ingredients</span>
-  <span class="cat-pill body">💆 Skin Concerns</span>
-  <span class="cat-pill exercise">💪 Exercise</span>
-  <span class="cat-pill drinks">🍵 Health Drinks</span>
+<!-- ══════════════════════════════════════
+     SECTION TABS  — EDIT labels if you rename sections
+══════════════════════════════════════ -->
+<nav class="sec-tabs" id="secTabs">
+  <div class="st-inner">
+    <div class="st-item active" onclick="goTo('sec-lacks')"><span class="st-n">1</span>What Skin Lacks</div>
+    <div class="st-item" onclick="goTo('sec-causes')"><span class="st-n">2</span>Causes</div>
+    <div class="st-item" onclick="goTo('sec-remedies')"><span class="st-n">3</span>Remedies</div>
+    <div class="st-item" onclick="goTo('sec-science')"><span class="st-n">4</span>Scientific Reason</div>
+    <div class="st-item" onclick="goTo('sec-how')"><span class="st-n">5</span>How They Help</div>
+    <div class="st-item" onclick="goTo('sec-routine')"><span class="st-n">6</span>Your Routine</div>
+    <div class="st-item" onclick="goTo('sec-tips')"><span class="st-n">7</span>Pro Tips</div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     MAIN BODY + SIDEBAR
+══════════════════════════════════════ -->
+<div class="page-wrap">
+<article>
+
+<!-- ════════════════════════
+     SECTION 1 — WHAT SKIN LACKS
+     EDIT: icon, name, value badge, description for each card
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-lacks">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:var(--accent)">1</span>
+    <span class="sec-eye-text" style="color:var(--accent-dark)">The Root Deficiency</span>
+  </div>
+  <h2 class="sec-title">What Your Skin Is <em>Missing</em></h2>
+  <p class="sec-lead">Glass skin does not appear on unhealthy skin by accident. Before treating symptoms, understand the precise nutrients, compounds, and conditions your skin is currently lacking.</p>
+
+  <div class="lacks-grid">
+
+    <!-- EDIT EACH CARD: icon, name, value, description, accent colour below -->
+    <div class="lack-card" style="border-color:#bdd8f5"><div class="lack-card" style="position:absolute;bottom:0;left:0;right:0;height:3px;background:#4a8fd4"></div>
+      <div class="lack-icon">💧</div>
+      <div class="lack-name">Moisture</div>
+      <div class="lack-val" style="background:var(--accent-pale);color:var(--accent-dark)">Hydration</div>
+      <p class="lack-desc">The stratum corneum requires 10–30% water content to appear smooth. Below that threshold skin scatters rather than reflects light.</p>
+    </div>
+
+    <div class="lack-card" style="border-color:#f5e4a0">
+      <div class="lack-icon">✨</div>
+      <div class="lack-name">Natural Oils (Sebum)</div>
+      <div class="lack-val" style="background:var(--gold-pale);color:#7a5500">Lipid Barrier</div>
+      <p class="lack-desc">A compromised lipid barrier allows trans-epidermal water loss (TEWL), leaving skin dull, tight, and rough on the surface.</p>
+    </div>
+
+    <div class="lack-card" style="border-color:#d4b8f0">
+      <div class="lack-icon">🔬</div>
+      <div class="lack-name">Antioxidants</div>
+      <div class="lack-val" style="background:#f3eeff;color:#5c2e8e">Protection</div>
+      <p class="lack-desc">Vitamins C, E, and polyphenols neutralise free radicals that degrade collagen and cause uneven pigmentation — both enemies of glass skin.</p>
+    </div>
+
+    <div class="lack-card" style="border-color:#c8e6c9">
+      <div class="lack-icon">🧬</div>
+      <div class="lack-name">Collagen & Elastin</div>
+      <div class="lack-val" style="background:var(--sage-pale);color:#2e6b32">Structure</div>
+      <p class="lack-desc">Without adequate collagen synthesis, pores appear larger, skin loses its plump bounce, and the surface reflects light unevenly.</p>
+    </div>
+
+    <div class="lack-card" style="border-color:#f5c8c8">
+      <div class="lack-icon">⚖️</div>
+      <div class="lack-name">pH Balance</div>
+      <div class="lack-val" style="background:#fdeaea;color:#8b1a1a">Acid Mantle</div>
+      <p class="lack-desc">Healthy skin sits at pH 4.5–5.5. Disruption (from harsh soaps or over-exfoliation) breaks down the protective acid mantle instantly.</p>
+    </div>
+
+    <div class="lack-card" style="border-color:var(--gold-light)">
+      <div class="lack-icon">🌙</div>
+      <div class="lack-name">Cell Renewal Rate</div>
+      <div class="lack-val" style="background:var(--gold-pale);color:#7a5500">Turnover</div>
+      <p class="lack-desc">Dead cells accumulate when turnover slows (every 28–40 days in adults vs. 14 days in children), creating the dull, opaque surface that prevents that glassy glow.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- divider pull quote — EDIT text -->
+<div class="pull-quote fade-up">
+  <p>Glass skin is the natural state of well-nourished, deeply hydrated skin. Everything standing between you and that glow can be addressed with consistent, targeted natural care.</p>
+  <cite>— Naturelle Bloom Editorial</cite>
 </div>
 
-<!-- ════════════════════════════════════════════════
-     MAIN LAYOUT
-════════════════════════════════════════════════ -->
-<div class="main-layout">
+<!-- ════════════════════════
+     SECTION 2 — CAUSES
+     EDIT: each cause-card — icon, title, desc, badge text + colour class below
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-causes">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:#c84040">2</span>
+    <span class="sec-eye-text" style="color:#8b1a1a">Understanding the Problem</span>
+  </div>
+  <h2 class="sec-title">Why You Don't Have <em>Glass Skin</em> Yet</h2>
+  <p class="sec-lead">Six root causes consistently prevent people from achieving that translucent luminosity — and they are all addressable through lifestyle and natural topical care.</p>
 
-  <!-- ══ SIDEBAR ══ -->
-  <aside class="sidebar">
+  <div class="causes-grid">
 
-    <div class="sidebar__section">
-      <div class="sidebar__title face">🌸 Face Care</div>
-      <div class="sb-subsection">Masks & Scrubs</div>
-      <a class="sb-item active" href="#">Top 10 Facial Masks</a>
-      <a class="sb-item" href="#">Top 10 Face Toners</a>
-      <a class="sb-item" href="#">Top 10 Natural Scrubs</a>
-      <a class="sb-item" href="#">Top 10 Moisturizers</a>
-      <div class="sb-subsection">Brightening & Glow</div>
-      <a class="sb-item" href="#">Ice Cubes for Glowing Skin</a>
-      <a class="sb-item" href="#">Egg Yolk for Glow</a>
-      <a class="sb-item" href="#">Curd for Skin</a>
-      <a class="sb-item" href="#">Best Way to Glass Skin</a>
-      <a class="sb-item" href="#">Face Steam & Icing</a>
-      <div class="sb-subsection">Skin Concerns</div>
-      <a class="sb-item" href="#">Under Eye Darkness</a>
-      <a class="sb-item" href="#">Dark Spots Corrector</a>
-      <a class="sb-item" href="#">Hyperpigmentation</a>
-      <a class="sb-item" href="#">Dark Lips</a>
-      <a class="sb-item" href="#">Anti-Aging Remedies</a>
-      <a class="sb-item" href="#">Reduce Melanin</a>
-      <a class="sb-item" href="#">Lighten Underarms</a>
-      <a class="sb-item" href="#">Remove Stretch Marks</a>
-      <a class="sb-item" href="#">Remove Tan</a>
-      <a class="sb-item" href="#">Neck Pigmentation</a>
-      <div class="sb-subsection">Ingredients</div>
-      <a class="sb-item" href="#">Aloe Vera Benefits</a>
-      <a class="sb-item" href="#">Multani Mitti</a>
-      <a class="sb-item" href="#">Rose Water</a>
-      <a class="sb-item" href="#">Sandalwood Powder</a>
-      <a class="sb-item" href="#">Charcoal Face Mask</a>
-      <a class="sb-item" href="#">Neem Water Face Wash</a>
-      <a class="sb-item" href="#">Lemon for Face Care</a>
-      <a class="sb-item" href="#">Tomato & Goodness</a>
-      <a class="sb-item" href="#">Beetroot Powder</a>
-      <a class="sb-item" href="#">Potato Juice</a>
-      <a class="sb-item" href="#">Rice Powder & Water</a>
-      <a class="sb-item" href="#">Orange Peel Powder</a>
-      <a class="sb-item" href="#">Besan Benefits</a>
-      <a class="sb-item" href="#">Glycerin & Milk</a>
-      <a class="sb-item" href="#">Castor Oil</a>
-      <a class="sb-item" href="#">Tea Tree Oil</a>
-      <a class="sb-item" href="#">Ginger Paste</a>
-      <a class="sb-item" href="#">Potash Alum for Acne</a>
-      <a class="sb-item" href="#">Avocado Paste</a>
-      <a class="sb-item" href="#">Natural AHA/BHA</a>
-      <a class="sb-item" href="#">Charcoal Powder</a>
-      <div class="sb-subsection">Skin Types</div>
-      <a class="sb-item" href="#">Best for Dry Skin</a>
-      <a class="sb-item" href="#">Best for Oily Skin</a>
-      <a class="sb-item" href="#">Best for Acne Skin</a>
-      <a class="sb-item" href="#">Best for Teenagers</a>
-      <div class="sb-subsection">Extras</div>
-      <a class="sb-item" href="#">Rosy Lips</a>
-      <a class="sb-item" href="#">Long Eyelids</a>
-      <a class="sb-item" href="#">Scaly Skin Removal</a>
-      <a class="sb-item" href="#">Homemade Foot Cleanse</a>
-      <a class="sb-item" href="#">Antioxidant-Rich Fruits</a>
-      <a class="sb-item" href="#">Sunscreen Importance</a>
-    </div>
+    <!-- To change accent per card: edit the border-color on the outer div,
+         the background on ::before via inline style on cause-card,
+         and the badge background/color. Use a style tag or direct inline. -->
 
-    <div class="sidebar__section">
-      <div class="sidebar__title exercise">💪 Exercise</div>
-      <div class="sb-subsection">Fat Reduction</div>
-      <a class="sb-item" href="#">Reduce Belly Fat</a>
-      <a class="sb-item" href="#">Reduce Thigh Fat</a>
-      <a class="sb-item" href="#">Reduce Arm Fat</a>
-      <a class="sb-item" href="#">Reduce Back Fat</a>
-      <a class="sb-item" href="#">Reduce Breast Size</a>
-      <div class="sb-subsection">Posture & Shape</div>
-      <a class="sb-item" href="#">Double Chin Fix</a>
-      <a class="sb-item" href="#">Remove Hunch Back</a>
-      <a class="sb-item" href="#">Uplift Collarbone</a>
-      <a class="sb-item" href="#">Long & Slim Neck</a>
-      <a class="sb-item" href="#">Flat Foot Exercise</a>
-      <div class="sb-subsection">Overall Fitness</div>
-      <a class="sb-item" href="#">Increase Stamina</a>
-      <a class="sb-item" href="#">Top 5 to Stay Fit</a>
-    </div>
-
-    <div class="sidebar__section">
-      <div class="sidebar__title drinks">🍵 Health Drinks</div>
-      <div class="sb-subsection">Herbal Waters</div>
-      <a class="sb-item" href="#">Turmeric Water</a>
-      <a class="sb-item" href="#">Neem Water</a>
-      <a class="sb-item" href="#">Moringa Water</a>
-      <a class="sb-item" href="#">Methi Water</a>
-      <a class="sb-item" href="#">Ashwagandha Water</a>
-      <a class="sb-item" href="#">Fennel & Cumin Water</a>
-      <div class="sb-subsection">Glow Juices</div>
-      <a class="sb-item" href="#">Beetroot Carrot Juice</a>
-      <a class="sb-item" href="#">Amla for Skin</a>
-      <a class="sb-item" href="#">Skin Brightening Juice</a>
-      <a class="sb-item" href="#">Lemon & Honey Water</a>
-      <a class="sb-item" href="#">Blueberry Drink</a>
-      <a class="sb-item" href="#">Fruits for Glow</a>
-      <div class="sb-subsection">Teas & Warm Drinks</div>
-      <a class="sb-item" href="#">Green Tea</a>
-      <a class="sb-item" href="#">Spearmint Tea</a>
-      <a class="sb-item" href="#">Turmeric Milk</a>
-      <a class="sb-item" href="#">Dark Coffee</a>
-      <div class="sb-subsection">Superfoods & Vitamins</div>
-      <a class="sb-item" href="#">Egg Yolk & Fish Vitamins</a>
-    </div>
-
-  </aside>
-
-  <!-- ══ CONTENT AREA ══ -->
-  <main class="content-area">
-
-    <!-- ── Featured Post ── -->
-    <div class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow">⭐ Editor's Pick</div>
-          <h2>Start Your Glow Journey</h2>
-        </div>
-        <a href="#" class="view-all">View All →</a>
+    <div class="cause-card" style="border-color:#bdd8f5;--cc:#4a8fd4">
+      <style>.cc-1::before{background:#4a8fd4}</style>
+      <div class="cause-card cc-1">
+        <div class="cause-icon">💧</div>
+        <div class="cause-title">Chronic Dehydration</div>
+        <div class="cause-desc">When skin cells lack adequate water the surface appears dull, flaky, and creased. Dehydrated skin cannot reflect light evenly — the core requirement for a glass-skin finish.</div>
+        <span class="cause-badge" style="background:var(--accent-pale);color:var(--accent-dark)">Impact: High</span>
       </div>
+    </div>
 
-      <div class="card-featured">
-        <div class="card-featured__img">
-          <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#e8d5b0);">
-            🌸
-            <p>Facial Masks Guide</p>
-          </div>
-          <span class="cat-tag">Face Care</span>
+    <div class="cause-card" style="border-color:#f5e4a0">
+      <style>.cc-2::before{background:var(--gold)}</style>
+      <div class="cause-card cc-2">
+        <div class="cause-icon">☀️</div>
+        <div class="cause-title">UV Damage &amp; Sun Exposure</div>
+        <div class="cause-desc">Unprotected sun exposure triggers melanin overproduction, breaks down collagen, and creates uneven texture that scatters rather than reflects light.</div>
+        <span class="cause-badge" style="background:var(--gold-pale);color:#7a5500">Impact: High</span>
+      </div>
+    </div>
+
+    <div class="cause-card" style="border-color:#c8e6c9">
+      <style>.cc-3::before{background:var(--sage)}</style>
+      <div class="cause-card cc-3">
+        <div class="cause-icon">🥗</div>
+        <div class="cause-title">Poor Nutrition</div>
+        <div class="cause-desc">A diet low in antioxidants, vitamins C and E, zinc, and omega-3s starves your skin of the building blocks needed for collagen synthesis and barrier maintenance.</div>
+        <span class="cause-badge" style="background:var(--sage-pale);color:#2e6b32">Impact: Medium</span>
+      </div>
+    </div>
+
+    <div class="cause-card" style="border-color:#e8c8e0">
+      <style>.cc-4::before{background:var(--rose)}</style>
+      <div class="cause-card cc-4">
+        <div class="cause-icon">🌙</div>
+        <div class="cause-title">Inadequate Sleep</div>
+        <div class="cause-desc">Skin performs most repair — including collagen production and cell turnover — while you sleep. Less than 7 hours consistently leads to dull, congested, puffy skin.</div>
+        <span class="cause-badge" style="background:var(--rose-pale);color:var(--rose-dark)">Impact: Medium</span>
+      </div>
+    </div>
+
+    <div class="cause-card" style="border-color:#f5c8c8">
+      <style>.cc-5::before{background:#c84040}</style>
+      <div class="cause-card cc-5">
+        <div class="cause-icon">⚡</div>
+        <div class="cause-title">Chronic Stress &amp; Cortisol</div>
+        <div class="cause-desc">Elevated cortisol triggers inflammation, weakens the skin barrier, increases oil production, and accelerates cellular ageing — none compatible with translucent glow.</div>
+        <span class="cause-badge" style="background:#fdeaea;color:#8b1a1a">Impact: High</span>
+      </div>
+    </div>
+
+    <div class="cause-card" style="border-color:var(--gold-light)">
+      <style>.cc-6::before{background:var(--bark-light)}</style>
+      <div class="cause-card cc-6">
+        <div class="cause-icon">🧴</div>
+        <div class="cause-title">Wrong Products &amp; Over-Washing</div>
+        <div class="cause-desc">Harsh cleansers and alcohol-heavy toners strip natural oils, disrupt pH, and create a compromised barrier unable to hold moisture or maintain smoothness.</div>
+        <span class="cause-badge" style="background:#f5ede8;color:var(--bark)">Impact: Medium</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SECTION 3 — REMEDIES
+     EDIT each remedy-card: title, tag, desc, ing-chips, steps
+     Change left-panel colour by editing the style on .rem-num and .rem-num::after
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-remedies">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:var(--sage)">3</span>
+    <span class="sec-eye-text" style="color:#2e6b32">Natural Solutions</span>
+  </div>
+  <h2 class="sec-title">6 Remedies That Actually <em>Deliver Results</em></h2>
+  <p class="sec-lead">Each remedy below is rooted in Ayurvedic tradition and has a clear, explainable biological mechanism. Used consistently they address root causes rather than masking symptoms.</p>
+
+  <div class="remedies-list">
+
+    <!-- REMEDY 1 -->
+    <div class="remedy-card fade-up">
+      <!-- EDIT background colour of the number panel -->
+      <div class="rem-num" style="background:linear-gradient(160deg,#4a7a40,#2e5a28)">
+        <style>.rem-arr-1::after{border-left:10px solid #2e5a28}</style>
+        <span class="rem-arr-1">01</span>
+      </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <!-- EDIT remedy name and tag -->
+          <div class="rem-title">Rice Water Toner</div>
+          <span class="rem-tag" style="background:#eaf5e8;color:#2e6b32">Brightening</span>
         </div>
-        <div class="card-featured__body">
-          <div class="meta">
-            <span>🌿 Natural Remedies</span>
-            <span class="dot"></span>
-            <span>8 min read</span>
-          </div>
-          <h3>Top 10 Facial Masks You Can Make at Home</h3>
-          <p>From brightening turmeric packs to deep-cleansing clay masks, discover how everyday kitchen ingredients transform your skin without a single harsh chemical. These time-tested recipes have been used for generations for good reason.</p>
-          <a href="#" class="btn btn-ghost">Read More →</a>
+        <!-- EDIT description -->
+        <p class="rem-desc">Fermented or plain rice water contains inositol, a carbohydrate that penetrates the skin to repair damage from within, plus ferulic acid and allantoin that smooth and create a subtle glow-film on the surface.</p>
+        <!-- EDIT ingredients -->
+        <div class="rem-ings">
+          <span class="ing-chip">White Rice</span>
+          <span class="ing-chip">Water</span>
+          <span class="ing-chip">Optional: Rose Water</span>
+        </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <!-- EDIT steps -->
+          <div class="step-row"><div class="step-dot">1</div><span>Rinse ¼ cup white rice briefly. Soak in 1 cup water for 30 minutes.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Strain the milky water into a clean bottle. Refrigerate for up to 3 days.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>After cleansing, apply with a cotton pad or pat onto face. Leave on — do not rinse.</span></div>
+          <div class="step-row"><div class="step-dot">4</div><span>Use morning and night. Visible smoothing within 2 weeks of daily use.</span></div>
         </div>
       </div>
     </div>
 
-    <!-- ── Face Care Grid ── -->
-    <section id="face-care" class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-rose">🌸 Face Care</div>
-          <h2>Masks, Toners & Scrubs</h2>
-        </div>
-        <a href="#" class="view-all">See All 53 Articles →</a>
+    <!-- REMEDY 2 -->
+    <div class="remedy-card fade-up">
+      <div class="rem-num" style="background:linear-gradient(160deg,#2e8060,#1a5c45)">
+        <style>.rem-arr-2::after{border-left:10px solid #1a5c45}</style>
+        <span class="rem-arr-2">02</span>
       </div>
-      <div class="grid-3">
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#f9e8de);">🧖‍♀️<span>Facial Mask</span></div>
-            <div class="cat-dot face"></div>
-            <div class="num-badge">#1</div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Top 10 Facial Masks for Radiant Skin</h4>
-            <div class="meta-sm"><span>5 min read</span><span class="tag">Masks</span></div>
-          </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <div class="rem-title">Aloe Vera Gel Mask</div>
+          <span class="rem-tag" style="background:#e0f4ec;color:#1a5c45">Hydrating</span>
         </div>
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#e8d5b0,#f4d6c8);">💧<span>Face Toner</span></div>
-            <div class="cat-dot face"></div>
-            <div class="num-badge">#2</div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Top 10 Natural Face Toners That Balance pH</h4>
-            <div class="meta-sm"><span>4 min read</span><span class="tag">Toners</span></div>
-          </div>
+        <p class="rem-desc">Fresh aloe vera gel is 99% water. Mucopolysaccharides bind moisture into the skin, while gibberellins stimulate fibroblasts to produce collagen — the structural protein behind a taut, glass-like bounce.</p>
+        <div class="rem-ings">
+          <span class="ing-chip">Aloe Vera Gel</span>
+          <span class="ing-chip">1 drop Vitamin E Oil</span>
         </div>
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#a8c5ab,#e8d5b0);">✨<span>Scrub</span></div>
-            <div class="cat-dot face"></div>
-            <div class="num-badge">#3</div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Top 10 Facial Natural Scrubs for Smooth Skin</h4>
-            <div class="meta-sm"><span>6 min read</span><span class="tag">Scrubs</span></div>
-          </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <div class="step-row"><div class="step-dot">1</div><span>Scoop fresh gel from an aloe leaf. Mix with 1 drop vitamin E oil.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Apply a thin even layer over clean face and neck.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>Leave 20 minutes until slightly tacky-dry. Rinse with cool water.</span></div>
+          <div class="step-row"><div class="step-dot">4</div><span>Use 3–4 times per week as mask, or nightly as leave-on serum.</span></div>
         </div>
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#f4d6c8,#a8c5ab);">🌿<span>Moisturizer</span></div>
-            <div class="cat-dot face"></div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Top 10 Facial Moisturizers — Natural Options</h4>
-            <div class="meta-sm"><span>5 min read</span><span class="tag">Moisture</span></div>
-          </div>
-        </div>
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#e8d5b0,#f4d6c8);">🌙<span>Under Eye</span></div>
-            <div class="cat-dot face"></div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Natural Remedies for Under Eye Darkness</h4>
-            <div class="meta-sm"><span>4 min read</span><span class="tag">Eyes</span></div>
-          </div>
-        </div>
-        <div class="card-grid">
-          <div class="card-grid__img">
-            <div class="img-placeholder" style="background: linear-gradient(135deg,#f9e8de,#e8d5b0);">☀️<span>Sunscreen</span></div>
-            <div class="cat-dot face"></div>
-          </div>
-          <div class="card-grid__body">
-            <h4>Importance of Sunscreen in Your Daily Routine</h4>
-            <div class="meta-sm"><span>6 min read</span><span class="tag">Protection</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Natural Ingredients Spotlight ── -->
-    <section class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-gold">🌿 Ingredients Spotlight</div>
-          <h2>Nature's Best Kept Secrets</h2>
-        </div>
-        <a href="#" class="view-all">All Ingredients →</a>
-      </div>
-      <div class="grid-4">
-        <div class="ingredient-card">
-          <div class="ing-icon">🌵</div>
-          <h4>Aloe Vera</h4>
-          <p>Soothing, hydrating & healing for all skin types</p>
-          <div class="ing-tag">Face • Body</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🌹</div>
-          <h4>Rose Water</h4>
-          <p>Natural toner with anti-inflammatory properties</p>
-          <div class="ing-tag">Toner • Mist</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🍋</div>
-          <h4>Lemon</h4>
-          <p>Natural brightener rich in Vitamin C for glow</p>
-          <div class="ing-tag">Brightening</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🌿</div>
-          <h4>Neem</h4>
-          <p>Powerful antibacterial for acne-free clear skin</p>
-          <div class="ing-tag">Acne • Purify</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🫚</div>
-          <h4>Castor Oil</h4>
-          <p>Deep nourishing oil for skin, hair & lashes</p>
-          <div class="ing-tag">Oil • Nourish</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🍅</div>
-          <h4>Tomato</h4>
-          <p>Natural astringent that minimises pores & brightens</p>
-          <div class="ing-tag">Pore-Tightening</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🍯</div>
-          <h4>Multani Mitti</h4>
-          <p>Fuller's earth for oil control & deep cleanse</p>
-          <div class="ing-tag">Clay • Detox</div>
-        </div>
-        <div class="ingredient-card">
-          <div class="ing-icon">🪴</div>
-          <h4>Sandalwood</h4>
-          <p>Ancient remedy for glowing, even-toned skin</p>
-          <div class="ing-tag">Glow • Even</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Skin Concerns Section ── -->
-    <section class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-rose">💆 Skin Concerns</div>
-          <h2>Brightening & Correcting</h2>
-        </div>
-        <a href="#" class="view-all">All Concerns →</a>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">01</div>
-        <div class="card-list__body">
-          <h5>Dark Spots Corrector — Natural Methods That Work</h5>
-          <span>Skin Correcting • 7 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">02</div>
-        <div class="card-list__body">
-          <h5>Hyperpigmentation: Causes & Natural Cures</h5>
-          <span>Brightening • 6 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">03</div>
-        <div class="card-list__body">
-          <h5>Best Practice to Reduce Anti-Aging Signs</h5>
-          <span>Anti-Aging • 8 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">04</div>
-        <div class="card-list__body">
-          <h5>Best Known Remedies to Reduce Melanin</h5>
-          <span>Brightening • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">05</div>
-        <div class="card-list__body">
-          <h5>Best Way to Get Glass Skin — The Complete Guide</h5>
-          <span>Glass Skin • 9 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">06</div>
-        <div class="card-list__body">
-          <h5>Top Ways to Lighten Underarms Naturally</h5>
-          <span>Body Care • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">07</div>
-        <div class="card-list__body">
-          <h5>Best Way to Remove Neck Pigmentation</h5>
-          <span>Pigmentation • 6 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">08</div>
-        <div class="card-list__body">
-          <h5>Best Way to Reduce Stretch Marks Naturally</h5>
-          <span>Skin Repair • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-    </section>
-
-    <!-- ── Skin Type Cards ── -->
-    <section class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-bark">🔬 By Skin Type</div>
-          <h2>Routines Made for You</h2>
-        </div>
-      </div>
-      <div class="grid-4">
-        <div class="skin-type-card skin-dry">
-          <div class="skin-icon">💦</div>
-          <h4>Dry Skin</h4>
-          <p>Best face packs & deep hydration tips for dry skin</p>
-        </div>
-        <div class="skin-type-card skin-oily">
-          <div class="skin-icon">✨</div>
-          <h4>Oily Skin</h4>
-          <p>Oil-control routines using natural clays & herbs</p>
-        </div>
-        <div class="skin-type-card skin-acne">
-          <div class="skin-icon">🌿</div>
-          <h4>Acne-Prone</h4>
-          <p>Gentle, antibacterial natural remedies for clear skin</p>
-        </div>
-        <div class="skin-type-card skin-teen" style="background:#e8f0fa;">
-          <div class="skin-icon">🌼</div>
-          <h4>Teens</h4>
-          <p>Safe, natural skincare routines for young skin</p>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── Exercise Section ── -->
-    <section id="exercise" class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-sage">💪 Exercise</div>
-          <h2>Move, Tone & Thrive</h2>
-        </div>
-        <a href="#" class="view-all">All 12 Routines →</a>
-      </div>
-
-      <div class="grid-2" style="margin-bottom:1.2rem">
-        <div class="card-featured" style="margin-bottom:0">
-          <div class="card-featured__img" style="flex:0 0 40%">
-            <div class="img-placeholder" style="background:linear-gradient(135deg,#eaf2eb,#a8c5ab);min-height:200px">💪<p>Belly Fat</p></div>
-            <span class="cat-tag" style="background:var(--sage)">Exercise</span>
-          </div>
-          <div class="card-featured__body">
-            <div class="meta"><span>💪 Fat Reduction</span></div>
-            <h3 style="font-size:1.1rem">Best Exercises to Reduce Belly Fat</h3>
-            <p style="font-size:0.82rem">Targeted core workouts that burn visceral fat and flatten the stomach — no gym required.</p>
-            <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
-          </div>
-        </div>
-        <div class="card-featured" style="margin-bottom:0">
-          <div class="card-featured__img" style="flex:0 0 40%">
-            <div class="img-placeholder" style="background:linear-gradient(135deg,#a8c5ab,#7a9e7e);min-height:200px">🧘<p>Posture</p></div>
-            <span class="cat-tag" style="background:var(--sage)">Posture</span>
-          </div>
-          <div class="card-featured__body">
-            <div class="meta"><span>🧘 Shape & Posture</span></div>
-            <h3 style="font-size:1.1rem">Fix Your Hunch Back with These Exercises</h3>
-            <p style="font-size:0.82rem">Daily stretches and strengthening moves to correct posture and open your chest naturally.</p>
-            <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div class="exercise-card">
-          <div class="ex-icon">🦵</div>
-          <div class="ex-body"><h4>Reduce Thigh Fat</h4><p>Targeted leg exercises & stretches</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-        <div class="exercise-card">
-          <div class="ex-icon">💪</div>
-          <div class="ex-body"><h4>Slim Arm Fat</h4><p>Toning moves for upper arms</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-        <div class="exercise-card">
-          <div class="ex-icon">😊</div>
-          <div class="ex-body"><h4>Double Chin Fix</h4><p>Face & neck exercises that work</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-        <div class="exercise-card">
-          <div class="ex-icon">🏃</div>
-          <div class="ex-body"><h4>Increase Stamina</h4><p>Build endurance step by step</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-        <div class="exercise-card">
-          <div class="ex-icon">🦢</div>
-          <div class="ex-body"><h4>Long Slim Neck</h4><p>Elongate & tone neck muscles</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-        <div class="exercise-card">
-          <div class="ex-icon">🔝</div>
-          <div class="ex-body"><h4>Uplift Collarbone</h4><p>Shoulder & chest sculpting moves</p></div>
-          <span class="ex-arrow">→</span>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ── Health Drinks ── -->
-    <section id="drinks" class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-green">🍵 Health Drinks</div>
-          <h2>Glow From the Inside</h2>
-        </div>
-        <a href="#" class="view-all">All 16 Drinks →</a>
-      </div>
-
-      <!-- Sub: Herbal Waters -->
-      <div style="margin-bottom:1.4rem">
-        <div class="eyebrow" style="margin-bottom:0.8rem">🌿 Herbal Waters</div>
-        <div class="grid-4">
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">💛</div><h4>Turmeric Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Anti-inflammatory powerhouse that boosts glow and fights acne from within</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🌿</div><h4>Neem Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Purifying antibacterial drink for clearer, acne-free skin</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🌱</div><h4>Moringa Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Superfood packed with vitamins for radiant skin & energy</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🌾</div><h4>Methi Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Fenugreek-infused water for glowing skin and weight management</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sub: Glow Juices -->
-      <div style="margin-bottom:1.4rem">
-        <div class="eyebrow" style="margin-bottom:0.8rem;color:#2d7a5e">🥤 Glow Juices</div>
-        <div class="grid-3">
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🥕</div><h4>Beetroot Carrot Glow Juice</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#d44#f90)"></div>
-            <div class="drink-card__body">Rich in beta-carotene & antioxidants for vibrant, radiant skin</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🍋</div><h4>Lemon & Honey Water</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#f9a825)"></div>
-            <div class="drink-card__body">Morning detox that flushes toxins and brightens complexion</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🫐</div><h4>Blueberry Glow Drink</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5b2d8e,#2d7a5e)"></div>
-            <div class="drink-card__body">Antioxidant-rich berry drink that fights free radicals and aging</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sub: Teas -->
-      <div>
-        <div class="eyebrow" style="margin-bottom:0.8rem;color:#3d6b41">☕ Teas & Warm Drinks</div>
-        <div class="grid-4">
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🍵</div><h4>Green Tea</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#6ab04c,#2d7a5e)"></div>
-            <div class="drink-card__body">EGCG-rich tea that reduces inflammation & promotes skin glow</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🌿</div><h4>Spearmint Tea</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#2d9e72,#6ab04c)"></div>
-            <div class="drink-card__body">Hormonal balance tea — excellent for reducing acne naturally</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">🥛</div><h4>Turmeric Milk</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#c9a96e)"></div>
-            <div class="drink-card__body">Golden milk for deep sleep, skin repair and anti-aging benefits</div>
-          </div>
-          <div class="drink-card">
-            <div class="drink-card__top"><div class="drink-emoji">☕</div><h4>Dark Coffee</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5c3d2e,#8b6355)"></div>
-            <div class="drink-card__body">Antioxidant-rich coffee that boosts skin cell renewal when consumed right</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA Banner ── -->
-    <div class="cta-banner fade-in">
-      <div class="cta-banner__text">
-        <div class="eyebrow">🌿 Stay Updated</div>
-        <h2>Get Weekly Glow Tips</h2>
-        <p>Join 5,000+ natural beauty lovers who get exclusive remedies, seasonal skin tips, and ingredient guides delivered to their inbox every week.</p>
-      </div>
-      <div class="cta-banner__form">
-        <input type="email" placeholder="your@email.com" />
-        <button class="btn btn-primary" style="background:var(--gold);border-color:var(--gold);color:var(--bark)">Subscribe 🌸</button>
       </div>
     </div>
 
-  </main>
-</div>
-
-<!-- ════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════ -->
-<footer class="footer">
-  <div class="footer__top">
-    <div class="footer__brand">
-      <div class="brand-name">Naturelle <span>Bloom</span></div>
-      <p>Your trusted guide to natural body care, holistic wellness, and kitchen-to-skin remedies. Real ingredients, real results, no harmful chemicals.</p>
-      <div class="socials">
-        <a href="#" title="Pinterest">📌</a>
-        <a href="#" title="Instagram">📸</a>
-        <a href="#" title="YouTube">▶️</a>
-        <a href="#" title="Facebook">👍</a>
+    <!-- REMEDY 3 — EDIT similarly -->
+    <div class="remedy-card fade-up">
+      <div class="rem-num" style="background:linear-gradient(160deg,#c8900a,#a07008)">
+        <style>.rem-arr-3::after{border-left:10px solid #a07008}</style>
+        <span class="rem-arr-3">03</span>
+      </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <div class="rem-title">Turmeric &amp; Sandalwood Pack</div>
+          <span class="rem-tag" style="background:var(--gold-pale);color:#7a5500">Glow-Boosting</span>
+        </div>
+        <p class="rem-desc">Curcumin in turmeric inhibits melanin synthesis directly at the tyrosinase enzyme. Sandalwood adds alpha-santalol, which brightens, evens tone, and imparts a satin-smooth surface finish.</p>
+        <div class="rem-ings">
+          <span class="ing-chip">¼ tsp Turmeric</span>
+          <span class="ing-chip">1 tsp Sandalwood Powder</span>
+          <span class="ing-chip">Raw Milk</span>
+        </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <div class="step-row"><div class="step-dot">1</div><span>Mix turmeric and sandalwood into a paste with raw milk or rose water.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Apply evenly, avoiding eye area. The yellow washes off cleanly.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>Leave 15–20 minutes. Rinse with lukewarm water.</span></div>
+          <div class="step-row"><div class="step-dot">4</div><span>Use 2–3 times per week. Pigmentation results visible in 3–4 weeks.</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="footer__col">
-      <h4>Face Care</h4>
-      <ul>
-        <li><a href="#">Top 10 Facial Masks</a></li>
-        <li><a href="#">Natural Scrubs</a></li>
-        <li><a href="#">Aloe Vera Benefits</a></li>
-        <li><a href="#">Rose Water Uses</a></li>
-        <li><a href="#">Glass Skin Guide</a></li>
-        <li><a href="#">Anti-Aging Remedies</a></li>
-        <li><a href="#">Dark Spot Correctors</a></li>
-        <li><a href="#">Skin by Type</a></li>
-      </ul>
+    <!-- REMEDY 4 -->
+    <div class="remedy-card fade-up">
+      <div class="rem-num" style="background:linear-gradient(160deg,#c89020,#a07018)">
+        <style>.rem-arr-4::after{border-left:10px solid #a07018}</style>
+        <span class="rem-arr-4">04</span>
+      </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <div class="rem-title">Honey &amp; Rose Water Serum</div>
+          <span class="rem-tag" style="background:var(--gold-pale);color:#7a5500">Barrier Repair</span>
+        </div>
+        <p class="rem-desc">Raw honey is a natural humectant containing gluconic acid (a gentle AHA) and hydrogen peroxide (mild antibacterial). Rose water's phenylethanol calms redness. Together they plump and restore the skin barrier.</p>
+        <div class="rem-ings">
+          <span class="ing-chip">1 tbsp Raw Honey</span>
+          <span class="ing-chip">2 tbsp Rose Water</span>
+          <span class="ing-chip">2 drops Glycerin</span>
+        </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <div class="step-row"><div class="step-dot">1</div><span>Warm honey gently. Mix with rose water and glycerin until combined.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Apply over clean, slightly damp skin as a serum — press in gently.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>Leave 15 minutes. Rinse lightly, or leave a thin film on dry skin.</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="footer__col">
-      <h4>Exercise & Drinks</h4>
-      <ul>
-        <li><a href="#">Belly Fat Exercises</a></li>
-        <li><a href="#">Slim Thighs Workout</a></li>
-        <li><a href="#">Double Chin Fix</a></li>
-        <li><a href="#">Top 5 Fitness Moves</a></li>
-        <li><a href="#">Turmeric Water</a></li>
-        <li><a href="#">Beetroot Carrot Juice</a></li>
-        <li><a href="#">Green Tea Benefits</a></li>
-        <li><a href="#">Moringa Superfood</a></li>
-      </ul>
+    <!-- REMEDY 5 -->
+    <div class="remedy-card fade-up">
+      <div class="rem-num" style="background:linear-gradient(160deg,var(--rose-dark),#8a3850)">
+        <style>.rem-arr-5::after{border-left:10px solid #8a3850}</style>
+        <span class="rem-arr-5">05</span>
+      </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <div class="rem-title">Besan &amp; Curd Exfoliating Mask</div>
+          <span class="rem-tag" style="background:var(--rose-pale);color:var(--rose-dark)">Exfoliating</span>
+        </div>
+        <p class="rem-desc">Chickpea flour provides gentle mechanical exfoliation while curd delivers lactic acid — a natural AHA that dissolves bonds between dead skin cells, promotes renewal, and delivers immediate luminosity without disrupting pH.</p>
+        <div class="rem-ings">
+          <span class="ing-chip">2 tbsp Besan</span>
+          <span class="ing-chip">1 tbsp Fresh Curd</span>
+          <span class="ing-chip">Pinch Turmeric</span>
+          <span class="ing-chip">Few drops Lemon</span>
+        </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <div class="step-row"><div class="step-dot">1</div><span>Combine all to a smooth paste.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Apply and allow to dry 12–15 minutes. Remove when semi-dry.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>Massage gently in circles while removing — this is the exfoliation.</span></div>
+          <div class="step-row"><div class="step-dot">4</div><span>Use once a week. Follow with aloe or rice water toner.</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="footer__col">
-      <h4>Contact</h4>
-      <div class="contact-row"><span class="icon">📍</span><span>Based in India, sharing globally</span></div>
-      <div class="contact-row"><span class="icon">✉️</span><span>hello@naturellebloom.in</span></div>
-      <div class="contact-row"><span class="icon">📱</span><span>DM us on Instagram</span></div>
-      <br>
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="#">About the Blog</a></li>
-        <li><a href="#">Disclaimer</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Write for Us</a></li>
-      </ul>
+    <!-- REMEDY 6 -->
+    <div class="remedy-card fade-up">
+      <div class="rem-num" style="background:linear-gradient(160deg,var(--accent),#2a6aaa)">
+        <style>.rem-arr-6::after{border-left:10px solid #2a6aaa}</style>
+        <span class="rem-arr-6">06</span>
+      </div>
+      <div class="rem-body">
+        <div class="rem-head">
+          <div class="rem-title">Ice Cube Facial (Cryotherapy)</div>
+          <span class="rem-tag" style="background:var(--accent-pale);color:var(--accent-dark)">Pore-Minimising</span>
+        </div>
+        <p class="rem-desc">Controlled cold application constricts blood vessels, instantly tightening pores and smoothing surface texture. Regular use boosts microcirculation, reduces puffiness, and diminishes hyperpigmentation through reduced local inflammation.</p>
+        <div class="rem-ings">
+          <span class="ing-chip">Ice Cubes</span>
+          <span class="ing-chip">Optional: Green Tea Ice</span>
+          <span class="ing-chip">Optional: Rose Water Ice</span>
+        </div>
+        <button class="rem-toggle" onclick="toggleSteps(this)">How to Make &amp; Use &#8594;</button>
+        <div class="steps-panel">
+          <div class="step-row"><div class="step-dot">1</div><span>Wrap an ice cube in a soft muslin cloth. Never apply ice directly to bare skin.</span></div>
+          <div class="step-row"><div class="step-dot">2</div><span>Glide in gentle circular motions for 1–2 minutes maximum.</span></div>
+          <div class="step-row"><div class="step-dot">3</div><span>For enhanced effect: freeze green tea, aloe juice, or rose water into cubes.</span></div>
+          <div class="step-row"><div class="step-dot">4</div><span>Use every morning before other skincare — products absorb more effectively after.</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SECTION 4 — SCIENTIFIC REASON
+     EDIT: each sci-card — name, mechanism label, text, result
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-science">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:#6a4ab8">4</span>
+    <span class="sec-eye-text" style="color:#3d1a8e">The Science Behind It</span>
+  </div>
+  <h2 class="sec-title">Scientific Reasons <em>These Work</em></h2>
+  <p class="sec-lead">Every ingredient operates through a documented biological pathway. Understanding the mechanism keeps you consistent — because you know exactly what is happening beneath the surface.</p>
+
+  <div class="science-box">
+    <h5>🔬 What glass skin biologically requires</h5>
+    <p>Three conditions must coexist: a smooth, even surface that scatters minimal light; adequate hydration in both the epidermis and dermis; and uniform melanin distribution that prevents patches. The remedies below address all three simultaneously through complementary pathways.</p>
+  </div>
+
+  <div class="sci-grid">
+
+    <!-- EDIT each sci-card independently -->
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:#4a7a40">RW</span>
+        <span class="sci-name">Rice Water</span>
+      </div>
+      <span class="sci-mechanism">Inositol &amp; Ferulic Acid Pathway</span>
+      <p class="sci-text">Inositol (a cyclitol carbohydrate) penetrates the stratum corneum and restructures damaged cell membranes from within. Ferulic acid is a UV-reactive antioxidant that neutralises free radicals by donating hydrogen atoms to interrupt chain reactions that degrade collagen and cause hyperpigmentation.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Measurably smoother surface within 2–4 weeks of daily application.</span>
+      </div>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:#2e8060">AV</span>
+        <span class="sci-name">Aloe Vera</span>
+      </div>
+      <span class="sci-mechanism">Mucopolysaccharide Hydration Loop</span>
+      <p class="sci-text">Mucopolysaccharides form hygroscopic chains within the skin matrix, actively pulling moisture from the dermis upward to the epidermis. Simultaneously, gibberellins bind to growth factor receptors on fibroblasts, stimulating collagen type I synthesis — the protein responsible for firmness and elasticity.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Plumping effect that fills surface micro-irregularities, improving light reflection.</span>
+      </div>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:#c8900a">TU</span>
+        <span class="sci-name">Turmeric</span>
+      </div>
+      <span class="sci-mechanism">Tyrosinase Competitive Inhibition</span>
+      <p class="sci-text">Curcumin binds to the copper-containing active site of tyrosinase — the enzyme that catalyses the conversion of tyrosine to melanin — blocking melanin synthesis at source rather than bleaching after the fact. This is categorically different from chemical whitening agents that damage existing melanocytes.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Reduced new pigmentation formation; existing spots gradually fade over 4–6 weeks.</span>
+      </div>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:var(--rose-dark)">LC</span>
+        <span class="sci-name">Lactic Acid (Curd)</span>
+      </div>
+      <span class="sci-mechanism">Desmosomal Bond Dissolution</span>
+      <p class="sci-text">Lactic acid (alpha-hydroxy acid, AHA) dissolves desmosomes — the protein bridges that anchor dead corneocytes to the skin surface — without physical abrasion. Unlike scrubbing, chemical exfoliation releases cells in an orderly sheet, exposing the fresher translucent cell layer beneath while preserving the acid mantle at pH 5.0.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Immediate luminosity improvement; measurable increase in light reflectance within 1 use.</span>
+      </div>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:var(--accent)">IC</span>
+        <span class="sci-name">Ice Cryotherapy</span>
+      </div>
+      <span class="sci-mechanism">Vasomotor Pump Effect</span>
+      <p class="sci-text">Cold-induced vasoconstriction (narrowing) followed by vasodilation (rebound widening) creates a vascular pump that flushes metabolic waste and delivers fresh oxygenated blood to the dermis. This "microcirculation exercise" is cumulative — regular sessions measurably improve skin tone uniformity by improving oxygen saturation in the tissue.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Reduced puffiness, tighter pores, improved product absorption — immediate and cumulative.</span>
+      </div>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-card-head">
+        <span class="sci-num" style="background:#c89020">HN</span>
+        <span class="sci-name">Raw Honey</span>
+      </div>
+      <span class="sci-mechanism">Hygroscopic Humectant + AHA</span>
+      <p class="sci-text">Honey's high fructose and glucose content creates intense osmotic pressure on the skin surface, drawing atmospheric moisture into the stratum corneum (hygroscopic effect). Gluconic acid (a mild AHA naturally present) simultaneously provides gentle exfoliation. Hydrogen peroxide is released slowly, providing low-level antimicrobial action without disruption.</p>
+      <div class="sci-result">
+        <span class="sci-result-label">Result</span>
+        <span class="sci-result-val">Simultaneous hydration, gentle exfoliation, and bacteria reduction in a single ingredient.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SECTION 5 — HOW THEY HELP
+     EDIT: each help-row — dot initials + colour, h4 title, p text, benefit chips
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-how">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:var(--gold)">5</span>
+    <span class="sec-eye-text" style="color:#7a5500">Skin Transformation</span>
+  </div>
+  <h2 class="sec-title">How They <em>Transform</em> Your Skin</h2>
+  <p class="sec-lead">Each remedy targets a specific skin layer. Understanding the cascade — from surface to dermis — makes the routine feel purposeful rather than routine.</p>
+
+  <div class="help-timeline">
+
+    <!-- EDIT each help-row: dot colour, initials, heading, explanation, benefit chips -->
+    <div class="help-row">
+      <div class="h-dot-col"><div class="h-dot" style="background:linear-gradient(135deg,#4a7a40,#2e5a28)">RW</div></div>
+      <div class="h-body">
+        <h4>Rice Water — Surface Smoothing &amp; Antioxidant Defence</h4>
+        <p>Inositol restructures damaged cell membranes from within the stratum corneum while ferulic acid creates a persistent antioxidant shield at the skin surface. The combined effect is a measurably smoother, more uniform texture — the literal surface prerequisite for light-reflective glass skin — within 2–4 weeks of daily use. Allantoin additionally accelerates epidermal cell turnover, constantly refreshing the surface layer.</p>
+        <div class="benefit-chips">
+          <span class="bc-chip" style="background:#eaf5e8;color:#2e6b32">Smoothing</span>
+          <span class="bc-chip" style="background:#eaf5e8;color:#2e6b32">Cell Turnover</span>
+          <span class="bc-chip" style="background:#eaf5e8;color:#2e6b32">UV Repair</span>
+          <span class="bc-chip" style="background:#eaf5e8;color:#2e6b32">Antioxidant Shield</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-row">
+      <div class="h-dot-col"><div class="h-dot" style="background:linear-gradient(135deg,#2e8060,#1a5c45)">AV</div></div>
+      <div class="h-body">
+        <h4>Aloe Vera — Deep Cellular Hydration &amp; Structural Repair</h4>
+        <p>Mucopolysaccharides pull moisture from deeper dermis layers upward to the dehydrated epidermis, creating a plumping effect that physically fills in fine surface irregularities. Gibberellins simultaneously stimulate fibroblasts to produce collagen type I — the structural protein responsible for that firm, taut bounce that distinguishes glass skin from merely "moisturised" skin. Acemannan polysaccharides calm inflammatory signals that cause redness and uneven tone.</p>
+        <div class="benefit-chips">
+          <span class="bc-chip" style="background:#e0f4ec;color:#1a5c45">Deep Hydration</span>
+          <span class="bc-chip" style="background:#e0f4ec;color:#1a5c45">Collagen Boost</span>
+          <span class="bc-chip" style="background:#e0f4ec;color:#1a5c45">Plumping</span>
+          <span class="bc-chip" style="background:#e0f4ec;color:#1a5c45">Anti-Inflammatory</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-row">
+      <div class="h-dot-col"><div class="h-dot" style="background:linear-gradient(135deg,#c8900a,#a07008)">TS</div></div>
+      <div class="h-body">
+        <h4>Turmeric &amp; Sandalwood — Melanin Regulation &amp; Even Tone</h4>
+        <p>Curcumin's tyrosinase inhibition directly reduces new melanin formation, gradually evening out accumulated pigmentation. Sandalwood's alpha-santalol modulates the inflammatory response responsible for post-inflammatory hyperpigmentation (PIH) — the darkening that follows breakouts or skin irritation. Over weeks, existing patches fade as the skin naturally turns over, replacing pigmented cells with uniformly-toned new cells. The cumulative result is dramatically improved tone uniformity — the second prerequisite for glass skin.</p>
+        <div class="benefit-chips">
+          <span class="bc-chip" style="background:var(--gold-pale);color:#7a5500">Melanin Control</span>
+          <span class="bc-chip" style="background:var(--gold-pale);color:#7a5500">Even Tone</span>
+          <span class="bc-chip" style="background:var(--gold-pale);color:#7a5500">PIH Reduction</span>
+          <span class="bc-chip" style="background:var(--gold-pale);color:#7a5500">Luminosity</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-row">
+      <div class="h-dot-col"><div class="h-dot" style="background:linear-gradient(135deg,var(--rose-dark),#8a3850)">BC</div></div>
+      <div class="h-body">
+        <h4>Besan &amp; Curd — Ordered Exfoliation Without Barrier Damage</h4>
+        <p>Lactic acid's chemical action and besan's mechanical action work on two separate dead-cell removal mechanisms simultaneously. Chemical dissolution (lactic acid) handles the majority of cells without friction; mechanical polishing (besan) removes any remaining loose flakes. Unlike harsh chemical peels or abrasive scrubs, this dual-action method maintains the skin's acid mantle at its natural pH, meaning the barrier remains intact after exfoliation — you get the luminosity without the sensitivity or rebound oiliness.</p>
+        <div class="benefit-chips">
+          <span class="bc-chip" style="background:var(--rose-pale);color:var(--rose-dark)">Dual Exfoliation</span>
+          <span class="bc-chip" style="background:var(--rose-pale);color:var(--rose-dark)">pH Safe</span>
+          <span class="bc-chip" style="background:var(--rose-pale);color:var(--rose-dark)">Instant Glow</span>
+          <span class="bc-chip" style="background:var(--rose-pale);color:var(--rose-dark)">Cell Renewal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-row">
+      <div class="h-dot-col"><div class="h-dot" style="background:linear-gradient(135deg,var(--accent),#2a6aaa)">IC</div></div>
+      <div class="h-body">
+        <h4>Ice Facial — Vascular Toning &amp; Pore Refinement</h4>
+        <p>The vasomotor pump created by cold application is the single fastest way to improve skin microcirculation without any active ingredient. Improved circulation means better oxygenation, faster waste removal, and more efficient delivery of the nutrients from the other remedies in your routine. The immediate pore-tightening effect also means serums and toners applied afterward penetrate more efficiently rather than sitting on the surface — amplifying the effectiveness of every subsequent step.</p>
+        <div class="benefit-chips">
+          <span class="bc-chip" style="background:var(--accent-pale);color:var(--accent-dark)">Pore Tightening</span>
+          <span class="bc-chip" style="background:var(--accent-pale);color:var(--accent-dark)">Circulation</span>
+          <span class="bc-chip" style="background:var(--accent-pale);color:var(--accent-dark)">De-Puffing</span>
+          <span class="bc-chip" style="background:var(--accent-pale);color:var(--accent-dark)">Product Absorption</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SECTION 6 — DAILY ROUTINE
+     EDIT: rt-dot labels, rt-time, rt-label for each step
+     EDIT: the weekly-box paragraph
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-routine">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:var(--rose)">6</span>
+    <span class="sec-eye-text" style="color:var(--rose-dark)">Your Action Plan</span>
+  </div>
+  <h2 class="sec-title">The Glass Skin <em>Daily Routine</em></h2>
+  <p class="sec-lead">Consistency beats intensity every time. Use this layered framework to build the remedies above into a sustainable daily practice that takes less than 10 minutes.</p>
+
+  <div class="routine-box">
+    <!-- EDIT: the 5 steps of the daily routine timeline -->
+    <div class="routine-timeline">
+      <div class="rt-step">
+        <div class="rt-dot">AM</div>
+        <div class="rt-time">6–7 am</div>
+        <div class="rt-label">Ice Cube Facial</div>
+      </div>
+      <div class="rt-step">
+        <div class="rt-dot" style="background:var(--sage)">C</div>
+        <div class="rt-time">After Ice</div>
+        <div class="rt-label">Gentle Cleanse</div>
+      </div>
+      <div class="rt-step">
+        <div class="rt-dot" style="background:#2e8060">T</div>
+        <div class="rt-time">Toning</div>
+        <div class="rt-label">Rice Water Toner</div>
+      </div>
+      <div class="rt-step">
+        <div class="rt-dot" style="background:var(--gold)">S</div>
+        <div class="rt-time">Serum</div>
+        <div class="rt-label">Aloe Vera Gel</div>
+      </div>
+      <div class="rt-step">
+        <div class="rt-dot" style="background:var(--bark-light)">SPF</div>
+        <div class="rt-time">Final Step</div>
+        <div class="rt-label">Sunscreen — always</div>
+      </div>
     </div>
   </div>
 
-  <div class="footer__bottom">
-    <span>© 2026 <a href="#">Naturelle Bloom</a> • All rights reserved • Made with 🌿 and love</span>
-    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <!-- EDIT: weekly additions paragraph -->
+  <div class="weekly-box">
+    <p><strong style="font-family:var(--ff)">Weekly additions:</strong> Turmeric &amp; Sandalwood pack on Tuesday and Friday evenings. Replace regular cleanser with Besan &amp; Curd mask once a week (Sunday). Use Honey &amp; Rose Water serum on alternate nights in place of aloe gel.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     SECTION 7 — PRO TIPS
+     EDIT: each tip-card — bold heading + body text
+════════════════════════ -->
+<section class="art-section fade-up" id="sec-tips">
+  <div class="sec-eyebrow">
+    <span class="sec-chip" style="background:var(--bark-light)">7</span>
+    <span class="sec-eye-text" style="color:var(--bark)">Expert Advice</span>
+  </div>
+  <h2 class="sec-title">Pro Tips &amp; <em>Common Mistakes</em></h2>
+  <p class="sec-lead">Small details make the difference between seeing results in 2 weeks versus 2 months. These are the things most guides do not tell you.</p>
+
+  <div class="tips-grid">
+
+    <!-- EDIT each tip: bold title + description text -->
+    <div class="tip-card">
+      <div class="tip-dot" style="background:var(--rose)"></div>
+      <p class="tip-text"><strong>Always apply on damp skin.</strong> Rice water toner and aloe gel absorb 40% more effectively when applied while skin is still slightly damp from cleansing. Pat skin with a cloth but do not fully dry before applying.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-dot" style="background:var(--accent)"></div>
+      <p class="tip-text"><strong>Never skip sunscreen.</strong> All brightening remedies — turmeric, rice water, lemon — make skin more photosensitive. Without SPF 30+ your morning routine is actively undone by afternoon UV exposure.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-dot" style="background:var(--sage)"></div>
+      <p class="tip-text"><strong>Ferment your rice water.</strong> Leaving strained rice water at room temperature for 24 hours before refrigerating creates fermented rice water with a lower pH (closer to skin's natural 5.5) and a higher concentration of active compounds.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-dot" style="background:var(--gold)"></div>
+      <p class="tip-text"><strong>Drink your way to glass skin too.</strong> Topical hydration has a ceiling — internal hydration is what truly fills skin cells. 8–10 glasses of water daily, plus one glass of rice water or green tea, dramatically accelerates visible results.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-dot" style="background:#c84040"></div>
+      <p class="tip-text"><strong>Do not over-exfoliate.</strong> The besan-curd mask should be used once a week maximum. Over-exfoliation removes healthy cells, triggers inflammation, and causes the exact dullness and sensitivity you are trying to cure.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-dot" style="background:var(--bark-light)"></div>
+      <p class="tip-text"><strong>Patch test turmeric first.</strong> Despite being natural, a small number of people react to curcumin topically. Apply a small amount to the inner wrist for 24 hours before using on the face for the first time.</p>
+    </div>
+
+  </div>
+
+  <!-- ─── INGREDIENTS QUICK REFERENCE TABLE ─── -->
+  <div style="margin-top:2rem;overflow-x:auto">
+    <table class="ing-table">
+      <thead>
+        <tr>
+          <th>Ingredient</th>
+          <th>Key Active</th>
+          <th>Primary Benefit</th>
+          <th>Best For</th>
+          <th>Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- EDIT rows as needed for your topic -->
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:#4a7a40;vertical-align:middle;margin-right:6px">RW</span>Rice Water</td>
+          <td>Inositol, Ferulic Acid</td>
+          <td>Surface smoothing, antioxidant</td>
+          <td>All skin types</td>
+          <td>Daily toner</td>
+        </tr>
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:#2e8060;vertical-align:middle;margin-right:6px">AV</span>Aloe Vera</td>
+          <td>Mucopolysaccharides, Gibberellins</td>
+          <td>Deep hydration, collagen</td>
+          <td>Dry, dehydrated</td>
+          <td>Daily serum</td>
+        </tr>
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:#c8900a;vertical-align:middle;margin-right:6px">TU</span>Turmeric</td>
+          <td>Curcumin</td>
+          <td>Melanin inhibition, glow</td>
+          <td>Dull, uneven tone</td>
+          <td>2–3x / week</td>
+        </tr>
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:var(--rose-dark);vertical-align:middle;margin-right:6px">BE</span>Besan + Curd</td>
+          <td>Lactic Acid (AHA)</td>
+          <td>Chemical + physical exfoliation</td>
+          <td>Normal, oily</td>
+          <td>1x / week</td>
+        </tr>
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:#c89020;vertical-align:middle;margin-right:6px">HN</span>Raw Honey</td>
+          <td>Gluconic Acid, H₂O₂</td>
+          <td>Humectant, barrier repair</td>
+          <td>Dry, acne-prone</td>
+          <td>2–3x / week</td>
+        </tr>
+        <tr>
+          <td><span class="ing-swatch-sm" style="background:var(--accent);vertical-align:middle;margin-right:6px">IC</span>Ice</td>
+          <td>Cryotherapy</td>
+          <td>Pore tightening, circulation</td>
+          <td>All skin types</td>
+          <td>Daily AM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</article>
+
+<!-- ══════════════════════════════
+     SIDEBAR — EDIT related posts + stats
+══════════════════════════════ -->
+<aside class="sidebar">
+
+  <!-- TOC -->
+  <div class="sb-card">
+    <div class="sb-head" style="color:var(--bark)">In This Article</div>
+    <div class="sb-body">
+      <div class="toc-item" onclick="goTo('sec-lacks')"><span class="toc-n">01</span><span class="toc-text">What Skin Lacks</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-causes')"><span class="toc-n">02</span><span class="toc-text">Causes</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-remedies')"><span class="toc-n">03</span><span class="toc-text">6 Natural Remedies</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-science')"><span class="toc-n">04</span><span class="toc-text">Scientific Reason</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-how')"><span class="toc-n">05</span><span class="toc-text">How They Help</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-routine')"><span class="toc-n">06</span><span class="toc-text">Daily Routine</span><span class="toc-arr">&#8594;</span></div>
+      <div class="toc-item" onclick="goTo('sec-tips')"><span class="toc-n">07</span><span class="toc-text">Pro Tips &amp; Table</span><span class="toc-arr">&#8594;</span></div>
+    </div>
+  </div>
+
+  <!-- Quick Facts — EDIT values -->
+  <div class="sb-card">
+    <div class="sb-head" style="color:var(--rose-dark)">Quick Facts</div>
+    <div class="sb-body">
+      <div class="kstat"><div class="ks-dot" style="background:var(--accent)"></div><span class="ks-lbl">Visible results</span><span class="ks-val">2–4 wks</span></div>
+      <div class="kstat"><div class="ks-dot" style="background:var(--sage)"></div><span class="ks-lbl">Daily time needed</span><span class="ks-val">8 min</span></div>
+      <div class="kstat"><div class="ks-dot" style="background:var(--gold)"></div><span class="ks-lbl">Masks per week</span><span class="ks-val">3 sessions</span></div>
+      <div class="kstat"><div class="ks-dot" style="background:var(--rose)"></div><span class="ks-lbl">Monthly cost</span><span class="ks-val">Near zero</span></div>
+      <div class="kstat"><div class="ks-dot" style="background:#2e8060"></div><span class="ks-lbl">Suitable for</span><span class="ks-val">All skin types</span></div>
+    </div>
+  </div>
+
+  <!-- Related Posts — EDIT thumb colour, initials, title, meta -->
+  <div class="sb-card">
+    <div class="sb-head" style="color:var(--bark)">You Might Also Like</div>
+    <div class="sb-body">
+      <div class="rel-post">
+        <div class="rel-thumb" style="background:linear-gradient(135deg,#c0183a,#6a0020)">DS</div>
+        <div><div class="rel-title">Dark Spots Corrector — Natural Methods</div><div class="rel-meta">Face Care &bull; 7 min read</div></div>
+      </div>
+      <div class="rel-post">
+        <div class="rel-thumb" style="background:linear-gradient(135deg,var(--rose-dark),#7a2040)">HP</div>
+        <div><div class="rel-title">Hyperpigmentation: Causes &amp; Cures</div><div class="rel-meta">Brightening &bull; 6 min read</div></div>
+      </div>
+      <div class="rel-post">
+        <div class="rel-thumb" style="background:linear-gradient(135deg,#4a7a40,#2e5a28)">AV</div>
+        <div><div class="rel-title">Complete Aloe Vera Benefits Guide</div><div class="rel-meta">Ingredients &bull; 5 min read</div></div>
+      </div>
+      <div class="rel-post">
+        <div class="rel-thumb" style="background:linear-gradient(135deg,#c8900a,#8a6000)">TU</div>
+        <div><div class="rel-title">Turmeric Water — Morning Ritual for Glow</div><div class="rel-meta">Health Drinks &bull; 4 min read</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="nl-mini">
+    <h5>Get Weekly Tips</h5>
+    <p>New remedies, ingredient guides &amp; seasonal care routines — every week.</p>
+    <input type="email" placeholder="your@email.com" />
+    <button>Subscribe Free</button>
+  </div>
+
+</aside>
+</div><!-- end page-wrap -->
+
+<!-- ══════════════════════════════════════
+     ARTICLE FOOTER
+     EDIT: author bio, more articles
+══════════════════════════════════════ -->
+<div class="art-footer">
+
+  <!-- EDIT: author info -->
+  <div class="author-card fade-up">
+    <div class="author-ava">NB</div>
+    <div>
+      <div class="author-role">Written by</div>
+      <div class="author-name">Naturelle Bloom Editorial</div>
+      <p class="author-bio">Our editorial team researches traditional Ayurvedic practices and natural skincare science to bring you remedies that are both time-tested and mechanistically understood. Every recommendation is based on documented ingredients with clear, explainable benefits — no guesswork, no trends.</p>
+    </div>
+  </div>
+
+  <!-- EDIT: more article cards (3 cards) — visual bg, big text, title, category -->
+  <div class="more-eye fade-up">Continue Reading</div>
+  <div class="more-h fade-up">More from Face Care</div>
+  <div class="more-grid">
+
+    <div class="more-card fade-up">
+      <div class="more-visual" style="background:linear-gradient(135deg,#fdeee9,#f4d6c8)"><span class="big" style="color:var(--rose-dark)">MASK</span></div>
+      <div class="more-body"><h5>Top 10 Facial Masks for Radiant Skin</h5><span>Face Care &bull; 5 min</span></div>
+    </div>
+
+    <div class="more-card fade-up">
+      <div class="more-visual" style="background:linear-gradient(135deg,#eaf2eb,#c8e6c9)"><span class="big" style="color:#2e6b32">TONE</span></div>
+      <div class="more-body"><h5>Natural Toners That Balance Your Skin pH</h5><span>Face Care &bull; 4 min</span></div>
+    </div>
+
+    <div class="more-card fade-up">
+      <div class="more-visual" style="background:linear-gradient(135deg,var(--gold-pale),var(--gold-light))"><span class="big" style="color:#7a5500">GLOW</span></div>
+      <div class="more-body"><h5>Reduce Anti-Aging Signs with Kitchen Remedies</h5><span>Anti-Aging &bull; 8 min</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SITE FOOTER -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div>
+      <div class="sf-brand">Naturelle <span>Bloom</span></div>
+      <div class="sf-copy">&copy; 2026 Naturelle Bloom &bull; All rights reserved</div>
+    </div>
+    <div class="sf-links">
+      <a href="index.html">Home</a>
+      <a href="#">Face Care</a>
+      <a href="#">Exercise</a>
+      <a href="#">Health Drinks</a>
+      <a href="#">About</a>
+      <a href="#">Privacy Policy</a>
+    </div>
   </div>
 </footer>
 
 <script>
-  // ── Search overlay ──
-  function openSearch()  { document.getElementById('searchOverlay').classList.add('active'); }
-  function closeSearch() { document.getElementById('searchOverlay').classList.remove('active'); }
-
-  // ── Mobile menu ──
-  function openMobile()  { document.getElementById('mobileMenu').classList.add('active'); }
-  function closeMobile() { document.getElementById('mobileMenu').classList.remove('active'); }
-
-  // Close on Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeSearch(); closeMobile(); }
+  /* Reading progress */
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('progressBar').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+    updateActiveTabs();
   });
 
-  // ── Fade-in on scroll ──
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+  /* Active tab tracking */
+  const SEC_IDS = ['sec-lacks','sec-causes','sec-remedies','sec-science','sec-how','sec-routine','sec-tips'];
+  function updateActiveTabs() {
+    const tabs = document.querySelectorAll('.st-item');
+    let active = 0;
+    SEC_IDS.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 150) active = i;
     });
-  }, { threshold: 0.1 });
+    tabs.forEach((t, i) => t.classList.toggle('active', i === active));
+  }
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  /* Scroll to section */
+  function goTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
 
-  // ── Category pill filter ──
-  document.querySelectorAll('.cat-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-    });
-  });
+  /* Steps toggle */
+  function toggleSteps(btn) {
+    const panel = btn.nextElementSibling;
+    const open = panel.classList.toggle('open');
+    btn.innerHTML = open ? 'Hide Steps &#8593;' : 'How to Make &amp; Use &#8594;';
+  }
 
-  // ── Sidebar link active state ──
-  document.querySelectorAll('.sb-item').forEach(item => {
-    item.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    });
-  });
+  /* Fade-up observer */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

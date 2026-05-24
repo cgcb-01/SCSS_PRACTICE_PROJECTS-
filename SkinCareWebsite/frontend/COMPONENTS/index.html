@@ -64,7 +64,7 @@
     .btn-ghost { background: transparent; color: var(--rose); border-color: var(--rose); font-size: 0.78rem; padding: 0.5rem 1.2rem; }
     .btn-ghost:hover { background: var(--rose); color: var(--white); }
 
-    /* ── NAVBAR ── */
+    /* NAVBAR */
     .navbar {
       position: sticky; top: 0; z-index: 1000;
       background: rgba(253,246,238,0.96);
@@ -106,7 +106,7 @@
     .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); border-radius: 2px; transition: var(--trans-mid); }
 
-    /* ── DROPDOWN ── */
+    /* DROPDOWN */
     .dropdown {
       display:none;
       position: absolute; top: calc(100% + 8px); left: 50%;
@@ -128,7 +128,7 @@
       to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       position: relative; min-height: 88vh; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
@@ -187,7 +187,7 @@
       75%      { border-radius: 46% 54% 40% 60% / 56% 44% 56% 44%; }
     }
 
-    /* ── CATEGORY STRIP ── */
+    /* CATEGORY STRIP */
     .category-strip {
       background: var(--white); border-bottom: 1px solid var(--border);
       padding: 1rem 3rem;
@@ -206,13 +206,13 @@
     .cat-pill.body    { background: #f3eee8; color: var(--bark); border-color: var(--gold-light); }
     .cat-pill:hover, .cat-pill.active { filter: brightness(0.92); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
-    /* ── MAIN LAYOUT ── */
+    /* MAIN LAYOUT */
     .main-layout {
       max-width: 1400px; margin: 0 auto; padding: 4rem 3rem;
       display: flex; align-items: flex-start; gap: 4rem;
     }
 
-    /* ── SIDEBAR ── */
+    /* SIDEBAR */
     .sidebar {
       flex: 0 0 270px; position: sticky; top: 84px;
       max-height: calc(100vh - 100px); overflow-y: auto;
@@ -245,10 +245,10 @@
       color: var(--rose); padding-left: 0.9rem;
     }
 
-    /* ── CONTENT AREA ── */
+    /* CONTENT AREA */
     .content-area { flex: 1; min-width: 0; }
 
-    /* ── BLOG SECTION ── */
+    /* BLOG SECTION */
     .blog-section { margin-bottom: 4.5rem; }
     .blog-section__header {
       display: flex; align-items: center; justify-content: space-between;
@@ -259,7 +259,7 @@
     .view-all { font-size: 0.78rem; font-weight: 600; color: var(--rose); display: flex; align-items: center; gap: 4px; transition: var(--trans-fast); }
     .view-all:hover { gap: 8px; }
 
-    /* ── FEATURED CARD ── */
+    /* FEATURED CARD */
     .card-featured {
       display: flex; background: var(--white);
       border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
@@ -278,14 +278,117 @@
     .card-featured__body h3 { font-family: var(--font-display); font-size: 1.45rem; color: var(--bark); line-height: 1.25; }
     .card-featured__body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
 
-    /* ── GRID CARD ── */
+    /* ============================================================
+       IMAGELESS CARD — FACE CARE GRID
+    ============================================================ */
     .card-grid {
       background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
       overflow: hidden; transition: var(--trans-mid); cursor: pointer;
     }
     .card-grid:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
-    .card-grid__img { height: 185px; position: relative; overflow: hidden; }
-    .card-grid__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Visual banner replacing image */
+    .card-visual {
+      height: 150px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-visual-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px;
+    }
+    /* Mask card */
+    .cv-mask {
+      background: linear-gradient(135deg, #fdeee9 0%, #f4d6c8 50%, #fde8d8 100%);
+    }
+    .cv-mask::before {
+      content: '';
+      position: absolute; width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 18px solid rgba(212,107,170,0.18);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .cv-mask::after {
+      content: '';
+      position: absolute; width: 68px; height: 68px;
+      border-radius: 50%;
+      border: 10px solid rgba(212,107,170,0.28);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    /* Toner card */
+    .cv-toner {
+      background: linear-gradient(160deg, #e8f4f0 0%, #d0ede6 50%, #b8dfd4 100%);
+    }
+    .cv-toner-drops {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .cv-toner-drops span {
+      position: absolute;
+      width: 8px; height: 14px;
+      background: rgba(45,158,114,0.35);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+    /* Scrub card */
+    .cv-scrub {
+      background: linear-gradient(135deg, #faf3e6 0%, #f5e6ca 50%, #edddb0 100%);
+    }
+    .cv-scrub-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(201,169,110,0.5) 2px, transparent 2px);
+      background-size: 14px 14px;
+    }
+    /* Moisturizer */
+    .cv-moist {
+      background: linear-gradient(135deg, #fdf6ee 0%, #f9e8d6 50%, #f4d6c8 100%);
+    }
+    .cv-moist-wave {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+      background: rgba(212,107,170,0.12);
+      clip-path: ellipse(60% 60px at 50% 60px);
+    }
+    /* Under Eye */
+    .cv-eye {
+      background: linear-gradient(135deg, #f3effe 0%, #e6d9f5 50%, #d4c0ea 100%);
+    }
+    /* Sunscreen */
+    .cv-sun {
+      background: linear-gradient(135deg, #fffbe6 0%, #faf0b8 50%, #f5e390 100%);
+    }
+    .cv-sun-rays {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 80px; height: 80px;
+    }
+    .cv-sun-rays::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.35);
+    }
+    .cv-sun-rays::after {
+      content: '';
+      position: absolute; inset: 12px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.55);
+    }
+
+    .cv-label {
+      position: absolute; bottom: 10px; right: 10px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--bark); opacity: 0.5;
+      font-family: var(--font-display);
+    }
+    .cv-large-text {
+      font-family: var(--font-display);
+      font-size: 3.2rem; font-weight: 900;
+      line-height: 1; text-align: center;
+      letter-spacing: -0.02em;
+      position: relative; z-index: 2;
+    }
+    .cv-sub-text {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      position: relative; z-index: 2;
+    }
+
     .cat-dot { position: absolute; bottom: 8px; left: 8px; width: 10px; height: 10px; border-radius: 50%; }
     .cat-dot.face     { background: var(--rose); }
     .cat-dot.treats   { background: var(--gold); }
@@ -297,7 +400,7 @@
     .meta-sm { display: flex; align-items: center; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); }
     .meta-sm .tag { color: var(--rose); font-weight: 600; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* ── LIST CARD ── */
+    /* LIST CARD */
     .card-list { display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--trans-fast); }
     .card-list:hover { transform: translateX(4px); }
     .card-list:last-child { border-bottom: none; }
@@ -308,12 +411,12 @@
     .card-list__arr { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; flex-shrink: 0; transition: var(--trans-fast); }
     .card-list:hover .card-list__arr { color: var(--rose); }
 
-    /* ── GRIDS ── */
+    /* GRIDS */
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
     .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
 
-    /* ── INGREDIENT CARD ── */
+    /* INGREDIENT CARD */
     .ingredient-card {
       display: flex; flex-direction: column; align-items: center; text-align: center;
       padding: 0; background: var(--white);
@@ -329,7 +432,7 @@
     .ingredient-card p { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
     .ing-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); }
 
-    /* ── EXERCISE CARD ── */
+    /* EXERCISE CARD */
     .exercise-card {
       background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
       display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem;
@@ -344,18 +447,251 @@
     .ex-arrow { color: var(--sage); font-size: 0.9rem; transition: var(--trans-fast); }
     .exercise-card:hover .ex-arrow { transform: translateX(4px); }
 
-    /* ── DRINK CARD ── */
+    /* ============================================================
+       IMAGELESS SKIN CONCERN CARDS — NEW MAGAZINE STYLE
+    ============================================================ */
+    .concern-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .concern-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      padding: 2rem 1.4rem 1.6rem;
+      min-height: 200px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      transition: var(--trans-mid);
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .concern-card:last-child { border-right: none; }
+    .concern-card:hover { z-index: 2; }
+    .concern-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: inherit;
+      transition: transform 0.4s ease;
+    }
+    .concern-card:hover::before { transform: scale(1.04); }
+
+    .cc-dark-spots  { background: linear-gradient(160deg, #2d1b2e 0%, #5c2040 60%, #8b3358 100%); }
+    .cc-hyper       { background: linear-gradient(160deg, #1a2340 0%, #2c3e7a 60%, #4a5fad 100%); }
+    .cc-aging       { background: linear-gradient(160deg, #2e1a0e 0%, #5c3520 60%, #8b5e3c 100%); }
+    .cc-melanin     { background: linear-gradient(160deg, #0e2416 0%, #1a4a28 60%, #2d7a45 100%); }
+    .cc-glass       { background: linear-gradient(160deg, #1e1628 0%, #3d2a58 60%, #6b4e91 100%); }
+    .cc-underarm    { background: linear-gradient(160deg, #2e0e1a 0%, #5c1e38 60%, #91354f 100%); }
+    .cc-neck        { background: linear-gradient(160deg, #1a1200 0%, #3d2e00 60%, #7a5c00 100%); }
+    .cc-stretch     { background: linear-gradient(160deg, #0e1e2e 0%, #1a3a5c 60%, #2d6491 100%); }
+
+    .concern-card__decor {
+      position: absolute; top: 1rem; right: 1rem;
+      font-family: var(--font-display);
+      font-size: 3.5rem; font-weight: 900; line-height: 1;
+      opacity: 0.08; color: #fff;
+      letter-spacing: -0.03em;
+      user-select: none; z-index: 1;
+    }
+    .concern-card__num {
+      position: absolute; top: 1.2rem; left: 1.4rem;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      z-index: 2;
+    }
+    .concern-card__line {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; z-index: 2;
+      opacity: 0.7;
+    }
+    .cc-dark-spots .concern-card__line  { background: linear-gradient(90deg, #f4a4c8, #d46baa); }
+    .cc-hyper .concern-card__line       { background: linear-gradient(90deg, #9bbcf5, #5b8ee6); }
+    .cc-aging .concern-card__line       { background: linear-gradient(90deg, #f5d49b, #c9a96e); }
+    .cc-melanin .concern-card__line     { background: linear-gradient(90deg, #9be4b8, #2d9e72); }
+    .cc-glass .concern-card__line       { background: linear-gradient(90deg, #d4b8f5, #9d72d4); }
+    .cc-underarm .concern-card__line    { background: linear-gradient(90deg, #f5a4b8, #d46b7a); }
+    .cc-neck .concern-card__line        { background: linear-gradient(90deg, #f5e39b, #c9a900); }
+    .cc-stretch .concern-card__line     { background: linear-gradient(90deg, #9bcef5, #5ba8e6); }
+
+    .concern-card__content { position: relative; z-index: 2; }
+    .concern-card__title {
+      font-family: var(--font-display); font-size: 0.92rem; font-weight: 700;
+      color: #fff; line-height: 1.3; margin-bottom: 6px;
+    }
+    .concern-card__meta {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .concern-card__arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: #fff; font-size: 0.75rem; margin-top: 10px;
+      transition: var(--trans-fast);
+    }
+    .concern-card:hover .concern-card__arrow {
+      background: rgba(255,255,255,0.28);
+      transform: translateX(3px);
+    }
+
+    /* Second row — wider 2-col layout */
+    .concern-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      overflow: hidden;
+      margin-top: 0;
+      box-shadow: var(--shadow-md);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ============================================================
+       IMAGELESS SKIN TYPE CARDS
+    ============================================================ */
+    .skin-type-card {
+      padding: 0; border-radius: var(--radius-md); text-align: center;
+      transition: var(--trans-mid); cursor: pointer; border: 2px solid transparent;
+      overflow: hidden;
+    }
+    .skin-type-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--rose); }
+
+    .skin-visual {
+      width: 100%; height: 130px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Dry Skin visual — warm sandy texture */
+    .sv-dry {
+      background: linear-gradient(145deg, #faf3e6, #f5e4c8, #edddb0);
+    }
+    .sv-dry::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 40px 20px at 30% 40%, rgba(180,140,80,0.15) 0%, transparent 100%),
+        radial-gradient(ellipse 60px 30px at 70% 60%, rgba(180,140,80,0.1) 0%, transparent 100%);
+    }
+    .sv-dry-cracks {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(45deg, transparent 48%, rgba(180,140,80,0.18) 49%, transparent 50%),
+        linear-gradient(-45deg, transparent 48%, rgba(180,140,80,0.12) 49%, transparent 50%),
+        linear-gradient(90deg, transparent 68%, rgba(180,140,80,0.1) 69%, transparent 70%);
+      background-size: 28px 28px, 40px 40px, 60px 60px;
+    }
+
+    /* Oily Skin visual — glossy green tones */
+    .sv-oily {
+      background: linear-gradient(145deg, #eaf2eb, #d0e8d2, #b8ddb8);
+    }
+    .sv-oily::before {
+      content: '';
+      position: absolute; top: 15px; right: 20px;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
+    }
+    .sv-oily::after {
+      content: '';
+      position: absolute; bottom: 20px; left: 25px;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+    }
+
+    /* Acne visual — rose/coral tones */
+    .sv-acne {
+      background: linear-gradient(145deg, #fdeee9, #f9d5c8, #f4bca8);
+    }
+    .sv-acne-spots {
+      position: absolute; inset: 0;
+    }
+
+    /* Teens visual — soft blue-lavender */
+    .sv-teen {
+      background: linear-gradient(145deg, #eef2fc, #dce6fa, #c8d8f5);
+    }
+    .sv-teen::before {
+      content: '';
+      position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+      width: 70px; height: 70px; border-radius: 50%;
+      border: 3px solid rgba(90,140,220,0.25);
+    }
+    .sv-teen::after {
+      content: '';
+      position: absolute; top: 34px; left: 50%; transform: translateX(-50%);
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 3px solid rgba(90,140,220,0.18);
+    }
+
+    .skin-visual-label {
+      position: relative; z-index: 2;
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 900; line-height: 1;
+      opacity: 0.22; color: var(--bark);
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+
+    .skin-type-info { padding: 1.2rem 1.2rem 1.5rem; }
+    .skin-type-card .skin-dry  { background: #faf3e6; }
+    .skin-type-card .skin-oily  { background: #eaf2eb; }
+    .skin-type-card .skin-acne  { background: #fdeee9; }
+    .skin-type-teen { background: #e8f0fa; }
+
+    .skin-type-card h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--bark); margin-bottom: 4px; }
+    .skin-type-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ============================================================
+       IMAGELESS DRINK CARDS
+    ============================================================ */
     .drink-card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden; transition: var(--trans-mid); cursor: pointer; }
     .drink-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
     .drink-card__img { width: 100%; height: 120px; overflow: hidden; }
     .drink-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
     .drink-card:hover .drink-card__img img { transform: scale(1.05); }
+
+    /* Drink visual banner — no image */
+    .drink-visual {
+      width: 100%; height: 120px; overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dv-turmeric { background: linear-gradient(135deg, #fff3b0, #ffe066, #f5c518); }
+    .dv-neem     { background: linear-gradient(135deg, #d4edda, #8bc34a, #558b2f); }
+    .dv-moringa  { background: linear-gradient(135deg, #c8e6c9, #66bb6a, #2e7d32); }
+    .dv-methi    { background: linear-gradient(135deg, #dcedc8, #aed581, #689f38); }
+    .dv-beetroot { background: linear-gradient(135deg, #fce4ec, #e91e63, #880e4f); }
+    .dv-lemon    { background: linear-gradient(135deg, #fffde7, #fff176, #f9a825); }
+    .dv-blueberry{ background: linear-gradient(135deg, #e8eaf6, #7986cb, #3949ab); }
+    .dv-green    { background: linear-gradient(135deg, #f1f8e9, #aed581, #33691e); }
+    .dv-spearmint{ background: linear-gradient(135deg, #e0f7fa, #4dd0e1, #006064); }
+    .dv-turmilk  { background: linear-gradient(135deg, #fff8e1, #ffcc02, #e65100); }
+    .dv-coffee   { background: linear-gradient(135deg, #efebe9, #a1887f, #3e2723); }
+    .dv-ashwag   { background: linear-gradient(135deg, #f3e5f5, #ba68c8, #4a148c); }
+
+    .drink-visual-text {
+      position: relative; z-index: 2;
+      font-family: var(--font-display); font-size: 2.2rem; font-weight: 900;
+      line-height: 1; letter-spacing: -0.02em;
+      mix-blend-mode: overlay; color: #fff; opacity: 0.55;
+      user-select: none;
+    }
+    .drink-visual::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+      background: linear-gradient(to top, rgba(0,0,0,0.12), transparent);
+    }
+    /* wave bubbles */
+    .dv-bubble {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+    }
+
     .drink-card__top { padding: 0.8rem 1rem 0.5rem; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
     .drink-card__top h4 { font-family: var(--font-display); font-size: 0.88rem; color: var(--bark); line-height: 1.3; }
     .drink-card__bar { height: 4px; background: linear-gradient(90deg, var(--sage), #2d9e72); }
     .drink-card__body { padding: 0.5rem 0.9rem 1rem; font-size: 0.73rem; color: var(--text-muted); text-align: center; line-height: 1.5; }
 
-    /* ── CTA BANNER ── */
+    /* CTA BANNER */
     .cta-banner {
       background: linear-gradient(135deg, var(--bark) 0%, var(--rose-dark) 60%, var(--rose) 100%);
       border-radius: var(--radius-lg); padding: 4rem 3rem;
@@ -372,10 +708,10 @@
     .cta-banner__form input::placeholder { color: rgba(255,255,255,0.5); }
     .cta-banner__form input:focus { background: rgba(255,255,255,0.25); }
 
-    /* ── DIVIDER ── */
+    /* DIVIDER */
     .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     .footer { background: var(--bark); color: rgba(255,255,255,0.75); padding: 5rem 3rem 2rem; }
     .footer__top { max-width: 1400px; margin: 0 auto 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
     .footer__brand .brand-name { font-family: var(--font-display); font-size: 1.35rem; color: var(--white); margin-bottom: 0.8rem; }
@@ -395,7 +731,7 @@
     .back-top { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--trans-fast); font-size: 0.8rem; border: none; color: rgba(255,255,255,0.6); }
     .back-top:hover { background: var(--rose); color: var(--white); }
 
-    /* ── SEARCH OVERLAY ── */
+    /* SEARCH OVERLAY */
     .search-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(253,246,238,0.96); z-index: 2000;
@@ -408,7 +744,7 @@
     .close-search { position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--trans-fast); }
     .close-search:hover { color: var(--rose); }
 
-    /* ── MOBILE MENU ── */
+    /* MOBILE MENU */
     .mobile-menu {
       display: none; position: fixed; inset: 0; background: var(--cream);
       z-index: 1500; padding: 5rem 2rem 2rem; overflow-y: auto;
@@ -422,37 +758,23 @@
     .mobile-sub:hover { color: var(--rose); }
     .mobile-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); padding: 0.8rem 0 0.2rem; }
 
-    /* ── FADE IN UTILITY ── */
+    /* FADE IN */
     .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── SECTION COLOR ACCENTS ── */
+    /* ACCENTS */
     .accent-rose    { color: var(--rose); }
     .accent-sage    { color: var(--sage); }
     .accent-gold    { color: var(--gold); }
     .accent-green   { color: #2d7a5e; }
     .accent-bark    { color: var(--bark-light); }
 
-    /* ── SKIN TYPE CARDS ── */
-    .skin-type-card {
-      padding: 1.5rem; border-radius: var(--radius-md); text-align: center;
-      transition: var(--trans-mid); cursor: pointer; border: 2px solid transparent;
-      overflow: hidden;
-    }
-    .skin-type-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--rose); }
-    .skin-type-card__img { width: 100%; height: 100px; overflow: hidden; border-radius: var(--radius-sm); margin-bottom: 0.8rem; }
-    .skin-type-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .skin-type-card h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--bark); margin-bottom: 4px; }
-    .skin-type-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
-    .skin-dry    { background: #faf3e6; }
-    .skin-oily   { background: #eaf2eb; }
-    .skin-acne   { background: #fdeee9; }
-    .skin-teen   { background: #e8f0fa; }
-
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .footer__top { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+      .concern-grid { grid-template-columns: repeat(2, 1fr); }
+      .concern-grid-2 { grid-template-columns: repeat(2, 1fr); border-radius: var(--radius-md); margin-top: 1rem; }
     }
     @media (max-width: 900px) {
       .navbar { padding: 0 1.5rem; }
@@ -478,47 +800,192 @@
       .cta-banner { padding: 2.5rem 1.5rem; }
       .footer { padding: 3rem 1.5rem 1.5rem; }
       .footer__top { grid-template-columns: 1fr; gap: 1.5rem; }
+      .concern-grid, .concern-grid-2 { grid-template-columns: repeat(2, 1fr); }
     }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@600&family=Lato:wght@400;700&display=swap');
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cream:#fdf6ee;--blush:#f4d6c8;--rose:#d46baa;--rose-dark:#b8526a;
+    --sage:#7a9e7e;--bark:#5c2e32;--bark-light:#8b6355;--gold:#c9a96e;
+    --text:#250714;--muted:#8a6376;--white:#fff;--border:#e8d5c8;
+    --ff:'Playfair Display',Georgia,serif;--fb:'Lato',sans-serif;--fs:'Dancing Script',cursive;
+  }
+
+  /* ── SECTION HEADER ── */
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+  .sec-eye{font-family:var(--fb);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bark-light);margin-bottom:4px}
+  .sec-title{font-family:var(--fs);font-size:32px;color:var(--bark);line-height:1.1}
+  .view-all{font-family:var(--fb);font-size:12px;font-weight:700;color:var(--rose);text-decoration:none;display:flex;align-items:center;gap:4px}
+
+  /* ══════════════════════════════════════
+     SKIN TYPE CARDS  — radial progress style
+  ══════════════════════════════════════ */
+  .skin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:60px}
+
+  .scard{
+    background:var(--white);border-radius:18px;
+    border:1.5px solid var(--border);
+    overflow:hidden;cursor:pointer;
+    transition:transform .25s ease,box-shadow .25s ease;
+    font-family:var(--fb);
+  }
+  .scard:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(92,46,50,.18)}
+
+  .scard-top{
+    height:148px;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* arc SVG inside each card top */
+  .scard-top svg{position:absolute;inset:0;width:100%;height:100%}
+
+  .scard-center{
+    position:relative;z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    text-align:center;
+  }
+  .scard-icon{
+    width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;font-weight:900;
+    font-family:var(--ff);
+    line-height:1;
+  }
+  .scard-pct{font-size:11px;font-weight:700;letter-spacing:.08em}
+
+  .scard-body{padding:12px 14px 16px}
+  .scard-name{font-family:var(--ff);font-size:14px;font-weight:700;color:var(--bark);margin-bottom:4px}
+  .scard-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+  /* trait pills */
+  .scard-traits{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+  .trait{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+         padding:3px 8px;border-radius:99px}
+
+  /* per-type palette */
+  .scard-dry  .scard-top{background:#fdf8f0}
+  .scard-dry  .scard-icon{background:#f5e4c0;color:#8b6020}
+  .scard-dry  .scard-pct{color:#8b6020}
+  .scard-dry  .trait{background:#faf0da;color:#8b6020}
+
+  .scard-oily .scard-top{background:#eef6ef}
+  .scard-oily .scard-icon{background:#c8e6c9;color:#2e6b32}
+  .scard-oily .scard-pct{color:#2e6b32}
+  .scard-oily .trait{background:#e0f0e2;color:#2e6b32}
+
+  .scard-acne .scard-top{background:#fdf0f3}
+  .scard-acne .scard-icon{background:#f8d0da;color:#a02040}
+  .scard-acne .scard-pct{color:#a02040}
+  .scard-acne .trait{background:#fde0e8;color:#a02040}
+
+  .scard-teen .scard-top{background:#eef2fc}
+  .scard-teen .scard-icon{background:#c5d8f8;color:#1a4a9e}
+  .scard-teen .scard-pct{color:#1a4a9e}
+  .scard-teen .trait{background:#dce8fc;color:#1a4a9e}
+
+  /* ══════════════════════════════════════
+     HEALTH DRINKS  — radial wheel layout (UPDATED with working chart)
+  ══════════════════════════════════════ */
+  .drinks-wrap{position:relative}
+
+  /* sub-section labels */
+  .sub-eye{font-family:var(--fb);font-size:10px;font-weight:700;letter-spacing:.18em;
+           text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+
+  /* THE BIG WHEEL */
+  .wheel-layout{
+    display:flex;align-items:flex-start;gap:28px;
+    margin-bottom:36px;
+  }
+  .wheel-svg-wrap{flex:0 0 300px;position:relative}
+  .wheel-svg-wrap svg{display:block;width:300px;height:300px;border-radius:50%;box-shadow:var(--shadow-sm);background:var(--white);}
+
+  /* wheel legend beside it */
+  .wheel-legend{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .wleg-item{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 14px;border-radius:12px;
+    border:1.5px solid transparent;
+    cursor:pointer;transition:border-color .18s,background .18s;
+    background:var(--white);
+  }
+  .wleg-item:hover{background:#fdf6f8;border-color:var(--blush)}
+  .wleg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+  .wleg-name{font-family:var(--ff);font-size:13px;font-weight:700;color:var(--bark)}
+  .wleg-sub{font-family:var(--fb);font-size:10px;color:var(--muted);line-height:1.4;margin-top:1px}
+  .wleg-pct{font-family:var(--ff);font-size:16px;font-weight:700;margin-left:auto;flex-shrink:0}
+
+  /* bottom grid: juices + teas */
+  .drinks-bottom-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  }
+  .dgroup-head{font-family:var(--fb);font-size:10px;font-weight:700;letter-spacing:.15em;
+               text-transform:uppercase;margin-bottom:10px}
+
+  .dstrip{display:flex;flex-direction:column;gap:8px}
+
+  .drow{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 14px;border-radius:12px;
+    background:var(--white);border:1.5px solid var(--border);
+    cursor:pointer;transition:transform .18s,box-shadow .18s;
+  }
+  .drow:hover{transform:translateX(4px);box-shadow:0 4px 16px rgba(92,46,50,.1)}
+
+  .drow-swatch{
+    width:40px;height:40px;border-radius:10px;
+    flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--ff);font-size:13px;font-weight:900;color:#fff;
+    letter-spacing:-.02em;
+  }
+  .drow-body{flex:1}
+  .drow-name{font-family:var(--ff);font-size:13px;font-weight:700;color:var(--bark);line-height:1.2}
+  .drow-sub{font-family:var(--fb);font-size:10px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .drow-bar-wrap{width:48px;flex-shrink:0}
+  .drow-bar-bg{height:4px;border-radius:99px;background:var(--border);overflow:hidden}
+  .drow-bar-fill{height:4px;border-radius:99px;transition:width .4s ease}
+  .drow-label{font-size:10px;font-weight:700;text-align:right;margin-top:3px;font-family:var(--fb)}
   </style>
 </head>
 <body>
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
-  <button class="close-search" onclick="closeSearch()">✕</button>
-  <input type="text" placeholder="Search natural remedies, ingredients…" autofocus />
-  <p class="search-hint">Try: "Aloe Vera", "Belly fat exercises", "Green tea benefits"</p>
+  <button class="close-search" onclick="closeSearch()">&#x2715;</button>
+  <input type="text" placeholder="Search natural remedies, ingredients&hellip;" autofocus />
+  <p class="search-hint">Try: &ldquo;Aloe Vera&rdquo;, &ldquo;Belly fat exercises&rdquo;, &ldquo;Green tea benefits&rdquo;</p>
 </div>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <button class="mobile-close" onclick="closeMobile()">&#x2715;</button>
   <a href="#" class="mobile-nav-link">Home</a>
   <a href="#face-care" class="mobile-nav-link">Face Care</a>
   <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Masks &amp; Scrubs</a>
-  <a href="#" class="mobile-sub">• Brightening &amp; Glow</a>
-  <a href="#" class="mobile-sub">• Skin Problems</a>
-  <a href="#" class="mobile-sub">• Ingredients Spotlight</a>
-  <a href="#" class="mobile-sub">• Skin Types</a>
+  <a href="#" class="mobile-sub">&bull; Masks &amp; Scrubs</a>
+  <a href="#" class="mobile-sub">&bull; Brightening &amp; Glow</a>
+  <a href="#" class="mobile-sub">&bull; Skin Problems</a>
+  <a href="#" class="mobile-sub">&bull; Ingredients Spotlight</a>
+  <a href="#" class="mobile-sub">&bull; Skin Types</a>
   <a href="#exercise" class="mobile-nav-link">Exercise</a>
   <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Fat Reduction</a>
-  <a href="#" class="mobile-sub">• Posture &amp; Shape</a>
-  <a href="#" class="mobile-sub">• Overall Fitness</a>
+  <a href="#" class="mobile-sub">&bull; Fat Reduction</a>
+  <a href="#" class="mobile-sub">&bull; Posture &amp; Shape</a>
+  <a href="#" class="mobile-sub">&bull; Overall Fitness</a>
   <a href="#drinks" class="mobile-nav-link">Health Drinks</a>
   <div class="mobile-section-label">Sub-categories</div>
-  <a href="#" class="mobile-sub">• Herbal Waters</a>
-  <a href="#" class="mobile-sub">• Glow Juices</a>
-  <a href="#" class="mobile-sub">• Teas &amp; Infusions</a>
-  <a href="#" class="mobile-sub">• Superfoods</a>
+  <a href="#" class="mobile-sub">&bull; Herbal Waters</a>
+  <a href="#" class="mobile-sub">&bull; Glow Juices</a>
+  <a href="#" class="mobile-sub">&bull; Teas &amp; Infusions</a>
+  <a href="#" class="mobile-sub">&bull; Superfoods</a>
   <a href="#" class="mobile-nav-link">Contact</a>
 </div>
 
 <!-- NAVBAR -->
 <header class="navbar">
   <div class="navbar__logo">
-    <div class="logo-icon">🌿</div>
+    <div class="logo-icon">&#127807;</div>
     <div>
       <div class="logo-text">Naturelle <span>Bloom</span></div>
       <div class="logo-sub">Natural Body Care</div>
@@ -530,7 +997,7 @@
       <a href="#" class="nav-link active">Home</a>
     </div>
     <div class="nav-item">
-      <a href="#face-care" class="nav-link">Face Care <span class="arr">▼</span></a>
+      <a href="#face-care" class="nav-link">Face Care <span class="arr">&#9660;</span></a>
       <div class="dropdown">
         <div class="dropdown-section">DIY for Beautiful Skin</div>
         <a href="#" class="dropdown-link">Top 10 Facial Masks</a>
@@ -549,7 +1016,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#exercise" class="nav-link">Exercise <span class="arr">▼</span></a>
+      <a href="#exercise" class="nav-link">Exercise <span class="arr">&#9660;</span></a>
       <div class="dropdown">
         <div class="dropdown-section">Fat Reduction</div>
         <a href="#" class="dropdown-link">Reduce Belly Fat</a>
@@ -566,7 +1033,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#drinks" class="nav-link">Glow Drinks with Ayurveda <span class="arr">▼</span></a>
+      <a href="#drinks" class="nav-link">Glow Drinks with Ayurveda <span class="arr">&#9660;</span></a>
       <div class="dropdown">
         <div class="dropdown-section">Ayurvedic Herbal Waters</div>
         <a href="#" class="dropdown-link">Turmeric Water</a>
@@ -591,8 +1058,8 @@
   </nav>
 
   <div class="navbar__actions">
-    <button class="search-btn" onclick="openSearch()" title="Search">🔍</button>
-    <a href="#" class="btn btn-primary">Subscribe 🌿</a>
+    <button class="search-btn" onclick="openSearch()" title="Search">&#128269;</button>
+    <a href="#" class="btn btn-primary">Subscribe</a>
     <button class="hamburger" onclick="openMobile()">
       <span></span><span></span><span></span>
     </button>
@@ -611,11 +1078,11 @@
   <div class="hero__content">
     <div class="hero__text">
       <div class="hero-eyebrow">
-        <span class="leaf">🌿</span>
-        <span>100% Natural • Holistic Beauty</span>
+        <span class="leaf">&#127807;</span>
+        <span>100% Natural &bull; Holistic Beauty</span>
       </div>
       <h1>Glow From<br><em>Within</em><br>Naturally</h1>
-      <p class="hero-sub">Discover time-tested, nature-powered secrets for radiant skin, a healthy body, and glowing wellness — no chemicals, just pure goodness from your kitchen.</p>
+      <p class="hero-sub">Discover time-tested, nature-powered secrets for radiant skin, a healthy body, and glowing wellness &mdash; no chemicals, just pure goodness from your kitchen.</p>
       <div class="hero-ctas">
         <a href="#face-care" class="btn btn-primary">Explore Remedies</a>
         <a href="#" class="btn btn-outline">About the Blog</a>
@@ -638,11 +1105,10 @@
 
     <div class="hero__visual">
       <div class="hero-img-frame">
-        <!-- HERO IMAGE: Replace src with your image path e.g. src="images/hero-main.jpg" -->
-        <img src="img2.jpeg" alt="Natural body care — pure and radiant" />
+        <img src="img2.jpeg" alt="Natural body care &mdash; pure and radiant" />
       </div>
       <div class="hero-badge hero-badge-1">
-        <span class="badge-icon">🍋</span>
+        <span class="badge-icon">&#127819;</span>
         <div>
           <div style="font-weight:700;color:var(--bark);font-size:0.8rem">Ayurvedic Remedies</div>
           <div style="font-size:0.68rem;color:var(--text-muted)">100% Natural</div>
@@ -658,11 +1124,11 @@
 
 <!-- Category Strip -->
 <div class="category-strip">
-  <span class="cat-pill face active">🌸 Face Care</span>
-  <span class="cat-pill treats">🌿 Natural Ingredients</span>
-  <span class="cat-pill body">💁‍♀️ Skin Concerns</span>
-  <span class="cat-pill exercise">💪 Exercise</span>
-  <span class="cat-pill drinks">🍵 Health Drinks</span>
+  <span class="cat-pill face active">Face Care</span>
+  <span class="cat-pill treats">Natural Ingredients</span>
+  <span class="cat-pill body">Skin Concerns</span>
+  <span class="cat-pill exercise">Exercise</span>
+  <span class="cat-pill drinks">Health Drinks</span>
 </div>
 
 <!-- MAIN LAYOUT -->
@@ -671,7 +1137,7 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar__section">
-      <div class="sidebar__title face">🌸 Face Care</div>
+      <div class="sidebar__title face">Face Care</div>
       <div class="sb-subsection">Masks &amp; Scrubs</div>
       <a class="sb-item active" href="#">Top 10 Facial Masks</a>
       <a class="sb-item" href="#">Top 10 Face Toners</a>
@@ -731,7 +1197,7 @@
     </div>
 
     <div class="sidebar__section">
-      <div class="sidebar__title exercise">💪 Exercise</div>
+      <div class="sidebar__title exercise">Exercise</div>
       <div class="sb-subsection">Fat Reduction</div>
       <a class="sb-item" href="#">Reduce Belly Fat</a>
       <a class="sb-item" href="#">Reduce Thigh Fat</a>
@@ -750,7 +1216,7 @@
     </div>
 
     <div class="sidebar__section">
-      <div class="sidebar__title drinks">🍵 Health Drinks</div>
+      <div class="sidebar__title drinks">Health Drinks</div>
       <div class="sb-subsection">Herbal Waters</div>
       <a class="sb-item" href="#">Turmeric Water</a>
       <a class="sb-item" href="#">Neem Water</a>
@@ -778,52 +1244,170 @@
   <!-- CONTENT AREA -->
   <main class="content-area">
 
-    <!-- Featured Post -->
+    <!-- ============================================================
+         1. Featured Post
+    ============================================================ -->
     <div class="blog-section fade-in">
       <div class="blog-section__header">
         <div class="section-left">
-          <div class="eyebrow">⭐ Editor's Pick</div>
+          <div class="eyebrow">Editor&rsquo;s Pick</div>
           <h2>Start Your Glow Journey</h2>
         </div>
-        <a href="#" class="view-all">View All →</a>
+        <a href="#" class="view-all">View All &rarr;</a>
       </div>
 
       <div class="card-featured">
         <div class="card-featured__img">
-          <!-- FEATURED POST IMAGE: Replace src with your image path e.g. src="images/featured-facial-masks.jpg" -->
           <img src="img3.jpeg" alt="Top 10 Facial Masks Guide" />
           <span class="cat-tag">Face Care</span>
         </div>
         <div class="card-featured__body">
           <div class="meta">
-            <span>🌿 Natural Remedies</span>
+            <span>Natural Remedies</span>
             <span class="dot"></span>
             <span>8 min read</span>
           </div>
           <h3>Top 10 Facial Masks You Can Make at Home</h3>
           <p>From brightening turmeric packs to deep-cleansing clay masks, discover how everyday kitchen ingredients transform your skin without a single harsh chemical. These time-tested recipes have been used for generations for good reason.</p>
-          <a href="#" class="btn btn-ghost">Read More →</a>
+          <a href="#" class="btn btn-ghost">Read More &rarr;</a>
         </div>
       </div>
     </div>
 
-    <!-- Face Care Grid -->
+    <!-- ============================================================
+         2. SKIN CONCERNS — moved here, redesigned magazine style
+    ============================================================ -->
+    <section class="blog-section fade-in">
+      <div class="blog-section__header">
+        <div class="section-left">
+          <div class="eyebrow accent-rose">Skin Concerns</div>
+          <h2>Brightening &amp; Correcting</h2>
+        </div>
+        <a href="#" class="view-all">All Concerns &rarr;</a>
+      </div>
+
+      <!-- Row 1: 4 cards -->
+      <div class="concern-grid">
+
+        <div class="concern-card cc-dark-spots">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">01</div>
+          <div class="concern-card__decor">DS</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Dark Spots Corrector &mdash; Natural Methods That Work</div>
+            <div class="concern-card__meta">Skin Correcting &bull; 7 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-hyper">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">02</div>
+          <div class="concern-card__decor">HP</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Hyperpigmentation: Causes &amp; Natural Cures</div>
+            <div class="concern-card__meta">Brightening &bull; 6 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-aging">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">03</div>
+          <div class="concern-card__decor">AA</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Best Practice to Reduce Anti-Aging Signs</div>
+            <div class="concern-card__meta">Anti-Aging &bull; 8 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-melanin">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">04</div>
+          <div class="concern-card__decor">ML</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Best Known Remedies to Reduce Melanin</div>
+            <div class="concern-card__meta">Brightening &bull; 5 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 2: 4 cards -->
+      <div class="concern-grid-2">
+
+        <div class="concern-card cc-glass">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">05</div>
+          <div class="concern-card__decor">GS</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Best Way to Get Glass Skin &mdash; The Complete Guide</div>
+            <div class="concern-card__meta">Glass Skin &bull; 9 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-underarm">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">06</div>
+          <div class="concern-card__decor">UA</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Top Ways to Lighten Underarms Naturally</div>
+            <div class="concern-card__meta">Body Care &bull; 5 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-neck">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">07</div>
+          <div class="concern-card__decor">NP</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Best Way to Remove Neck Pigmentation</div>
+            <div class="concern-card__meta">Pigmentation &bull; 6 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+        <div class="concern-card cc-stretch">
+          <div class="concern-card__line"></div>
+          <div class="concern-card__num">08</div>
+          <div class="concern-card__decor">SM</div>
+          <div class="concern-card__content">
+            <div class="concern-card__title">Best Way to Reduce Stretch Marks Naturally</div>
+            <div class="concern-card__meta">Skin Repair &bull; 5 min read</div>
+            <div class="concern-card__arrow">&rarr;</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. Face Care Grid — image-free visual banners
+    ============================================================ -->
     <section id="face-care" class="blog-section fade-in">
       <div class="blog-section__header">
         <div class="section-left">
-          <div class="eyebrow accent-rose">🌸 Face Care</div>
+          <div class="eyebrow accent-rose">Face Care</div>
           <h2>Masks, Toners &amp; Scrubs</h2>
         </div>
-        <a href="#" class="view-all">See All 53 Articles →</a>
+        <a href="#" class="view-all">See All 53 Articles &rarr;</a>
       </div>
       <div class="grid-3">
 
+        <!-- Facial Masks -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/facial-mask.jpg" -->
-            <img src="images/facial-mask.jpg" alt="Facial Mask" />
+          <div class="card-visual cv-mask">
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:var(--rose-dark);opacity:0.55">MASK</div>
+              <div class="cv-sub-text" style="color:var(--rose-dark);opacity:0.45">Facial &bull; Deep Cleanse</div>
+            </div>
             <div class="cat-dot face"></div>
             <div class="num-badge">#1</div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
             <h4>Top 10 Facial Masks for Radiant Skin</h4>
@@ -831,12 +1415,24 @@
           </div>
         </div>
 
+        <!-- Face Toner -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/face-toner.jpg" -->
-            <img src="images/face-toner.jpg" alt="Face Toner" />
+          <div class="card-visual cv-toner">
+            <div class="cv-toner-drops">
+              <span style="top:18%;left:20%;transform:rotate(-15deg);width:7px;height:12px"></span>
+              <span style="top:30%;left:55%;transform:rotate(10deg);width:9px;height:16px"></span>
+              <span style="top:55%;left:35%;transform:rotate(-5deg);width:6px;height:11px"></span>
+              <span style="top:65%;left:70%;transform:rotate(20deg);width:8px;height:14px"></span>
+              <span style="top:40%;left:80%;transform:rotate(-25deg);width:5px;height:10px"></span>
+              <span style="top:75%;left:15%;transform:rotate(15deg);width:7px;height:13px"></span>
+            </div>
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:#1a5c45;opacity:0.4">TONE</div>
+              <div class="cv-sub-text" style="color:#1a5c45;opacity:0.4">Balance &bull; Refresh</div>
+            </div>
             <div class="cat-dot face"></div>
             <div class="num-badge">#2</div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
             <h4>Top 10 Natural Face Toners That Balance pH</h4>
@@ -844,12 +1440,17 @@
           </div>
         </div>
 
+        <!-- Natural Scrub -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/natural-scrub.jpg" -->
-            <img src="images/natural-scrub.jpg" alt="Natural Scrub" />
+          <div class="card-visual cv-scrub">
+            <div class="cv-scrub-dots"></div>
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:#7a5520;opacity:0.5">SCRUB</div>
+              <div class="cv-sub-text" style="color:#7a5520;opacity:0.45">Exfoliate &bull; Smooth</div>
+            </div>
             <div class="cat-dot face"></div>
             <div class="num-badge">#3</div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
             <h4>Top 10 Facial Natural Scrubs for Smooth Skin</h4>
@@ -857,23 +1458,32 @@
           </div>
         </div>
 
+        <!-- Moisturizer -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/facial-moisturizer.jpg" -->
-            <img src="images/facial-moisturizer.jpg" alt="Facial Moisturizer" />
+          <div class="card-visual cv-moist">
+            <div class="cv-moist-wave"></div>
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:var(--bark);opacity:0.35">MOIST</div>
+              <div class="cv-sub-text" style="color:var(--bark);opacity:0.35">Hydrate &bull; Nourish</div>
+            </div>
             <div class="cat-dot face"></div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
-            <h4>Top 10 Facial Moisturizers — Natural Options</h4>
+            <h4>Top 10 Facial Moisturizers &mdash; Natural Options</h4>
             <div class="meta-sm"><span>5 min read</span><span class="tag">Moisture</span></div>
           </div>
         </div>
 
+        <!-- Under Eye -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/under-eye-care.jpg" -->
-            <img src="images/under-eye-care.jpg" alt="Under Eye Care" />
+          <div class="card-visual cv-eye">
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:#5c2e78;opacity:0.4">EYE</div>
+              <div class="cv-sub-text" style="color:#5c2e78;opacity:0.38">Brighten &bull; Depuff</div>
+            </div>
             <div class="cat-dot face"></div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
             <h4>Natural Remedies for Under Eye Darkness</h4>
@@ -881,11 +1491,16 @@
           </div>
         </div>
 
+        <!-- Sunscreen -->
         <div class="card-grid">
-          <div class="card-grid__img">
-            <!-- CARD IMAGE: Replace src e.g. src="images/sunscreen.jpg" -->
-            <img src="images/sunscreen.jpg" alt="Sunscreen" />
+          <div class="card-visual cv-sun">
+            <div class="cv-sun-rays"></div>
+            <div class="card-visual-inner">
+              <div class="cv-large-text" style="color:#7a5500;opacity:0.5">SPF</div>
+              <div class="cv-sub-text" style="color:#7a5500;opacity:0.45">Protect &bull; Shield</div>
+            </div>
             <div class="cat-dot face"></div>
+            <div class="cv-label">Face Care</div>
           </div>
           <div class="card-grid__body">
             <h4>Importance of Sunscreen in Your Daily Routine</h4>
@@ -896,46 +1511,39 @@
       </div>
     </section>
 
-    <!-- Natural Ingredients Spotlight -->
+    <!-- ============================================================
+         4. Natural Ingredients Spotlight (images kept)
+    ============================================================ -->
     <section class="blog-section fade-in">
       <div class="blog-section__header">
         <div class="section-left">
-          <div class="eyebrow accent-gold">🌿 Ingredients Spotlight</div>
-          <h2>Nature's Best Kept Secrets</h2>
+          <div class="eyebrow accent-gold">Ingredients Spotlight</div>
+          <h2>Nature&rsquo;s Best Kept Secrets</h2>
         </div>
-        <a href="#" class="view-all">All Ingredients →</a>
+        <a href="#" class="view-all">All Ingredients &rarr;</a>
       </div>
       <div class="grid-4">
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/aloe-vera.jpg" -->
-            <img src="aloe.png" alt="Aloe Vera" />
-          </div>
+          <div class="ingredient-card__img"><img src="aloe.png" alt="Aloe Vera" /></div>
           <div class="ingredient-card__info">
             <h4>Aloe Vera</h4>
             <p>Soothing, hydrating &amp; healing for all skin types</p>
-            <div class="ing-tag">Face • Body</div>
+            <div class="ing-tag">Face &bull; Body</div>
           </div>
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/rose-water.jpg" -->
-            <img src="rosew.png" alt="Rose Water" />
-          </div>
+          <div class="ingredient-card__img"><img src="rosew.png" alt="Rose Water" /></div>
           <div class="ingredient-card__info">
             <h4>Rose Water</h4>
             <p>Natural toner with anti-inflammatory properties</p>
-            <div class="ing-tag">Toner • Mist</div>
+            <div class="ing-tag">Toner &bull; Mist</div>
           </div>
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/lemon.jpg" -->
-            <img src="lemon.png" alt="Lemon" />
-          </div>
+          <div class="ingredient-card__img"><img src="lemon.png" alt="Lemon" /></div>
           <div class="ingredient-card__info">
             <h4>Lemon</h4>
             <p>Natural brightener rich in Vitamin C for glow</p>
@@ -944,34 +1552,25 @@
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/neem.jpg" -->
-            <img src="neem.png" alt="Neem" />
-          </div>
+          <div class="ingredient-card__img"><img src="neem.png" alt="Neem" /></div>
           <div class="ingredient-card__info">
             <h4>Neem</h4>
             <p>Powerful antibacterial for acne-free clear skin</p>
-            <div class="ing-tag">Acne • Purify</div>
+            <div class="ing-tag">Acne &bull; Purify</div>
           </div>
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/castor-oil.jpg" -->
-            <img src="castor.png" alt="Castor Oil" />
-          </div>
+          <div class="ingredient-card__img"><img src="castor.png" alt="Castor Oil" /></div>
           <div class="ingredient-card__info">
             <h4>Castor Oil</h4>
             <p>Deep nourishing oil for skin, hair &amp; lashes</p>
-            <div class="ing-tag">Oil • Nourish</div>
+            <div class="ing-tag">Oil &bull; Nourish</div>
           </div>
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/tomato.jpg" -->
-            <img src="tomato.png" alt="Tomato" />
-          </div>
+          <div class="ingredient-card__img"><img src="tomato.png" alt="Tomato" /></div>
           <div class="ingredient-card__info">
             <h4>Tomato</h4>
             <p>Natural astringent that minimises pores &amp; brightens</p>
@@ -980,151 +1579,78 @@
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/multani-mitti.jpg" -->
-            <img src="multani.png" alt="Multani Mitti" />
-          </div>
+          <div class="ingredient-card__img"><img src="multani.png" alt="Multani Mitti" /></div>
           <div class="ingredient-card__info">
             <h4>Multani Mitti</h4>
-            <p>Fuller's earth for oil control &amp; deep cleanse</p>
-            <div class="ing-tag">Clay • Detox</div>
+            <p>Fuller&rsquo;s earth for oil control &amp; deep cleanse</p>
+            <div class="ing-tag">Clay &bull; Detox</div>
           </div>
         </div>
 
         <div class="ingredient-card">
-          <div class="ingredient-card__img">
-            <!-- INGREDIENT IMAGE: Replace src e.g. src="images/sandalwood.jpg" -->
-            <img src="sandal.png" alt="Sandalwood" />
-          </div>
+          <div class="ingredient-card__img"><img src="sandal.png" alt="Sandalwood" /></div>
           <div class="ingredient-card__info">
             <h4>Sandalwood</h4>
             <p>Ancient remedy for glowing, even-toned skin</p>
-            <div class="ing-tag">Glow • Even</div>
+            <div class="ing-tag">Glow &bull; Even</div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Skin Concerns Section -->
+    <!-- ============================================================
+         5. Skin Type Cards — image-free CSS visuals
+    ============================================================ -->
     <section class="blog-section fade-in">
       <div class="blog-section__header">
         <div class="section-left">
-          <div class="eyebrow accent-rose"> Skin Concerns</div>
-          <h2>Brightening &amp; Correcting</h2>
-        </div>
-        <a href="#" class="view-all">All Concerns →</a>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">01</div>
-        <div class="card-list__body">
-          <h5>Dark Spots Corrector — Natural Methods That Work</h5>
-          <span>Skin Correcting • 7 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">02</div>
-        <div class="card-list__body">
-          <h5>Hyperpigmentation: Causes &amp; Natural Cures</h5>
-          <span>Brightening • 6 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">03</div>
-        <div class="card-list__body">
-          <h5>Best Practice to Reduce Anti-Aging Signs</h5>
-          <span>Anti-Aging • 8 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">04</div>
-        <div class="card-list__body">
-          <h5>Best Known Remedies to Reduce Melanin</h5>
-          <span>Brightening • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">05</div>
-        <div class="card-list__body">
-          <h5>Best Way to Get Glass Skin — The Complete Guide</h5>
-          <span>Glass Skin • 9 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">06</div>
-        <div class="card-list__body">
-          <h5>Top Ways to Lighten Underarms Naturally</h5>
-          <span>Body Care • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">07</div>
-        <div class="card-list__body">
-          <h5>Best Way to Remove Neck Pigmentation</h5>
-          <span>Pigmentation • 6 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-      <div class="card-list">
-        <div class="card-list__num">08</div>
-        <div class="card-list__body">
-          <h5>Best Way to Reduce Stretch Marks Naturally</h5>
-          <span>Skin Repair • 5 min read</span>
-        </div>
-        <span class="card-list__arr">→</span>
-      </div>
-    </section>
-
-    <!-- Skin Type Cards -->
-    <section class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-bark">🔬 By Skin Type</div>
+          <div class="eyebrow accent-bark">By Skin Type</div>
           <h2>Routines Made for You</h2>
         </div>
       </div>
       <div class="grid-4">
 
-        <div class="skin-type-card skin-dry">
-          <div class="skin-type-card__img">
-            <!-- SKIN TYPE IMAGE: Replace src e.g. src="images/dry-skin.jpg" -->
-            <img src="images/dry-skin.jpg" alt="Dry Skin" />
+        <div class="skin-type-card">
+          <div class="skin-visual sv-dry">
+            <div class="sv-dry-cracks"></div>
+            <div class="skin-visual-label">DRY</div>
           </div>
-          <h4>Dry Skin</h4>
-          <p>Best face packs &amp; deep hydration tips for dry skin</p>
+          <div class="skin-type-info" style="background:#faf3e6">
+            <h4>Dry Skin</h4>
+            <p>Best face packs &amp; deep hydration tips for dry skin</p>
+          </div>
         </div>
 
-        <div class="skin-type-card skin-oily">
-          <div class="skin-type-card__img">
-            <!-- SKIN TYPE IMAGE: Replace src e.g. src="images/oily-skin.jpg" -->
-            <img src="images/oily-skin.jpg" alt="Oily Skin" />
+        <div class="skin-type-card">
+          <div class="skin-visual sv-oily">
+            <div class="skin-visual-label">OILY</div>
           </div>
-          <h4>Oily Skin</h4>
-          <p>Oil-control routines using natural clays &amp; herbs</p>
+          <div class="skin-type-info" style="background:#eaf2eb">
+            <h4>Oily Skin</h4>
+            <p>Oil-control routines using natural clays &amp; herbs</p>
+          </div>
         </div>
 
-        <div class="skin-type-card skin-acne">
-          <div class="skin-type-card__img">
-            <!-- SKIN TYPE IMAGE: Replace src e.g. src="images/acne-skin.jpg" -->
-            <img src="images/acne-skin.jpg" alt="Acne Prone Skin" />
+        <div class="skin-type-card">
+          <div class="skin-visual sv-acne" style="position:relative">
+            <div class="sv-acne-spots" id="acneSpots"></div>
+            <div class="skin-visual-label">ACNE</div>
           </div>
-          <h4>Acne-Prone</h4>
-          <p>Gentle, antibacterial natural remedies for clear skin</p>
+          <div class="skin-type-info" style="background:#fdeee9">
+            <h4>Acne-Prone</h4>
+            <p>Gentle, antibacterial natural remedies for clear skin</p>
+          </div>
         </div>
 
-        <div class="skin-type-card skin-teen" style="background:#e8f0fa;">
-          <div class="skin-type-card__img">
-            <!-- SKIN TYPE IMAGE: Replace src e.g. src="images/teen-skin.jpg" -->
-            <img src="images/teen-skin.jpg" alt="Teen Skin" />
+        <div class="skin-type-card">
+          <div class="skin-visual sv-teen">
+            <div class="skin-visual-label">TEEN</div>
           </div>
-          <h4>Teens</h4>
-          <p>Safe, natural skincare routines for young skin</p>
+          <div class="skin-type-info" style="background:#e8f0fa">
+            <h4>Teens</h4>
+            <p>Safe, natural skincare routines for young skin</p>
+          </div>
         </div>
 
       </div>
@@ -1132,40 +1658,40 @@
 
     <hr class="divider">
 
-    <!-- Exercise Section -->
+    <!-- ============================================================
+         6. Exercise Section (images kept for exercise)
+    ============================================================ -->
     <section id="exercise" class="blog-section fade-in">
       <div class="blog-section__header">
         <div class="section-left">
-          <div class="eyebrow accent-sage">💪 Exercise</div>
+          <div class="eyebrow accent-sage">Exercise</div>
           <h2>Move, Tone &amp; Thrive</h2>
         </div>
-        <a href="#" class="view-all">All 12 Routines →</a>
+        <a href="#" class="view-all">All 12 Routines &rarr;</a>
       </div>
 
       <div class="grid-2" style="margin-bottom:1.2rem">
 
         <div class="card-featured" style="margin-bottom:0">
           <div class="card-featured__img" style="flex:0 0 40%">
-            <!-- EXERCISE FEATURED IMAGE: Replace src e.g. src="images/belly-fat-exercise.jpg" -->
             <img src="belly.png" alt="Belly Fat Exercise" style="min-height:200px" />
             <span class="cat-tag" style="background:var(--sage)">Exercise</span>
           </div>
           <div class="card-featured__body">
-            <div class="meta"><span>💪 Fat Reduction</span></div>
+            <div class="meta"><span>Fat Reduction</span></div>
             <h3 style="font-size:1.1rem">Best Exercises to Reduce Belly Fat</h3>
-            <p style="font-size:0.82rem">Targeted core workouts that burn visceral fat and flatten the stomach — no gym required.</p>
+            <p style="font-size:0.82rem">Targeted core workouts that burn visceral fat and flatten the stomach &mdash; no gym required.</p>
             <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
           </div>
         </div>
 
         <div class="card-featured" style="margin-bottom:0">
           <div class="card-featured__img" style="flex:0 0 40%">
-            <!-- EXERCISE FEATURED IMAGE: Replace src e.g. src="images/posture-exercise.jpg" -->
             <img src="hunch.png" alt="Posture Exercise" style="min-height:200px" />
             <span class="cat-tag" style="background:var(--sage)">Posture</span>
           </div>
           <div class="card-featured__body">
-            <div class="meta"><span>🧘 Shape &amp; Posture</span></div>
+            <div class="meta"><span>Shape &amp; Posture</span></div>
             <h3 style="font-size:1.1rem">Fix Your Hunch Back with These Exercises</h3>
             <p style="font-size:0.82rem">Daily stretches and strengthening moves to correct posture and open your chest naturally.</p>
             <a href="#" class="btn btn-sage" style="font-size:0.72rem;padding:0.4rem 1rem;margin-top:0.5rem">Read More</a>
@@ -1175,221 +1701,169 @@
       </div>
 
       <div class="grid-3">
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/thigh-fat.jpg" -->
-            <img src="images/thigh-fat.jpg" alt="Thigh Fat Exercise" />
-          </div>
+          <div class="ex-icon"><img src="images/thigh-fat.jpg" alt="Thigh Fat Exercise" /></div>
           <div class="ex-body"><h4>Reduce Thigh Fat</h4><p>Targeted leg exercises &amp; stretches</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/arm-fat.jpg" -->
-            <img src="images/arm-fat.jpg" alt="Arm Fat Exercise" />
-          </div>
+          <div class="ex-icon"><img src="images/arm-fat.jpg" alt="Arm Fat Exercise" /></div>
           <div class="ex-body"><h4>Slim Arm Fat</h4><p>Toning moves for upper arms</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/double-chin.jpg" -->
-            <img src="images/double-chin.jpg" alt="Double Chin Fix" />
-          </div>
+          <div class="ex-icon"><img src="images/double-chin.jpg" alt="Double Chin Fix" /></div>
           <div class="ex-body"><h4>Double Chin Fix</h4><p>Face &amp; neck exercises that work</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/stamina.jpg" -->
-            <img src="images/stamina.jpg" alt="Increase Stamina" />
-          </div>
+          <div class="ex-icon"><img src="images/stamina.jpg" alt="Increase Stamina" /></div>
           <div class="ex-body"><h4>Increase Stamina</h4><p>Build endurance step by step</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/slim-neck.jpg" -->
-            <img src="images/slim-neck.jpg" alt="Long Slim Neck" />
-          </div>
+          <div class="ex-icon"><img src="images/slim-neck.jpg" alt="Long Slim Neck" /></div>
           <div class="ex-body"><h4>Long Slim Neck</h4><p>Elongate &amp; tone neck muscles</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
         <div class="exercise-card">
-          <div class="ex-icon">
-            <!-- EXERCISE ICON IMAGE: Replace src e.g. src="images/collarbone.jpg" -->
-            <img src="images/collarbone.jpg" alt="Uplift Collarbone" />
-          </div>
+          <div class="ex-icon"><img src="images/collarbone.jpg" alt="Uplift Collarbone" /></div>
           <div class="ex-body"><h4>Uplift Collarbone</h4><p>Shoulder &amp; chest sculpting moves</p></div>
-          <span class="ex-arrow">→</span>
+          <span class="ex-arrow">&rarr;</span>
         </div>
-
       </div>
     </section>
 
     <hr class="divider">
 
-    <!-- Health Drinks -->
-    <section id="drinks" class="blog-section fade-in">
-      <div class="blog-section__header">
-        <div class="section-left">
-          <div class="eyebrow accent-green">🍵 Health Drinks</div>
-          <h2>Glow From the Inside</h2>
+    <!-- ============================================================
+         7. Health Drinks — image-free colour-coded visuals (FIXED)
+    ============================================================ -->
+    <div id="drinks">
+      <div class="sec-head" style="margin-bottom:22px">
+        <div>
+          <div class="sec-eye">Health Drinks</div>
+          <div class="sec-title">Glow From the Inside</div>
         </div>
-        <a href="#" class="view-all">All 16 Drinks →</a>
+        <a href="#" class="view-all">All 16 Drinks &rarr;</a>
       </div>
 
-      <!-- Herbal Waters -->
-      <div style="margin-bottom:1.4rem">
-        <div class="eyebrow" style="margin-bottom:0.8rem">🌿 Herbal Waters</div>
-        <div class="grid-4">
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/turmeric-water.jpg" -->
-              <img src="turjuice.png" alt="Turmeric Water" />
-            </div>
-            <div class="drink-card__top"><h4>Turmeric Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Anti-inflammatory powerhouse that boosts glow and fights acne from within</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/neem-water.jpg" -->
-              <img src="neem.png" alt="Neem Water" />
-            </div>
-            <div class="drink-card__top"><h4>Neem Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Purifying antibacterial drink for clearer, acne-free skin</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/moringa-water.jpg" -->
-              <img src="moringa.png" alt="Moringa Water" />
-            </div>
-            <div class="drink-card__top"><h4>Moringa Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Superfood packed with vitamins for radiant skin &amp; energy</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/methi-water.jpg" -->
-              <img src="methi.png" alt="Methi Water" />
-            </div>
-            <div class="drink-card__top"><h4>Methi Water</h4></div>
-            <div class="drink-card__bar"></div>
-            <div class="drink-card__body">Fenugreek-infused water for glowing skin and weight management</div>
-          </div>
-
+      <!-- WHEEL: Herbal Waters -->
+      <div class="sub-eye" style="color:#7a5500">Herbal Waters</div>
+      <div class="wheel-layout">
+        <div class="wheel-svg-wrap">
+          <svg viewBox="0 0 300 300" id="herbWheel" style="background:#fdf6ee; border-radius:50%; box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+            <!-- Chart will be drawn by JavaScript -->
+          </svg>
         </div>
+        <div class="wheel-legend" id="herbLegend"></div>
       </div>
 
-      <!-- Glow Juices -->
-      <div style="margin-bottom:1.4rem">
-        <div class="eyebrow" style="margin-bottom:0.8rem;color:#2d7a5e">🥤 Glow Juices</div>
-        <div class="grid-3">
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/beetroot-carrot-juice.jpg" -->
-              <img src="beetrootj.png" alt="Beetroot Carrot Juice" />
+      <!-- BOTTOM: Juices + Teas (unchanged) -->
+      <div class="drinks-bottom-grid">
+        <div>
+          <div class="dgroup-head" style="color:#7a2540">Glow Juices</div>
+          <div class="dstrip">
+            <div class="drow">
+              <div class="drow-swatch" style="background:#c0183a">BT</div>
+              <div class="drow-body">
+                <div class="drow-name">Beetroot &amp; Carrot</div>
+                <div class="drow-sub">Beta-carotene &bull; antioxidants &bull; glow</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:90%;background:#c0183a"></div></div>
+                <div class="drow-label" style="color:#c0183a">High</div>
+              </div>
             </div>
-            <div class="drink-card__top"><h4>Beetroot Carrot Glow Juice</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#d44444,#ff9000)"></div>
-            <div class="drink-card__body">Rich in beta-carotene &amp; antioxidants for vibrant, radiant skin</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/lemon-honey-water.jpg" -->
-              <img src="lemonW.png" alt="Lemon Honey Water" />
+            <div class="drow">
+              <div class="drow-swatch" style="background:#d4a200">LH</div>
+              <div class="drow-body">
+                <div class="drow-name">Lemon &amp; Honey</div>
+                <div class="drow-sub">Morning detox &bull; brightens complexion</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:75%;background:#d4a200"></div></div>
+                <div class="drow-label" style="color:#d4a200">Good</div>
+              </div>
             </div>
-            <div class="drink-card__top"><h4>Lemon &amp; Honey Water</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#f9a825)"></div>
-            <div class="drink-card__body">Morning detox that flushes toxins and brightens complexion</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/blueberry-drink.jpg" -->
-              <img src="blueberryJ.png" alt="Blueberry Drink" />
+            <div class="drow">
+              <div class="drow-swatch" style="background:#5040a8">BB</div>
+              <div class="drow-body">
+                <div class="drow-name">Blueberry Glow</div>
+                <div class="drow-sub">Free radical fighter &bull; anti-aging</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:82%;background:#5040a8"></div></div>
+                <div class="drow-label" style="color:#5040a8">High</div>
+              </div>
             </div>
-            <div class="drink-card__top"><h4>Blueberry Glow Drink</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5b2d8e,#2d7a5e)"></div>
-            <div class="drink-card__body">Antioxidant-rich berry drink that fights free radicals and aging</div>
           </div>
+        </div>
 
+        <div>
+          <div class="dgroup-head" style="color:#2e5a20">Teas &amp; Warm Drinks</div>
+          <div class="dstrip">
+            <div class="drow">
+              <div class="drow-swatch" style="background:#3a7a28">GT</div>
+              <div class="drow-body">
+                <div class="drow-name">Green Tea</div>
+                <div class="drow-sub">EGCG &bull; reduces inflammation &bull; glow</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:88%;background:#3a7a28"></div></div>
+                <div class="drow-label" style="color:#3a7a28">High</div>
+              </div>
+            </div>
+            <div class="drow">
+              <div class="drow-swatch" style="background:#007a68">SM</div>
+              <div class="drow-body">
+                <div class="drow-name">Spearmint Tea</div>
+                <div class="drow-sub">Hormonal balance &bull; reduces acne</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:78%;background:#007a68"></div></div>
+                <div class="drow-label" style="color:#007a68">Good</div>
+              </div>
+            </div>
+            <div class="drow">
+              <div class="drow-swatch" style="background:#c8800a">TM</div>
+              <div class="drow-body">
+                <div class="drow-name">Turmeric Milk</div>
+                <div class="drow-sub">Sleep &bull; skin repair &bull; anti-aging</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:85%;background:#c8800a"></div></div>
+                <div class="drow-label" style="color:#c8800a">High</div>
+              </div>
+            </div>
+            <div class="drow">
+              <div class="drow-swatch" style="background:#4a2a18">DC</div>
+              <div class="drow-body">
+                <div class="drow-name">Dark Coffee</div>
+                <div class="drow-sub">Cell renewal &bull; antioxidant boost</div>
+              </div>
+              <div class="drow-bar-wrap">
+                <div class="drow-bar-bg"><div class="drow-bar-fill" style="width:65%;background:#4a2a18"></div></div>
+                <div class="drow-label" style="color:#4a2a18">Mod</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Teas -->
-      <div>
-        <div class="eyebrow" style="margin-bottom:0.8rem;color:#3d6b41">☕ Teas &amp; Warm Drinks</div>
-        <div class="grid-4">
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/green-tea.jpg" -->
-              <img src="greentea.png" alt="Green Tea" />
-            </div>
-            <div class="drink-card__top"><h4>Green Tea</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#6ab04c,#2d7a5e)"></div>
-            <div class="drink-card__body">EGCG-rich tea that reduces inflammation &amp; promotes skin glow</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/spearmint-tea.jpg" -->
-              <img src="spearMintTea.png" alt="Spearmint Tea" />
-            </div>
-            <div class="drink-card__top"><h4>Spearmint Tea</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#2d9e72,#6ab04c)"></div>
-            <div class="drink-card__body">Hormonal balance tea — excellent for reducing acne naturally</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/turmeric-milk.jpg" -->
-              <img src="turmericMilk.png" alt="Turmeric Milk" />
-            </div>
-            <div class="drink-card__top"><h4>Turmeric Milk</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#f5e642,#c9a96e)"></div>
-            <div class="drink-card__body">Golden milk for deep sleep, skin repair and anti-aging benefits</div>
-          </div>
-
-          <div class="drink-card">
-            <div class="drink-card__img">
-              <!-- DRINK IMAGE: Replace src e.g. src="images/dark-coffee.jpg" -->
-              <img src="darkCoffee.png" alt="Dark Coffee" />
-            </div>
-            <div class="drink-card__top"><h4>Dark Coffee</h4></div>
-            <div class="drink-card__bar" style="background:linear-gradient(90deg,#5c3d2e,#8b6355)"></div>
-            <div class="drink-card__body">Antioxidant-rich coffee that boosts skin cell renewal when consumed right</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    <hr class="divider">
 
     <!-- CTA Banner -->
     <div class="cta-banner fade-in">
       <div class="cta-banner__text">
-        <div class="eyebrow">🌿 Stay Updated</div>
+        <div class="eyebrow">Stay Updated</div>
         <h2>Get Weekly Glow Tips</h2>
         <p>Join 5,000+ natural beauty lovers who get exclusive remedies, seasonal skin tips, and ingredient guides delivered to their inbox every week.</p>
       </div>
       <div class="cta-banner__form">
         <input type="email" placeholder="your@email.com" />
-        <button class="btn btn-primary" style="background:var(--gold);border-color:var(--gold);color:var(--bark)">Subscribe 🌸</button>
+        <button class="btn btn-primary" style="background:var(--gold);border-color:var(--gold);color:var(--bark)">Subscribe</button>
       </div>
     </div>
 
@@ -1403,10 +1877,10 @@
       <div class="brand-name">Naturelle <span>Bloom</span></div>
       <p>Your trusted guide to natural body care, holistic wellness, and kitchen-to-skin remedies. Real ingredients, real results, no harmful chemicals.</p>
       <div class="socials">
-        <a href="#" title="Pinterest">📌</a>
-        <a href="#" title="Instagram">📸</a>
-        <a href="#" title="YouTube">▶️</a>
-        <a href="#" title="Facebook">👍</a>
+        <a href="#" title="Pinterest">&#128204;</a>
+        <a href="#" title="Instagram">&#128247;</a>
+        <a href="#" title="YouTube">&#9654;&#65039;</a>
+        <a href="#" title="Facebook">&#128077;</a>
       </div>
     </div>
 
@@ -1440,9 +1914,9 @@
 
     <div class="footer__col">
       <h4>Contact</h4>
-      <div class="contact-row"><span class="icon">📍</span><span>Based in India, sharing globally</span></div>
-      <div class="contact-row"><span class="icon">✉️</span><span>hello@naturellebloom.in</span></div>
-      <div class="contact-row"><span class="icon">📱</span><span>DM us on Instagram</span></div>
+      <div class="contact-row"><span class="icon">&#128205;</span><span>Based in India, sharing globally</span></div>
+      <div class="contact-row"><span class="icon">&#9993;&#65039;</span><span>hello@naturellebloom.in</span></div>
+      <div class="contact-row"><span class="icon">&#128241;</span><span>DM us on Instagram</span></div>
       <br>
       <h4>Quick Links</h4>
       <ul>
@@ -1455,8 +1929,8 @@
   </div>
 
   <div class="footer__bottom">
-    <span>© 2026 <a href="#">Naturelle Bloom</a> • All rights reserved • Made with 🌿 and love</span>
-    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <span>&copy; 2026 <a href="#">Naturelle Bloom</a> &bull; All rights reserved &bull; Made with care</span>
+    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
   </div>
 </footer>
 
@@ -1478,7 +1952,6 @@
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   document.querySelectorAll('.cat-pill').forEach(pill => {
@@ -1495,6 +1968,167 @@
       item.classList.add('active');
     });
   });
+
+  /* Acne skin card — generate dot spots */
+  const acneEl = document.getElementById('acneSpots');
+  if (acneEl) {
+    const spots = [
+      {top:'22%',left:'28%',s:9},{top:'38%',left:'62%',s:7},{top:'55%',left:'20%',s:6},
+      {top:'68%',left:'50%',s:8},{top:'30%',left:'75%',s:6},{top:'50%',left:'40%',s:10},
+      {top:'72%',left:'78%',s:5},{top:'20%',left:'50%',s:7},{top:'60%',left:'82%',s:6}
+    ];
+    spots.forEach(sp => {
+      const d = document.createElement('div');
+      d.style.cssText = `position:absolute;top:${sp.top};left:${sp.left};width:${sp.s}px;height:${sp.s}px;border-radius:50%;background:rgba(180,80,80,0.3)`;
+      acneEl.appendChild(d);
+    });
+  }
+
+  /* Concern card subtle parallax on hover */
+  document.querySelectorAll('.concern-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 8;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * 8;
+      card.style.setProperty('--rx', y + 'deg');
+      card.style.setProperty('--ry', x + 'deg');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.removeProperty('--rx');
+      card.style.removeProperty('--ry');
+    });
+  });
+
+  // ========== FIXED HEALTH DRINKS PIE CHART (HERBAL WATERS) ==========
+  const herbalDrinks = [
+    { name: "Turmeric Water", value: 28, color: "#e6b422", description: "Anti-inflammatory & glow" },
+    { name: "Neem Water",    value: 18, color: "#5c9e5e", description: "Purifies blood & acne" },
+    { name: "Moringa Water", value: 22, color: "#7cb342", description: "Vitamins & youthful skin" },
+    { name: "Methi Water",   value: 15, color: "#b3863a", description: "Hormonal balance" },
+    { name: "Ashwagandha",   value: 10, color: "#9c6e4d", description: "Stress & skin repair" },
+    { name: "Fennel & Cumin",value: 7,  color: "#c2b280", description: "Detox & digestion" }
+  ];
+
+  function drawHerbalWheel() {
+    const svg = document.getElementById('herbWheel');
+    if (!svg) return;
+    svg.innerHTML = ''; // clear previous
+    const radius = 140;
+    const center = 150;
+    let startAngle = -90; // start from top
+    const total = herbalDrinks.reduce((sum, d) => sum + d.value, 0);
+
+    herbalDrinks.forEach((item, idx) => {
+      const angle = (item.value / total) * 360;
+      const endAngle = startAngle + angle;
+      const largeArc = angle > 180 ? 1 : 0;
+      
+      const radStart = (startAngle * Math.PI) / 180;
+      const radEnd = (endAngle * Math.PI) / 180;
+      const x1 = center + radius * Math.cos(radStart);
+      const y1 = center + radius * Math.sin(radStart);
+      const x2 = center + radius * Math.cos(radEnd);
+      const y2 = center + radius * Math.sin(radEnd);
+      
+      const pathData = [
+        `M ${center} ${center}`,
+        `L ${x1} ${y1}`,
+        `A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`,
+        'Z'
+      ].join(' ');
+      
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", pathData);
+      path.setAttribute("fill", item.color);
+      path.setAttribute("stroke", "#fff");
+      path.setAttribute("stroke-width", "2");
+      path.setAttribute("data-name", item.name);
+      path.style.cursor = "pointer";
+      path.style.transition = "opacity 0.2s";
+      path.addEventListener("mouseenter", () => {
+        path.setAttribute("opacity", "0.85");
+      });
+      path.addEventListener("mouseleave", () => {
+        path.setAttribute("opacity", "1");
+      });
+      svg.appendChild(path);
+      
+      startAngle = endAngle;
+    });
+
+    // add central circle for donut effect
+    const innerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    innerCircle.setAttribute("cx", center);
+    innerCircle.setAttribute("cy", center);
+    innerCircle.setAttribute("r", "55");
+    innerCircle.setAttribute("fill", "#fdf6ee");
+    innerCircle.setAttribute("stroke", "#e8d5c8");
+    innerCircle.setAttribute("stroke-width", "1.5");
+    svg.appendChild(innerCircle);
+
+    const centerText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    centerText.setAttribute("x", center);
+    centerText.setAttribute("y", center-5);
+    centerText.setAttribute("text-anchor", "middle");
+    centerText.setAttribute("font-family", "'Playfair Display', Georgia");
+    centerText.setAttribute("font-size", "20");
+    centerText.setAttribute("font-weight", "700");
+    centerText.setAttribute("fill", "#5c2e32");
+    centerText.textContent = "6";
+    svg.appendChild(centerText);
+    
+    const subText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    subText.setAttribute("x", center);
+    subText.setAttribute("y", center+15);
+    subText.setAttribute("text-anchor", "middle");
+    subText.setAttribute("font-family", "'Lato', sans-serif");
+    subText.setAttribute("font-size", "10");
+    subText.setAttribute("fill", "#8a6376");
+    subText.setAttribute("letter-spacing", "1");
+    subText.textContent = "DRINKS";
+    svg.appendChild(subText);
+  }
+
+  function buildLegend() {
+    const legendDiv = document.getElementById('herbLegend');
+    if (!legendDiv) return;
+    legendDiv.innerHTML = '';
+    const total = herbalDrinks.reduce((sum, d) => sum + d.value, 0);
+    herbalDrinks.forEach(item => {
+      const percent = ((item.value / total) * 100).toFixed(1);
+      const legendItem = document.createElement('div');
+      legendItem.className = 'wleg-item';
+      legendItem.innerHTML = `
+        <div class="wleg-dot" style="background: ${item.color}; box-shadow:0 0 0 2px rgba(0,0,0,0.05);"></div>
+        <div style="flex:1">
+          <div class="wleg-name">${item.name}</div>
+          <div class="wleg-sub">${item.description}</div>
+        </div>
+      `;
+      legendItem.addEventListener('mouseenter', () => {
+        const paths = document.querySelectorAll('#herbWheel path');
+        paths.forEach((path, idx) => {
+          if (herbalDrinks[idx] && herbalDrinks[idx].name === item.name) {
+            path.setAttribute('opacity', '0.85');
+            path.setAttribute('stroke-width', '3');
+          } else {
+            path.setAttribute('opacity', '0.5');
+          }
+        });
+      });
+      legendItem.addEventListener('mouseleave', () => {
+        const paths = document.querySelectorAll('#herbWheel path');
+        paths.forEach(path => {
+          path.setAttribute('opacity', '1');
+          path.setAttribute('stroke-width', '2');
+        });
+      });
+      legendDiv.appendChild(legendItem);
+    });
+  }
+
+  drawHerbalWheel();
+  buildLegend();
 </script>
 </body>
 </html>
