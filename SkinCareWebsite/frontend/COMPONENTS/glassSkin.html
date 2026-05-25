@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Complete Guide to Glass Skin — Naturelle Bloom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:       #fdf8f2;
+      --blush:       #f2d5c4;
+      --rose:        #c85fa0;
+      --rose-dark:   #a3456a;
+      --rose-pale:   #fbedf5;
+      --sage:        #6a9470;
+      --sage-pale:   #eef5ef;
+      --bark:        #4a2428;
+      --bark-mid:    #7a4f44;
+      --bark-light:  #a07060;
+      --gold:        #b8913a;
+      --gold-light:  #e0c88a;
+      --gold-pale:   #faf5e8;
+      --text:        #2a0f18;
+      --text-muted:  #8a5e70;
+      --white:       #ffffff;
+      --surface:     #fff2e7;
+      --border:      #ead8cc;
+      --border-soft: #f0e4db;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-script:  'Dancing Script', cursive;
+      --font-body:    'Lato', sans-serif;
+
+      --shadow-xs: 0 1px 4px rgba(74,36,40,0.07);
+      --shadow-sm: 0 2px 10px rgba(74,36,40,0.09);
+      --shadow-md: 0 6px 24px rgba(74,36,40,0.12);
+
+      --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-pill: 999px;
+      --tr: all 0.22s ease;
+    }
+
+    /* DARK MODE OVERRIDES — minimal additions */
+    body.dark-mode {
+      --cream:       #0f0d0d;
+      --blush:       #1f1719;
+      --rose:        #e07bb8;
+      --rose-dark:   #c9639b;
+      --rose-pale:   #0b090a;
+      --sage:        #8bb591;
+      --sage-pale:   #1e2a1f;
+      --bark:        #f0d5ce;
+      --bark-mid:    #d6b2a6;
+      --bark-light:  #c09b8c;
+      --gold:        #dfb45c;
+      --gold-light:  #bf9a4a;
+      --gold-pale:   #2d2a1f;
+      --text:        #ffffff;
+      --text-muted:  #f9f4f6;
+      --white:       #2a2527;
+      --surface:     #151113;
+      --border:      #4a3a3e;
+      --border-soft: #3f3236;
+      --shadow-xs: 0 1px 4px rgba(0,0,0,0.4);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.5);
+      --shadow-md: 0 6px 24px rgba(0,0,0,0.6);
+    }
+
+    /* additional element overrides for dark mode */
+    body.dark-mode .post-hero {
+      background: linear-gradient(135deg, #2a2225 0%, #2c1e22 100%);
+    }
+    body.dark-mode .cause-box {
+      background: #141112;
+      border-color: var(--border);
+    }
+    body.dark-mode .cause-num {
+      background: #4e353c;
+      color: #e2c5c0;
+    }
+    body.dark-mode .receipe-card,
+    body.dark-mode .remedy-card {
+      background: #1e191b;
+      border-color: var(--border);
+    }
+    body.dark-mode .receipe-header {
+      background: #0f0d0e;
+    }
+    body.dark-mode .receipe-benefits {
+      background: #232826;
+    }
+    body.dark-mode .widget-btn {
+      background: #3a2e32;
+      border-color: #5f4a50;
+      color: #f0dbd5;
+    }
+    body.dark-mode .widget-btn.active,
+    body.dark-mode .widget-btn:hover {
+      background: var(--rose);
+      color: white;
+    }
+    body.dark-mode .toc-card {
+      background: #2a2225;
+    }
+    body.dark-mode .blockquote-callout {
+      background: #2d1f26;
+    }
+    body.dark-mode .footer {
+      background: #1e181a;
+    }
+    body.dark-mode .help-node {
+      background: #2a2225;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; transition: background 0.2s, color 0.2s; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(253,248,242,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 3rem; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    body.dark-mode .navbar {
+      background: rgba(30,26,28,0.97);
+    }
+    .navbar__logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--rose), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .logo-text { font-family: var(--font-display); font-size: 1.25rem; color: var(--bark); font-weight: 700; }
+    .logo-text span { font-family: var(--font-script); color: var(--rose); font-size: 1.5rem; }
+    .logo-sub { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    .navbar__nav { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link { font-size: 0.82rem; font-weight: 600; color: var(--text); transition: var(--tr); }
+    .nav-link:hover { color: var(--rose); }
+
+    /* dark mode toggle button */
+    .dark-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 0.3rem 0.7rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--tr);
+      color: var(--text-muted);
+      margin-left: 1rem;
+    }
+    .dark-toggle:hover {
+      background: var(--blush);
+      color: var(--bark);
+    }
+    body.dark-mode .dark-toggle:hover {
+      background: var(--rose-dark);
+      color: white;
+    }
+
+    /* HERO */
+    .post-hero { padding: 3.5rem 3rem 2rem; background: linear-gradient(135deg, #fdf8f2 0%, #f8e8dc 100%); text-align: center; transition: background 0.2s; }
+    .post-category { display: inline-block; background: var(--white); border: 1px solid var(--border); color: var(--rose-dark); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 1.1rem; border-radius: var(--r-pill); margin-bottom: 1.3rem; }
+    .post-hero h1 { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 3rem); color: var(--bark); line-height: 1.2; max-width: 820px; margin: 0 auto 1.4rem; }
+    .post-hero h1 em { font-family: var(--font-script); color: var(--rose); font-style: normal; }
+    .post-meta-card { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.78rem; color: var(--text-muted); }
+    .author-img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--white); object-fit: cover; }
+    .author-name { font-weight: 700; color: var(--bark); }
+    .meta-dot { width: 3px; height: 3px; background: var(--border); border-radius: 50%; }
+
+    /* LAYOUT */
+    .article-layout { max-width: 1180px; margin: 0 auto; padding: 2.5rem 3rem 5rem; display: flex; gap: 3.5rem; }
+    .article-body { flex: 1; min-width: 0; }
+    .article-sidebar { flex: 0 0 220px; position: sticky; top: 90px; max-height: calc(100vh - 120px); }
+    .toc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 1.3rem; box-shadow: var(--shadow-xs); }
+    .toc-title { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.9rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border-soft); }
+    .toc-link { display: block; font-size: 0.8rem; color: var(--bark-light); padding: 0.35rem 0; transition: var(--tr); border-left: 2px solid transparent; padding-left: 4px; }
+    .toc-link:hover { color: var(--rose); padding-left: 8px; border-left-color: var(--blush); }
+
+    /* TYPOGRAPHY */
+    .article-body section { margin-bottom: 3rem; scroll-margin-top: 80px; }
+    .article-body p { font-size: 1.02rem; color: #3a1d28; line-height: 1.82; margin-bottom: 1.3rem; }
+    body.dark-mode .article-body p { color: #e2cfd0; }
+    .article-body p strong { color: var(--bark); }
+    .article-body h2 { font-family: var(--font-display); font-size: 1.65rem; color: var(--bark); margin-bottom: 1.1rem; display: flex; align-items: center; gap: 10px; }
+    .article-body h2::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+
+    /* BLOCKQUOTE */
+    .blockquote-callout { background: var(--rose-pale); border-left: 3px solid var(--rose); border-radius: 0 var(--r-md) var(--r-md) 0; padding: 1.2rem 1.5rem; margin: 1.8rem 0; }
+    .blockquote-callout p { margin-bottom: 0; font-style: italic; color: var(--rose-dark); font-size: 0.98rem; }
+
+    /* CAUSES */
+    .cause-box { background: var(--white); border-radius: var(--r-md); border: 1px solid var(--border-soft); overflow: hidden; margin-bottom: 0.9rem; display: flex; transition: var(--tr); }
+    .cause-box:hover { box-shadow: var(--shadow-sm); transform: translateX(3px); }
+    .cause-num { background: var(--blush); color: var(--bark); font-family: var(--font-display); font-size: 1.35rem; font-weight: 900; display: flex; align-items: center; justify-content: center; width: 54px; flex-shrink: 0; }
+    .cause-content { padding: 1rem 1.3rem; }
+    .cause-content h4 { font-family: var(--font-display); font-size: 1rem; color: var(--bark); margin-bottom: 0.25rem; }
+    .cause-content p { font-size: 0.87rem; margin-bottom: 0; line-height: 1.6; color: var(--text-muted); }
+
+    /* REMEDY CARD */
+    .remedy-card {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      border: 2px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--tr);
+    }
+    .remedy-header {
+      background: linear-gradient(110deg, #dcf4cf 0%, #f8dcd0 45%, #95f2ef 100%);
+      padding: 1.4rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    body.dark-mode .remedy-header {
+      background: linear-gradient(110deg, #2f4230 0%, #4a3535 45%, #2b5f5c 100%);
+    }
+    .remedy-header::before {
+      content: '';
+      position: absolute; right: -20px; top: -20px;
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, rgba(212,107,170,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .remedy-header::after {
+      content: '';
+      position: absolute; right: 30px; bottom: -30px;
+      width: 70px; height: 70px;
+      background: radial-gradient(circle, rgba(201,169,110,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .remedy-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--bark);
+      position: relative; z-index: 1;
+    }
+    .remedy-tag {
+      font-size: 0.62rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--rose-dark);
+      background: rgb(255, 213, 250);
+      padding: 0.25rem 0.8rem;
+      border-radius: var(--r-pill);
+      border: 1.5px solid rgba(206, 97, 162, 0.25);
+      position: relative; z-index: 1;
+      box-shadow: 0 1px 4px rgba(180,82,106,0.1);
+    }
+    .remedy-body {
+      padding: 2rem;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, var(--rose), var(--gold), transparent);
+      border-image-slice: 1;
+    }
+    .remedy-body > p {
+      font-size: 0.98rem; color: var(--text-muted);
+      margin-bottom: 1.8rem; line-height: 1.75;
+    }
+
+    /* RECIPE CARDS */
+    .receipe-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+      box-shadow: var(--shadow-xs);
+      transition: var(--tr);
+    }
+    .receipe-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .receipe-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.3rem 0.9rem 1rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-soft);
+      border-left: 4px solid var(--rose);
+    }
+    .receipe-header-left { display: flex; align-items: center; gap: 10px; }
+    .receipe-icon { font-size: 1.2rem; line-height: 1; }
+    .receipe-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--bark); }
+    .receipe-tag {
+      font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--rose-dark); background: var(--rose-pale);
+      padding: 0.2rem 0.65rem; border-radius: var(--r-pill);
+      border: 1px solid rgba(200,95,160,0.2); white-space: nowrap;
+    }
+    .receipe-body {
+      display: grid; grid-template-columns: 1.1fr 1fr;
+      gap: 0;
+    }
+    .receipe-recipe {
+      padding: 1.1rem 1.3rem;
+      border-right: 1px solid var(--border-soft);
+    }
+    .recipe-meta-strip {
+      display: flex; gap: 1rem; align-items: center;
+      padding-bottom: 0.7rem;
+      margin-bottom: 0.9rem;
+      border-bottom: 1px dashed var(--gold-light);
+    }
+    .rms { display: flex; flex-direction: column; }
+    .rms__val { font-size: 0.82rem; font-weight: 800; color: var(--bark); line-height: 1; }
+    .rms__lbl { font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-top: 2px; }
+    .col-label {
+      font-size: 0.58rem; font-weight: 900; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--bark-light);
+      margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px;
+    }
+    .col-label::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+    .ingredient-row { display: flex; gap: 8px; align-items: baseline; padding: 0.3rem 0; border-bottom: 1px solid var(--border-soft); font-size: 0.86rem; }
+    .ingredient-row:last-child { border-bottom: none; }
+    .ing-qty { font-weight: 800; color: var(--bark); min-width: 52px; flex-shrink: 0; font-size: 0.8rem; }
+    .ing-name { color: var(--bark-mid); }
+    .steps-block { margin-top: 0.9rem; }
+    .recipe-step { display: flex; gap: 9px; margin-bottom: 0.65rem; align-items: flex-start; }
+    .recipe-step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 20px; height: 20px; flex-shrink: 0;
+      background: var(--gold); color: white;
+      border-radius: 50%; font-size: 0.68rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .step-text { font-size: 0.86rem; color: #5a3030; line-height: 1.6; }
+    body.dark-mode .step-text { color: #ddc7c2; }
+    .receipe-benefits {
+      padding: 1.1rem 1.3rem;
+      background: var(--sage-pale);
+    }
+    .benefit-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(106,148,112,0.15);
+    }
+    .benefit-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .benefit-dot {
+      width: 20px; height: 20px; flex-shrink: 0;
+      background: var(--sage); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 900; color: white;
+      margin-top: 1px;
+    }
+    .benefit-text { font-size: 0.84rem; color: #2a4a2e; line-height: 1.55; }
+    body.dark-mode .benefit-text { color: #c6e0ca; }
+    .benefit-text strong { color: #1e3820; display: block; font-size: 0.82rem; margin-bottom: 1px; }
+    body.dark-mode .benefit-text strong { color: #e0f0e0; }
+
+    .helps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.3rem; }
+    .help-node { background: var(--white); border-radius: var(--r-md); padding: 1.1rem; border: 1px solid var(--border-soft); text-align: center; transition: var(--tr); }
+    .help-node:hover { border-color: var(--sage); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .help-icon { width: 40px; height: 40px; background: var(--sage-pale); color: var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.7rem; font-size: 0.72rem; font-weight: 900; letter-spacing: -0.02em; }
+    .help-node h5 { font-family: var(--font-display); font-size: 0.92rem; color: var(--bark); margin-bottom: 0.35rem; }
+    .help-node p { font-size: 0.78rem; margin-bottom: 0; line-height: 1.5; color: var(--text-muted); }
+
+    .widget-container { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 1.8rem; box-shadow: var(--shadow-sm); margin-top: 1.5rem; }
+    .widget-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--bark); margin-bottom: 0.4rem; text-align: center; }
+    .widget-subtitle { font-size: 0.83rem; color: var(--text-muted); text-align: center; margin-bottom: 1.3rem; }
+    .widget-controls { display: flex; justify-content: center; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 1.3rem; }
+    .widget-btn { background: var(--cream); border: 1px solid var(--border); padding: 0.45rem 1.1rem; border-radius: var(--r-pill); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: var(--tr); color: var(--text-muted); }
+    .widget-btn.active, .widget-btn:hover { background: var(--rose); color: white; border-color: var(--rose); }
+    .routine-display { background: var(--cream); border-radius: var(--r-md); padding: 1.2rem; min-height: 100px; }
+    .routine-step-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.7rem; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .routine-step-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .routine-tag { font-size: 0.58rem; font-weight: 900; background: var(--white); padding: 0.12rem 0.4rem; border-radius: 4px; border: 1px solid var(--border); text-transform: uppercase; margin-top: 3px; white-space: nowrap; color: var(--bark-mid); }
+
+    /* FOOTER */
+    .footer { background: var(--bark); color: rgba(255,255,255,0.7); padding: 3rem 3rem 2rem; margin-top: 4rem; }
+    .footer-content { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.2rem; font-size: 0.83rem; }
+    .footer-brand span { font-family: var(--font-script); color: var(--rose); font-size: 1.35rem; }
+    .footer-links { display: flex; gap: 1rem; color: rgba(255,255,255,0.4); }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    @media (max-width: 900px) {
+      .article-layout { flex-direction: column; padding: 2rem 1.5rem; }
+      .article-sidebar { display: none; }
+      .post-hero { padding: 2.5rem 1.5rem 1.5rem; }
+      .helps-grid { grid-template-columns: 1fr; }
+      .navbar { padding: 0 1.5rem; }
+      .receipe-body { grid-template-columns: 1fr; }
+      .receipe-recipe { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar__logo">
+    <div class="logo-icon">🌿</div>
+    <div>
+      <div class="logo-text">Naturelle <span>Bloom</span></div>
+      <div class="logo-sub">Natural Body Care</div>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center;">
+    <nav class="navbar__nav">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Remedies</a>
+      <a href="#" class="nav-link">About</a>
+    </nav>
+    <button class="dark-toggle" id="darkModeToggle" aria-label="Dark mode">🌙 Dark</button>
+  </div>
+</header>
+
+<header class="post-hero">
+  <span class="post-category">Skin Correcting</span>
+  <h1>The Best Known Way to Get <em>Glass Skin</em> — The Complete Natural Guide</h1>
+  <div class="post-meta-card">
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Author" class="author-img" />
+    <div>By <span class="author-name">Aditi Sharma</span></div>
+    <div class="meta-dot"></div>
+    <div>May 24, 2026</div>
+    <div class="meta-dot"></div>
+    <div>9 min read</div>
+  </div>
+</header>
+
+<div class="article-layout">
+
+  <aside class="article-sidebar">
+    <div class="toc-card">
+      <div class="toc-title">On This Page</div>
+      <a href="#introduction" class="toc-link">1. Understanding Glass Skin</a>
+      <a href="#causes" class="toc-link">2. Core Saboteurs</a>
+      <a href="#remedies" class="toc-link">3. Time-Tested Remedies</a>
+      <a href="#how-it-helps" class="toc-link">4. How it Helps</a>
+      <a href="#routine" class="toc-link">5. Routine Builder</a>
+    </div>
+  </aside>
+
+  <main class="article-body">
+
+    <section id="introduction">
+      <p>Originating from holistic Eastern skincare philosophy, <strong>"Glass Skin"</strong> represents skin at its peak physiological health: intensely hydrated, completely uniform in texture, and possessing a structural lucency that reflects ambient light effortlessly. True cutaneous clarity is achievable via targeted kitchen-sourced bio-actives that sync with your biological systems.</p>
+      <div class="blockquote-callout">
+        <p>"Glass skin isn't an artificial porcelain layer; it's the natural result of optimal cellular hydration and uninhibited microcirculation working from the inside out."</p>
+      </div>
+    </section>
+
+    <section id="causes">
+      <h2>1. What Prevents Your Natural Luminescence?</h2>
+      <p>Before applying structural remedies, isolate the cellular conditions that break down light refraction across the epidermis:</p>
+      <div class="cause-box">
+        <div class="cause-num">01</div>
+        <div class="cause-content">
+          <h4>Oxidative Cellular Debris Accumulation</h4>
+          <p>When desquamation flags, dead skin cells fuse via surface sebum — scattering light irregularly and casting a dull shadow profile across the skin canvas.</p>
+        </div>
+      </div>
+      <div class="cause-box">
+        <div class="cause-num">02</div>
+        <div class="cause-content">
+          <h4>Deep Epidermal Moisture Depletion</h4>
+          <p>Without sufficient intercellular moisture, cells deflate — bringing fine tissue textures forward and flattening structural radiance.</p>
+        </div>
+      </div>
+      <div class="cause-box">
+        <div class="cause-num">03</div>
+        <div class="cause-content">
+          <h4>Micro-Inflammation and Melanin Spikes</h4>
+          <p>UV and environmental oxidants spark low-grade inflammation, signalling melanocytes to overproduce pigment clusters and cause hyperpigmentation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="remedies">
+      <h2>2. Time-Tested Bio-Actives Remedies</h2>
+      <p>Each receipe below includes its recipe and the science behind why it works on your skin.</p>
+
+      <!-- receipe 1 -->
+      <div class="remedy-card">
+        <div class="remedy-header">
+          <span class="remedy-title">Most Critical Care</span>
+        </div>
+        <div class="remedy-body">
+          <p>Before you take any measure there are few most frequently used elements which we overlook.</p>
+          <!--Change Water-->
+          <div class="receipe-card">
+            <div class="receipe-header">
+              <div class="receipe-header-left">
+                <span class="receipe-icon">🍁</span>
+                <span class="receipe-title">Change your Water</span>
+              </div>
+              <span class="receipe-tag">During washing Face</span>
+            </div>
+            <div class="receipe-body">
+              <div class="receipe-recipe">
+                <div class="recipe-meta-strip">
+                  <div class="rms"><span class="rms__val">Always while Face Wash</span><span class="rms__lbl">Use</span></div>
+                </div>
+                <div class="col-label">Ingredients</div>
+                <div class="ingredient-row"><span class="ing-qty">Filtered (Soft water) &amp; Lukewarm</span><span class="ing-name">Water</span></div>
+                <div class="steps-block">
+                  <div class="col-label">Method</div>
+                  <div class="recipe-step"><div class="step-num">1</div><div class="step-text">Take Filtered Water</div></div>
+                  <div class="recipe-step"><div class="step-num">2</div><div class="step-text">Slightly warm it. Temp should be such that you can deep your fingers for long time.</div></div>
+                  <div class="recipe-step"><div class="step-num">3</div><div class="step-text">Remember,your face is more delicate than your finger. So temp should perfect for your face accordingly.Now, Wash your face with it</div></div>
+                </div>
+              </div>
+              <div class="receipe-benefits">
+                <div class="col-label">Key Benefits</div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Deep Barrier Repair</strong>Ricinoleic acid in castor oil penetrates the dermis to restore the lipid barrier and lock in moisture for 24+ hours.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Circulation Boost</strong>Massage action increases microcirculation, delivering oxygen and nutrients that give skin its natural healthy glow.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Softening & Smoothing</strong>Lauric acid in coconut oil emulsifies surface debris and fills micro-texture irregularities, producing a smoother canvas.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Detox your Body-->
+          <div class="receipe-card">
+            <div class="receipe-header">
+              <div class="receipe-header-left">
+                <span class="receipe-icon">🍁</span>
+                <span class="receipe-title">Detox your Body</span>
+              </div>
+              <span class="receipe-tag">Daily</span>
+            </div>
+            <div class="receipe-body">
+              <div class="receipe-recipe">
+                <div class="recipe-meta-strip">
+                  <div class="rms"><span class="rms__val">Always while Face Wash</span><span class="rms__lbl">Use</span></div>
+                </div>
+                <div class="col-label">Ingredients</div>
+                <div class="ingredient-row"><span class="ing-qty">Filtered (Soft water) &amp; Lukewarm</span><span class="ing-name">Water</span></div>
+                <div class="steps-block">
+                  <div class="col-label">Method</div>
+                  <div class="recipe-step"><div class="step-num">1</div><div class="step-text">Take Filtered Water</div></div>
+                  <div class="recipe-step"><div class="step-num">2</div><div class="step-text">Slightly warm it. Temp should be such that you can deep your fingers for long time.</div></div>
+                  <div class="recipe-step"><div class="step-num">3</div><div class="step-text">Remember,your face is more delicate than your finger. So temp should perfect for your face accordingly.Now, Wash your face with it</div></div>
+                </div>
+              </div>
+              <div class="receipe-benefits">
+                <div class="col-label">Key Benefits</div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Deep Barrier Repair</strong>Ricinoleic acid in castor oil penetrates the dermis to restore the lipid barrier and lock in moisture for 24+ hours.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Circulation Boost</strong>Massage action increases microcirculation, delivering oxygen and nutrients that give skin its natural healthy glow.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Softening & Smoothing</strong>Lauric acid in coconut oil emulsifies surface debris and fills micro-texture irregularities, producing a smoother canvas.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="remedy-card">
+        <div class="remedy-header">
+          <span class="remedy-title">The Glazing Elixir Beauty Secret</span>
+        </div>
+        <div class="remedy-body">
+          <p>Castor oil's unique ricinoleic acid penetrates deeply to repair the skin barrier and lock in moisture, while coconut oil's lauric acid emulsifies surface debris and fills micro-texture irregularities. The massage action itself boosts microcirculation, delivering oxygen and nutrients that give skin its natural healthy glow.</p>
+          <div class="receipe-card">
+            <div class="receipe-header">
+              <div class="receipe-header-left">
+                <span class="receipe-icon">🍁</span>
+                <span class="receipe-title">Facial Oil Massage</span>
+              </div>
+              <span class="receipe-tag">Daily Nourish</span>
+            </div>
+            <div class="receipe-body">
+              <div class="receipe-recipe">
+                <div class="recipe-meta-strip">
+                  <div class="rms"><span class="rms__val">1 min</span><span class="rms__lbl">Prep</span></div>
+                  <div class="rms"><span class="rms__val">25–35 min</span><span class="rms__lbl">Total</span></div>
+                  <div class="rms"><span class="rms__val">Daily</span><span class="rms__lbl">Frequency</span></div>
+                </div>
+                <div class="col-label">Ingredients</div>
+                <div class="ingredient-row"><span class="ing-qty">1½ tbsp</span><span class="ing-name">Castor Oil</span></div>
+                <div class="ingredient-row"><span class="ing-qty">½ tbsp</span><span class="ing-name">Coconut Oil</span></div>
+                <div class="steps-block">
+                  <div class="col-label">Method</div>
+                  <div class="recipe-step"><div class="step-num">1</div><div class="step-text">Combine both oils and warm slightly between palms.</div></div>
+                  <div class="recipe-step"><div class="step-num">2</div><div class="step-text">Massage in circular motions onto clean skin for 5 minutes.</div></div>
+                  <div class="recipe-step"><div class="step-num">3</div><div class="step-text">Leave on for 20–30 mins, then rinse with lukewarm water.</div></div>
+                </div>
+              </div>
+              <div class="receipe-benefits">
+                <div class="col-label">Key Benefits</div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Deep Barrier Repair</strong>Ricinoleic acid in castor oil penetrates the dermis to restore the lipid barrier and lock in moisture for 24+ hours.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Circulation Boost</strong>Massage action increases microcirculation, delivering oxygen and nutrients that give skin its natural healthy glow.</div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-dot">✓</div>
+                  <div class="benefit-text"><strong>Softening & Smoothing</strong>Lauric acid in coconut oil emulsifies surface debris and fills micro-texture irregularities, producing a smoother canvas.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- receipe 2 -->
+      <div class="receipe-card">
+        <div class="receipe-header">
+          <div class="receipe-header-left">
+            <span class="receipe-icon">🍁</span>
+            <span class="receipe-title">Rice &amp; Enzyme Polishing Mask</span>
+          </div>
+          <span class="receipe-tag">2× Weekly</span>
+        </div>
+        <div class="receipe-body">
+          <div class="receipe-recipe">
+            <div class="recipe-meta-strip">
+              <div class="rms"><span class="rms__val">5 min</span><span class="rms__lbl">Prep</span></div>
+              <div class="rms"><span class="rms__val">20 min</span><span class="rms__lbl">Total</span></div>
+              <div class="rms"><span class="rms__val">2× Weekly</span><span class="rms__lbl">Frequency</span></div>
+            </div>
+            <div class="col-label">Ingredients</div>
+            <div class="ingredient-row"><span class="ing-qty">2 tbsp</span><span class="ing-name">Fine Organic Rice Powder</span></div>
+            <div class="ingredient-row"><span class="ing-qty">1½ tbsp</span><span class="ing-name">Fresh Sour Curd</span></div>
+            <div class="ingredient-row"><span class="ing-qty">1 tsp</span><span class="ing-name">Pure Raw Honey</span></div>
+            <div class="steps-block">
+              <div class="col-label">Method</div>
+              <div class="recipe-step"><div class="step-num">1</div><div class="step-text">Mix into a smooth, heavy-cream paste in a ceramic bowl.</div></div>
+              <div class="recipe-step"><div class="step-num">2</div><div class="step-text">Apply on damp skin in upward strokes, avoiding the eye area.</div></div>
+              <div class="recipe-step"><div class="step-num">3</div><div class="step-text">Leave 15 mins. Rinse with gentle circular sweeps to lift dead cells.</div></div>
+            </div>
+          </div>
+          <div class="receipe-benefits">
+            <div class="col-label">Key Benefits</div>
+            <div class="benefit-item">
+              <div class="benefit-dot">✓</div>
+              <div class="benefit-text"><strong>Gentle Exfoliation</strong>Lactic acid in curd dissolves dead cell bonds without micro-tears, revealing the fresher, more reflective layer beneath.</div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-dot">✓</div>
+              <div class="benefit-text"><strong>Melanin Regulation</strong>Ferulic acid in rice powder blocks tyrosinase enzyme activity — directly reducing pigment overproduction for a brighter, even tone.</div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-dot">✓</div>
+              <div class="benefit-text"><strong>Hydration Lock</strong>Raw honey enzymes break down surface impurities while simultaneously pulling atmospheric moisture into the upper skin layers.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="how-it-helps">
+      <h2>3. Biological Dynamics: How They Work</h2>
+      <p>Natural chemistry operates through targeted structural mechanics to visibly clear and transform your skin barrier:</p>
+      <div class="helps-grid">
+        <div class="help-node">
+          <div class="help-icon">LA</div>
+          <h5>Lactic Exfoliation</h5>
+          <p>Alpha-hydroxy acids in curd dissolve cellular bonds smoothly without micro-tears, uncovering fresh skin underneath.</p>
+        </div>
+        <div class="help-node">
+          <div class="help-icon">FE</div>
+          <h5>Ferulic Protection</h5>
+          <p>Rice extracts deliver concentrated ferulic acid, down-regulating melanin production pathways to brighten skin tone.</p>
+        </div>
+        <div class="help-node">
+          <div class="help-icon">EN</div>
+          <h5>Enzyme Shielding</h5>
+          <p>Raw honey enzymes safely break down surface impurities while flooding deeper cellular layers with direct hydration.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="routine">
+      <h2>4. Your Personalized Glass Skin Routine</h2>
+      <p>Select your skin type below to build an ideal daily natural sequence designed to maximize skin lucency:</p>
+      <div class="widget-container">
+        <div class="widget-title">⚘ Glass Skin Sequence Builder</div>
+        <div class="widget-subtitle">Choose your skin type to generate a barrier-safe daily routine:</div>
+        <div class="widget-controls">
+          <button class="widget-btn active" onclick="updateRoutine('dry', this)">Dry &amp; Flaky</button>
+          <button class="widget-btn" onclick="updateRoutine('oily', this)">Oily &amp; Congested</button>
+          <button class="widget-btn" onclick="updateRoutine('sensitive', this)">Sensitive / Reactive</button>
+        </div>
+        <div class="routine-display" id="routineOutput"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">Naturelle <span>Bloom</span> &copy; 2026. Holistic Wellness Journal.</div>
+    <div class="footer-links">
+      <a href="#">Remedies Index</a>
+      <a href="#">Privacy</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const routineData = {
+    dry: [
+      { step: "AM Cleanse", action: "Raw chilled milk wash to retain vital intercellular structural lipids." },
+      { step: "Tone", action: "Pure steam-distilled rose water patted into skin three times." },
+      { step: "Nourish", action: "2 drops of sweet almond oil mixed with pure fresh aloe gel." }
+    ],
+    oily: [
+      { step: "AM Cleanse", action: "Diluted honey wash to clear excess surface sebum without stripping." },
+      { step: "Tone", action: "Chilled cucumber juice to clarify pores and rebalance surface pH." },
+      { step: "Nourish", action: "Pure aloe vera gel with half a drop of organic tea tree oil." }
+    ],
+    sensitive: [
+      { step: "AM Cleanse", action: "Lukewarm oatmeal infusion sweep to calm reactive tissues gently." },
+      { step: "Tone", action: "Freshly brewed, completely cooled chamomile tea as a mist spray." },
+      { step: "Nourish", action: "Cold-pressed jojoba oil — mirrors natural skin sebum perfectly." }
+    ]
+  };
+
+  function updateRoutine(type, btn) {
+    document.querySelectorAll('.widget-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const output = document.getElementById('routineOutput');
+    output.innerHTML = '';
+    routineData[type].forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'routine-step-item';
+      row.innerHTML = `<span class="routine-tag">${item.step}</span><span style="font-size:0.9rem;color:var(--bark);line-height:1.6;">${item.action}</span>`;
+      output.appendChild(row);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateRoutine('dry', document.querySelector('.widget-btn'));
+
+    // Dark mode toggle
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+    // check localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+      toggleBtn.textContent = '☀️ Light';
+    }
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+        toggleBtn.textContent = '☀️ Light';
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+        toggleBtn.textContent = '🌙 Dark';
+      }
+    });
+  });
+</script>
+</body>
+</html>
